@@ -13,34 +13,24 @@ use League\CommonMark\Extension\SmartPunct\EllipsesParser;
 class PostController extends Controller
 {
 
-    public function index(Request $request){
-        
+    public function explore(Request $request){
         if(auth::check()){
-            $filters = $request->only(["UID"]);
-        
-            if (count($filters) == 0){
-                $posts = Post::where('delete', 0)->get();
-            } else {
-                $posts = Post::where($filters)->get();
-            }
-        
+            $posts = Post::where('delete', 0)->get();
             return view('Dashboard', ['posts' => $posts]);    
         }else{
             return redirect()->route('login');
         }
     }
 
-    public function indexAll(Request $request){
-        
-        if(auth::check()){
-        
-                $posts = Post::where('delete', 0)->get();
-        
-            return view('Dashboard', ['posts' => $posts]);    
-        }else{
-            return redirect()->route('login');
-        }
-    }
+    // public function index(Request $request){
+    //     dd($request);
+        // if(auth::check()){
+        //     $posts = Post::where('delete', 0)->where()->get();
+        //     return view('Dashboard', ['posts' => $posts]);    
+        // }else{
+        //     return redirect()->route('login');
+        // }
+    // }
 
     public function create(Request $request){
                 
@@ -48,12 +38,10 @@ class PostController extends Controller
 
             $inputs = $request->only([
                 'UID',
-                'first_name',
-                'last_name',
-                'email',
-                'phone',
-                'address',
-                'gender'
+                'title',
+                'post',
+                'hashtag',
+                'delete',
             ]);
 
             $inputs['UID'] = Auth::id();
@@ -70,8 +58,11 @@ class PostController extends Controller
         }
     }
 
-    public function update(Request $request, $id){
-        //return Response()->json($request, 400); 
+    // edit / update
+    public function update(){
+        return redirect()->route('edit');
+    }
+    public function updatePost(Request $request, $id){
         $inputs = $request->only([
             'UID',
             'fistname_name',
@@ -82,7 +73,6 @@ class PostController extends Controller
         ]);;
 
         try {
-            //$post = Post::where(['id' => $id]) -> update($inputs);
             $post = Post::findOrFail($id) -> update($inputs);
 
             if($post){

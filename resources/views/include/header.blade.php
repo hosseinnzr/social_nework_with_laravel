@@ -13,6 +13,9 @@
             <a class="nav-link active"href="{{route('Dashboard')}}">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active"href="{{route('explore')}}">Explore</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{route('logout')}}">logout</a>
           </li>
           <li class="nav-item">

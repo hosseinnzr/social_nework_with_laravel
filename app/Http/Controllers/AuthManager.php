@@ -14,17 +14,15 @@ use Exception;
 class AuthManager extends Controller
 {
     function login(){
-        if(Auth::check()){
-            return view('Dashboard');
+        if(auth::check()){
+            $user_id = auth::user()->id;
+            $user = auth::user();
+            $posts = Post::where('delete', 0)->where('UID', $user_id)->get();
+        
+            return view('Dashboard', ['posts' => $posts, 'user' => $user]);    
+        }else{
+            return view('login');
         }
-        return view('login');
-    }
-
-    function registration(){
-        if(Auth::check()){
-            return view('Dashboard');
-        }
-        return view('registration');
     }
 
     function loginPost(Request $request){
@@ -36,7 +34,10 @@ class AuthManager extends Controller
         $credentials = $request->only('email','password');
 
         if(Auth::attempt($credentials)){
-            return redirect()->intended(route('Dashboard'));
+            $user_id = auth::user()->id;
+            $user = Auth::user();
+            $posts = Post::where('delete', 0)->where('UID', $user_id)->get();
+            return view('Dashboard', ['user' => $user, 'posts' => $posts]);
         }
         return redirect(route('login'))->with('error', 'login details are not valid');
     }
@@ -78,23 +79,29 @@ class AuthManager extends Controller
         return redirect(route('Dashboard'))->with('success', 'registration successfully ');
     }
 
-    public function update(Request $request, $id){
+    // edit / update
+    public function update(User $user){
+        // dd($user);
+        return view('edit', ['user' => $user]);
+    }
+    public function updateUser(Request $request, $id){
+
         $inputs = $request->only([
-            'UID',
-            'fistname_name',
+            'biography',
+            'first_name',
             'last_name',
-            'phone',
-            'adress',
-            'gender'
+            'user_name',
+            'email',
         ]);;
 
-        try {
-            $post = Post::findOrFail($id) -> update($inputs);
+        // $inputs['password'] = Hash::make($request->password);
 
-            if($post){
-                return Response()->json('the post updated successfuly', 200); 
+        try {
+            $sesult = user::findOrFail($id) -> update($inputs);
+            if($sesult){
+                return redirect(route('Dashboard'))->with('massage', 'he user updated successfuly - 200');
             }else{
-                return Response()->json('Updating the post ins failed!',401);
+                return Response()->json('Updating the user in failed!',401);
             }
         } catch (Exception $error) {
             return Response()->json($error, 400);

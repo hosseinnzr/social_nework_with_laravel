@@ -13,11 +13,9 @@ class Post extends Model
 
     protected $fillable = [
         'UID',
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'address',
+        'title',
+        'post',
+        'hashtag',
         'delete',
-        'gender'    ];
+        ];
 }

@@ -9,28 +9,16 @@
           <h3>Add Post :</h3>
           <br>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">first name</label>
-            <input type="text" class="form-control" name="first_name">
+            <label for="title" class="form-label">title :</label>
+            <input type="text" class="form-control" name="title">
           </div>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">last name</label>
-            <input type="text" class="form-control" name="last_name">
+            <label for="post" class="form-label">post :</label>
+            <input type="text" class="form-control" name="post">
           </div>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="text" class="form-control" name="email">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">phone</label>
-            <input type="text" class="form-control" name="phone">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">address</label>
-            <input type="text" class="form-control" name="address">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">gender</label>
-            <input type="text" class="form-control" name="gender">
+            <label for="hashtag" class="form-label">hashtag :</label>
+            <input type="text" class="form-control" name="hashtag">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
     </form>

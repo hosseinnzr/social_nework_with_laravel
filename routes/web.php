@@ -11,8 +11,20 @@ Route::get('/signup', [AuthManager::class, 'signup'])->name('signup');
 Route::post('/signup', [AuthManager::class, 'signupPost'])->name('signup.post');
 
 Route::middleware(['web', 'throttle:60,1'])->group(function () {
+
+    // explore
+    Route::get('/explore', [PostController::class, 'explore'])->name('explore');
+
     // Home page
-    Route::get('/', [PostController::class, "index"])->name('Dashboard');
+    Route::get('/', [AuthManager::class, "login"])->name('Dashboard');
+
+    // Edit User
+    Route::get('/edit/{user}', [AuthManager::class, "update"])->name('edit');
+    Route::post('/edit/{user}', [AuthManager::class, "updateUser"])->name('edit.post');
+
+    // Edit Post
+    Route::get('/edit/post/{id}', [PostController::class], )->name('postEdit');
+    Route::get('/edit/post/{id}', [PostController::class], )->name('postEdit.post');
 
     //delete
     Route::post('/delete/{id}', [PostController::class, "delete"])->name('delete');

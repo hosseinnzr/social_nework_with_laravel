@@ -145,9 +145,6 @@
             <div class="col-md-3">
                 <div class="card">
                     @auth
-                    <div class="mr-2">
-                      <img class="rounded-circle" width="65" src="https://picsum.photos/50/50" alt="">
-                    </div>
                     <div class="card-body">
                         <div class="h5">{{auth()->user()->user_name}}</div>
                         <div class="h7 text-muted">Fullname : {{auth()->user()->first_name}}</div>
@@ -159,6 +156,7 @@
                           <a href="{{route('edit', ['user' => $user])}}" class="card-link"><i class="fa fa-edit"></i> Edit Profile</a>
                         </form>
                     </div>
+                    @endauth
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h6 text-muted">Followers</div>
@@ -173,7 +171,6 @@
                           <div class="h5">6758</div>
                       </li>
                     </ul>
-                    @endauth
                 </div>
             </div>
             <div class="col-md-6 gedf-main">
