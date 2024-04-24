@@ -146,7 +146,7 @@
                 <div class="card">
                     @auth
                     <div class="mr-2">
-                      <img class="rounded-circle" width="65" src="https://picsum.photos/50/50" alt="">
+                      <img class="rounded-circle" width="150" src="https://picsum.photos/id/{{auth()->user()->id}}/300/300" alt="">
                     </div>
                     <div class="card-body">
                         <div class="h5">{{auth()->user()->user_name}}</div>
@@ -162,15 +162,15 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h6 text-muted">Followers</div>
-                            <div class="h5">5.2342</div>
+                            <div class="h5">2342</div>
                         </li>
                         <li class="list-group-item">
                             <div class="h6 text-muted">Following</div>
-                            <div class="h5">6758</div>
+                            <div class="h5">658</div>
                         </li>
                         <li class="list-group-item">
                           <div class="h6 text-muted">Post Number</div>
-                          <div class="h5">6758</div>
+                          <div class="h5">67</div>
                       </li>
                     </ul>
                     @endauth
@@ -183,7 +183,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                    <img class="rounded-circle" width="45" src="https://picsum.photos/id/{{auth()->user()->id}}/100/100" alt="">
                                 </div>
                                 <div class="ml-2">
                                     <div class="h5 m-0">{{auth()->user()->user_name}}</div>
@@ -218,15 +218,15 @@
 
                     </div>
                     <div class="card-body">
-                        <a class="card-link" href="#">
-                            <h5 class="card-title">
-                              {{$post['title']}}
-                            </h5>
-                        </a>
+                        {{-- title --}}
+                        <h5 class="card-title">
+                          {{$post['title']}}
+                        </h5>
+                        {{-- post --}}
                         <p class="card-text">
                           {{$post['post']}}
                         </p>
-
+                        {{-- tag --}}
                         @foreach(explode(",", $post['tag']) as $tag)
                           <a href="/?tag={{$tag}}">{{$tag}}</a>
                         @endforeach
