@@ -20,7 +20,7 @@ class Post extends Model
         'UID',
         'title',
         'post',
-        'hashtag',
+        'tag',
         'delete',
         'like',
         'like_number',

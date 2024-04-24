@@ -10,14 +10,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('post', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('UID');
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('phone');
-            $table->string('email');
-            $table->longText('address');
-            $table->string('gender');
+            $table->string('title')->nullable();
+            $table->string('post');
+            $table->longText('tag')->nullable();
+            $table->boolean('delete')->default(0);
+            $table->string('like')->nullable()->default(null);
+            $table->integer('like_number')->default(0);
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

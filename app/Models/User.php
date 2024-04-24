@@ -16,6 +16,7 @@ class User extends Authenticatable
         'Followers',
         'Following',
         'biography',
+        'phone',
         'first_name',
         'last_name',
         'user_name',

@@ -72,16 +72,16 @@ class PostController extends Controller
             try {
                 Post::create($inputs);
                 return redirect()->route('Dashboard');
-                // return Response()->json(['status'=> 200, 'message'=> 'اطلاعات با موفقیت ثبت شد'], 200);
             } catch (Exception $error) {
-                return Response()->json(['status'=> 401, 'message'=> 'Error'], 401);
+                return redirect(route('addPost'))->with('error', 'complate reqired fild');
+                // return Response()->json(['status'=> 401, 'message'=> 'Error'], 401);
             }
         }else{
-            return Response()->json(['status'=> 401, 'message'=> 'please login'], 401);
+            return redirect()->route('/login');
         }
     }
 
-    // edit / update
+    // edit updatew update
     public function update(){
         return redirect()->route('edit');
     }
