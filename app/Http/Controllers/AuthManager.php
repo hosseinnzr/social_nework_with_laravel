@@ -13,12 +13,23 @@ use Exception;
 
 class AuthManager extends Controller
 {
-    function login(){
+    function login(Request $request){
         if(auth::check()){
             $user_id = auth::user()->id;
             $user = auth::user();
-            $posts = Post::where('delete', 0)->where('UID', $user_id)->get();
-        
+            $posts = Post::latest()->where('delete', 0)->where('UID', $user_id)->get();
+
+            if(isset($request->tag)){
+                $result = array();
+                foreach ($posts as $post) {
+                    $post_array = explode(',', $post['tag']);
+                    if ((in_array($request->tag, $post_array)) != false){
+                        array_push($result, $post);
+                    }
+                    $posts=$result;
+                } 
+            }
+            
             return view('Dashboard', ['posts' => $posts, 'user' => $user]);    
         }else{
             return view('login');
@@ -34,10 +45,7 @@ class AuthManager extends Controller
         $credentials = $request->only('email','password');
 
         if(Auth::attempt($credentials)){
-            $user_id = auth::user()->id;
-            $user = Auth::user();
-            $posts = Post::where('delete', 0)->where('UID', $user_id)->get();
-            return view('Dashboard', ['user' => $user, 'posts' => $posts]);
+            return redirect()->route('login');
         }
         return redirect(route('login'))->with('error', 'login details are not valid');
     }
@@ -81,7 +89,6 @@ class AuthManager extends Controller
 
     // edit / update
     public function update(User $user){
-        // dd($user);
         return view('edit', ['user' => $user]);
     }
     public function updateUser(Request $request, $id){
@@ -94,7 +101,7 @@ class AuthManager extends Controller
             'email',
         ]);;
 
-        // $inputs['password'] = Hash::make($request->password);
+        $inputs['password'] = Hash::make($request->password);
 
         try {
             $sesult = user::findOrFail($id) -> update($inputs);

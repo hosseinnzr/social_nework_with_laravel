@@ -26,8 +26,14 @@ Route::middleware(['web', 'throttle:60,1'])->group(function () {
     Route::get('/edit/post/{id}', [PostController::class], )->name('postEdit');
     Route::get('/edit/post/{id}', [PostController::class], )->name('postEdit.post');
 
-    //delete
+    // Delete Post
     Route::post('/delete/{id}', [PostController::class, "delete"])->name('delete');
+
+    // search Post by hashtag
+    // Route::get('/search', [PostController::class, 'search'])->name('search');
+
+    // Like Post
+    Route::post('/Like/{id}', [PostController::class, 'like'])->name('like');
 
     // Add Post Page
     Route::get('/addPost', function(){

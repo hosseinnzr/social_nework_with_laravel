@@ -9,6 +9,11 @@ class Post extends Model
 {
     use HasFactory;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'UID'); // Assuming 'UID' is the foreign key
+    }
+    
     protected $table = 'post';
 
     protected $fillable = [
@@ -17,5 +22,7 @@ class Post extends Model
         'post',
         'hashtag',
         'delete',
+        'like',
+        'like_number',
         ];
 }
