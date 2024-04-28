@@ -28,7 +28,7 @@ class PostController extends Controller
     // }
     
     
-    public function explore(Request $request){
+    public function home(Request $request){
         if(auth::check()){
             $posts = Post::latest()->where('delete', 0)->get();
 
@@ -47,8 +47,8 @@ class PostController extends Controller
                 $user = User::where('id', $post->UID)->select('user_name')->first();
                 $post['user_name'] = $user ? $user->user_name : null;
             }
-
-            return view('explore', ['posts' => $posts]);    
+            // dd($post);
+            return view('home', ['posts' => $posts]);    
         } else {
             return redirect()->route('login');
         }
@@ -71,7 +71,7 @@ class PostController extends Controller
 
             try {
                 Post::create($inputs);
-                return redirect()->route('Dashboard');
+                return redirect()->route('home');
             } catch (Exception $error) {
                 return redirect(route('addPost'))->with('error', 'complate reqired fild');
                 // return Response()->json(['status'=> 401, 'message'=> 'Error'], 401);
@@ -112,7 +112,7 @@ class PostController extends Controller
 
         $post = Post::findOrFail($id);
         $post->update(['delete' => true]);
-        return redirect()->route('Dashboard');
+        return redirect()->route('home');
 
     }
 
@@ -129,7 +129,7 @@ class PostController extends Controller
 
             if ($user_liked_id == $like_number){
                 $post_liked_array = array_diff($post_liked_array, array($like_number));
-                $like = $string = implode(",", $post_liked_array);
+                $like = implode(",", $post_liked_array);
                 $is_liked = true;
                 break;
             }

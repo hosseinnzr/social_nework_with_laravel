@@ -3,20 +3,21 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\PostController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
 
 // SignUp
 Route::get('/signup', [AuthManager::class, 'signup'])->name('signup');
 Route::post('/signup', [AuthManager::class, 'signupPost'])->name('signup.post');
 
-Route::middleware(['web', 'throttle:60,1'])->group(function () {
+Route::middleware(['web', 'throttle:600,1'])->group(function () {
 
     // explore
     Route::get('/explore', [PostController::class, 'explore'])->name('explore');
 
+    // follow
+    Route::post('/follow/{id}', [AuthManager::class, 'follow'])->name('follow');
+
     // Home page
-    Route::get('/', [AuthManager::class, "login"])->name('Dashboard');
+    Route::get('/', [PostController::class, "home"])->name('home');
 
     // Edit User
     Route::get('/edit/{user}', [AuthManager::class, "update"])->name('edit');
@@ -41,16 +42,14 @@ Route::middleware(['web', 'throttle:60,1'])->group(function () {
     })->name('addPost');
     Route::post('/addPost', [PostController::class, 'create'])->name('addPost.post');
 
-    // Login Page
-    Route::get('/login', [AuthManager::class, 'login'])->name('login');
+    // Logout/Login Page
+    Route::get('/login', [AuthManager::class, 'profile'])->name('login');
     Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
+    Route::post('/logout', [AuthManager::class, 'logout'])->name('logout');
 
-    // LogOut
-    Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
-    Route::group(['middleware' => 'auth'], function (){
-        Route::get('/profile', function () {
-            return 'hi';
-        });
-    });
+    
+    // profile
+    Route::get('/{user_name}', [AuthManager::class, "profile"])->name('profile');
+
 });
 

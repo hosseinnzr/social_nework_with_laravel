@@ -13,12 +13,19 @@ use Exception;
 
 class AuthManager extends Controller
 {
-    function login(Request $request){
-        if(auth::check()){
-            $user_id = auth::user()->id;
-            $user = auth::user();
-            $posts = Post::latest()->where('delete', 0)->where('UID', $user_id)->get();
 
+    function profile(Request $request){
+        if(auth::check()){
+            $user = User::where('user_name', $request->user_name)->first();
+
+            if(isset($request)){
+                $user_id = $user->id;
+            }else{
+                $user_id = null;
+            }
+
+            $posts = Post::latest()->where('delete', 0)->where('UID', $user_id)->get();
+            
             if(isset($request->tag)){
                 $result = array();
                 foreach ($posts as $post) {
@@ -30,7 +37,7 @@ class AuthManager extends Controller
                 } 
             }
             
-            return view('Dashboard', ['posts' => $posts, 'user' => $user]);    
+            return view('profile', ['posts' => $posts, 'user' => $user]);    
         }else{
             return view('login');
         }
@@ -45,19 +52,16 @@ class AuthManager extends Controller
         $credentials = $request->only('email','password');
 
         if(Auth::attempt($credentials)){
-            return redirect()->route('login');
+            return redirect()->route('home');
         }
         return redirect(route('login'))->with('error', 'login details are not valid');
     }
 
     function logout(){
         Auth::logout();
-        return redirect(route('login'));
+        return view('login');
     }
     
-    public function select($id){
-       //
-    }
     
     function signup(){
         return view('signUp');
@@ -82,9 +86,9 @@ class AuthManager extends Controller
         $user = User::create($data);
 
         if(!$user){
-            return redirect(route('Dashboard'))->with('error', 'registration fiald, try again');
+            return redirect(route('home'))->with('error', 'registration fiald, try again');
         }
-        return redirect(route('Dashboard'))->with('success', 'registration successfully ');
+        return redirect(route('home'))->with('success', 'registration successfully ');
     }
 
     // edit / update
@@ -106,7 +110,7 @@ class AuthManager extends Controller
         try {
             $sesult = user::findOrFail($id) -> update($inputs);
             if($sesult){
-                return redirect(route('Dashboard'))->with('massage', 'he user updated successfuly - 200');
+                return redirect(route('home'))->with('massage', 'he user updated successfuly - 200');
             }else{
                 return Response()->json('Updating the user in failed!',401);
             }
@@ -114,7 +118,6 @@ class AuthManager extends Controller
             return Response()->json($error, 400);
         }
     }
-
     public function delete($id){
         try {
             $status = Post::where(['id' => $id]) -> delete();
@@ -129,5 +132,49 @@ class AuthManager extends Controller
         } catch (Exception $error) {
             return Response()->json($error, 400);
         }
+    }
+
+    // follow
+    public function follow($id){
+        $is_follow = false;
+        $user_login_id = auth::id();
+        $user = User::findOrFail($id);
+
+        $user_followers = $user->followers;
+
+        $user_follower_array = explode(",", $user_followers);
+
+        foreach($user_follower_array as $followers_number){
+            if ($user_login_id == $followers_number){
+                $user_follower_array = array_diff($user_follower_array, array($followers_number));
+                $followers = implode(",", $user_follower_array);
+                $is_follow = true;
+                break;
+            }
+        }
+
+        if(!$is_follow){
+            if ($user->followers != NULL) {
+                $followers = $user->followers . ',' . $user_login_id;
+            } else {
+                $followers = $user->followers . $user_login_id;   
+            }
+        }
+
+        // save follow
+        $user->followers = $followers;
+        $user->save();
+
+            if ($user->followers == ""){
+                $followers_number = 0;
+            }else{
+                $followers_number = count(explode(",", $user->followers));
+            }
+        
+        $user->followers_number = $followers_number-1;
+        $user->save();
+
+        return back();
+
     }
 }
