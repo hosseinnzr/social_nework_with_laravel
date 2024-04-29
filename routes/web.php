@@ -10,9 +10,6 @@ Route::post('/signup', [AuthManager::class, 'signupPost'])->name('signup.post');
 
 Route::middleware(['web', 'throttle:600,1'])->group(function () {
 
-    // explore
-    Route::get('/explore', [PostController::class, 'explore'])->name('explore');
-
     // follow
     Route::post('/follow/{id}', [AuthManager::class, 'follow'])->name('follow');
 
@@ -20,12 +17,12 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::get('/', [PostController::class, "home"])->name('home');
 
     // Edit User
-    Route::get('/edit/{user}', [AuthManager::class, "update"])->name('edit');
-    Route::post('/edit/{user}', [AuthManager::class, "updateUser"])->name('edit.post');
+    Route::get('/setting/{user}', [AuthManager::class, "setting"])->name('settings');
+    Route::post('/setting/{user}', [AuthManager::class, "settingPost"])->name('settings.post');
 
     // Edit Post
     Route::get('/edit/post/{id}', [PostController::class], )->name('postEdit');
-    Route::get('/edit/post/{id}', [PostController::class], )->name('postEdit.post');
+    Route::post('/edit/post/{id}', [PostController::class], )->name('postEdit.post');
 
     // Delete Post
     Route::post('/delete/{id}', [PostController::class, "delete"])->name('delete');
@@ -45,6 +42,7 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     // Logout/Login Page
     Route::get('/login', [AuthManager::class, 'profile'])->name('login');
     Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
+    
     Route::post('/logout', [AuthManager::class, 'logout'])->name('logout');
 
     

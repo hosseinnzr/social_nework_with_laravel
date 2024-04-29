@@ -10,23 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
-{
-    // public function search(Request $request)
-    // {
-    //     $posts = Post::latest()->where('delete', 0)->get();
-
-    //     $result = array();
-    //     foreach ($posts as $post) {
-    //         $post_array = explode(',', $post['tag']);
-    //         if ((in_array($request->tag, $post_array)) != false){
-    //             array_push($result, $post);
-    //         }
-    //         $post=$result;
-    //     }    
-
-    //     return view('search', ['posts' => $result]);
-    // }
-    
+{   
     
     public function home(Request $request){
         if(auth::check()){
@@ -47,7 +31,7 @@ class PostController extends Controller
                 $user = User::where('id', $post->UID)->select('user_name')->first();
                 $post['user_name'] = $user ? $user->user_name : null;
             }
-            // dd($post);
+
             return view('home', ['posts' => $posts]);    
         } else {
             return redirect()->route('login');

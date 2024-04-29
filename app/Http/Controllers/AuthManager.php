@@ -44,22 +44,30 @@ class AuthManager extends Controller
     }
 
     function loginPost(Request $request){
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
-
-        $credentials = $request->only('email','password');
-
+        
         if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+ 
+            // return redirect()->intended('dashboard');
+
             return redirect()->route('home');
         }
         return redirect(route('login'))->with('error', 'login details are not valid');
     }
 
-    function logout(){
+    function logout(Request $request){
         Auth::logout();
-        return view('login');
+
+        $request->session()->invalidate();
+ 
+        $request->session()->regenerateToken();
+         
+        return view('/login');
     }
     
     
@@ -92,10 +100,10 @@ class AuthManager extends Controller
     }
 
     // edit / update
-    public function update(User $user){
-        return view('edit', ['user' => $user]);
+    public function setting(User $user){
+        return view('settings', ['user' => $user]);
     }
-    public function updateUser(Request $request, $id){
+    public function settingPost(Request $request, $id){
 
         $inputs = $request->only([
             'biography',
@@ -137,41 +145,58 @@ class AuthManager extends Controller
     // follow
     public function follow($id){
         $is_follow = false;
-        $user_login_id = auth::id();
+        $user_login = auth::user();
         $user = User::findOrFail($id);
 
         $user_followers = $user->followers;
+        $user_login_id_following = auth::user()->following;
 
         $user_follower_array = explode(",", $user_followers);
+        $user_login_id_following_array = explode(",", $user_login_id_following);
 
         foreach($user_follower_array as $followers_number){
-            if ($user_login_id == $followers_number){
+            if ($user_login->id == $followers_number){
+                // delete follower
                 $user_follower_array = array_diff($user_follower_array, array($followers_number));
+                // delete following
+                $user_login_id_following_array = array_diff($user_login_id_following_array, array($followers_number));
+
                 $followers = implode(",", $user_follower_array);
+                $followings = implode(",", $user_login_id_following_array);
+
                 $is_follow = true;
                 break;
             }
         }
 
         if(!$is_follow){
-            if ($user->followers != NULL) {
-                $followers = $user->followers . ',' . $user_login_id;
-            } else {
-                $followers = $user->followers . $user_login_id;   
-            }
+            $followers = $user->followers . ',' . $user_login->id;
+            $followings = $user_login->following . ',' . $user_login->id;   
         }
 
         // save follow
         $user->followers = $followers;
+        $user_login->following = $followings;
+
+        $user_login->save();
         $user->save();
 
-            if ($user->followers == ""){
-                $followers_number = 0;
+            if ($user->followers == "0"){
+                $followers_number = 1;
             }else{
                 $followers_number = count(explode(",", $user->followers));
             }
+
+            if ($user_login->following == "0"){
+                $following_number = 1;
+            }else{
+                $following_number = count(explode(",", $user->followers));
+            }
         
-        $user->followers_number = $followers_number-1;
+        $user->followers_number = $followers_number -1;
+        $user_login->following_number = $following_number -1;
+
+        $user_login->save();
         $user->save();
 
         return back();
