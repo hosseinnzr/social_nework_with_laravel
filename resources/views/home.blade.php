@@ -208,38 +208,31 @@
                 <!-- Card body END -->
         
                 <!-- Card Footer START -->
-                <div class="card-footer py-3">
+                <div class="card-footer py-3"> 
                     <!-- Feed react START -->
-                    <ul class="nav nav-fill nav-stack small">
+                  <ul class="nav nav-fill nav-stack small">
 
                     <li class="nav-item">
                         <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                             @csrf
-                            <button type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like ( {{$post['like_number']}} )</button>
+                            <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like ( {{$post['like_number']}} )</button>
                         </form>
                     </li>
                     
                     <li class="nav-item">
                         <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                             @csrf
-                            <button type="submit" class="btn btn-link"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</button>
+                            <button style="font-size: 12px" type="submit" class="btn btn-link"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</button>
                         </form>
                     </li>
 
                     <li class="nav-item">
                         <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                             @csrf
-                            <button type="submit" class="btn btn-link"> <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)</button>
+                            <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
                         </form>
                     </li>
-
-                    <li class="nav-item">
-                        <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
-                            @csrf
-                            <button type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
-                        </form>
-                    </li>
-                    </ul>
+                  </ul>
                     <!-- Feed react END -->
                 </div>
                 <!-- Card Footer END -->

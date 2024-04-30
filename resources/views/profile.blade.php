@@ -99,7 +99,9 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
                     <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
                     <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
-                    <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                    <li>
+                      <a class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}" type="POST"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a>
+                    </li>
                     <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
@@ -125,25 +127,19 @@
                 <li class="nav-item">
                     <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                         @csrf
-                        <button type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like ( {{$post['like_number']}} )</button>
+                        <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like ( {{$post['like_number']}} )</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                         @csrf
-                        <button type="submit" class="btn btn-link"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</button>
+                        <button style="font-size: 12px" type="submit" class="btn btn-link"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                         @csrf
-                        <button type="submit" class="btn btn-link"> <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)</button>
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
-                        @csrf
-                        <button type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
+                        <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
                     </form>
                 </li>
                 </ul>
