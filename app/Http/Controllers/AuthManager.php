@@ -13,7 +13,6 @@ use Exception;
 
 class AuthManager extends Controller
 {
-
     function profile(Request $request){
         if(auth::check()){
             $posts = Post::latest()->where('delete', 0)->where('UID', auth::id())->get();
@@ -29,11 +28,6 @@ class AuthManager extends Controller
                     $posts=$result;
                 } 
             }
-    
-            // foreach ($posts as $post) {
-            //     $user = User::where('id', $post->UID)->select('user_name')->first();
-            //     $post['user_name'] = $user ? $user->user_name : null;
-            // }
 
             return view('profile', ['posts' => $posts, 'user' => $user]);    
         } else {

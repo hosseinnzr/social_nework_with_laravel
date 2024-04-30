@@ -14,7 +14,7 @@ class PostController extends Controller
     
     public function home(Request $request){
         if(auth::check()){
-            $posts = Post::latest()->where('delete', 0)->get();
+            $posts = Post::latest()->where('delete', 0)->where('UID', '!=', Auth::id())->get();
 
             if(isset($request->tag)){
                 $result = array();
@@ -105,9 +105,8 @@ class PostController extends Controller
 
     }
 
-    public function delete($id){
-
-        $post = Post::findOrFail($id);
+    public function delete(Request $request){
+        $post = Post::findOrFail($request->id);
         $post->update(['delete' => true]);
         return redirect()->route('home');
 

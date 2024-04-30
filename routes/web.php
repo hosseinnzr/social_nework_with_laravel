@@ -26,10 +26,8 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::post('/setting', [AuthManager::class, "settingPost"])->name('settings.post');
 
     // Delete Post
-    Route::post('/delete/{id}', [PostController::class, "delete"])->name('delete');
+    Route::get('/delete', [PostController::class, "delete"])->name('delete');
 
-    // search Post by hashtag
-    // Route::get('/search', [PostController::class, 'search'])->name('search');
 
     // Like Post
     Route::post('/Like/{id}', [PostController::class, 'like'])->name('like');
