@@ -57,6 +57,12 @@
                 <div  class="btn btn-primary">add</div>
             @endisset
           </button>
+
+          <hr>
+          <div class="card-footer text-center py-2">
+            <a class="btn btn-link text-secondary btn-sm" type="submit" href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">Back to Profile </a>
+          </div>
+
     </form>
   </main>
 

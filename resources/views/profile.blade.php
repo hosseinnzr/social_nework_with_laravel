@@ -98,7 +98,7 @@
                     <!-- Card share action dropdown menu -->     
                     @if ($post['UID'] == Auth::id())
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
+                      <li><a class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
                       <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
                       <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
                       <li><hr class="dropdown-divider"></li>
