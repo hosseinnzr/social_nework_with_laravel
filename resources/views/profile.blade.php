@@ -7,7 +7,6 @@
 
 <!-- **************** MAIN CONTENT START **************** -->
 <main>
-  <br><br><br>  
   <!-- Container START -->
   <div class="container">
     <div class="row g-4">
@@ -36,9 +35,9 @@
                 <div class="d-flex mt-3 justify-content-center ms-sm-auto">
 
                   @if ($user['user_name'] == auth()->user()->user_name)
-                    <form action="{{route('settings', ['user' => $user])}}" method="GET" class="ms-auto me-auto mt-3">
+                    <form action="{{route('settings')}}" method="GET" class="ms-auto me-auto mt-3">
                       {{-- @csrf --}}
-                      <button type="submit" class="btn btn-danger-soft me-2" href="/lks dv"> <i class="fa fa-edit"></i> Edit Profile</button>
+                      <button type="submit" class="btn btn-danger-soft me-2"> <i class="fa fa-edit"></i> Edit Profile</button>
                     </form>
                   @else                              
                     <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
@@ -83,7 +82,7 @@
                 <div class="d-flex align-items-center">
                     <!-- Avatar -->
                     <div class="avatar me-2">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/11.svg" alt=""> </a>
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{asset("assets/images/logo/11.svg")}}" alt=""> </a>
                     </div>
                     <!-- Info -->
                     <div>
@@ -199,7 +198,7 @@
                 <div class="d-flex">
                   <!-- Avatar -->
                   <div class="avatar me-3">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/08.svg" alt=""> </a>
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{asset("assets/images/logo/08.svg")}}" alt=""> </a>
                   </div>
                   <!-- Info -->
                   <div>
@@ -213,7 +212,7 @@
                 <div class="d-flex">
                   <!-- Avatar -->
                   <div class="avatar me-3">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/09.svg" alt=""> </a>
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{asset("assets/images/logo/09.svg")}}" alt=""> </a>
                   </div>
                   <!-- Info -->
                   <div>
@@ -227,7 +226,7 @@
                 <div class="d-flex">
                   <!-- Avatar -->
                   <div class="avatar me-3">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/10.svg" alt=""> </a>
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{asset("assets/images/logo/10.svg")}}" alt=""> </a>
                   </div>
                   <!-- Info -->
                   <div>
@@ -257,32 +256,32 @@
                 <div class="row g-2">
                   <!-- Photos item -->
                   <div class="col-6">
-                    <a href="assets/images/albums/01.jpg" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="assets/images/albums/01.jpg" alt="">
+                    <a href="{{asset("assets/images/albums/01.jpg")}}" data-gallery="image-popup" data-glightbox="">
+                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/01.jpg")}}" alt="">
                     </a>
                   </div>
                   <!-- Photos item -->
                   <div class="col-6">
-                    <a href="assets/images/albums/02.jpg" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="assets/images/albums/02.jpg" alt="">
+                    <a href="{{asset("assets/images/albums/02.jpg")}}" data-gallery="image-popup" data-glightbox="">
+                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/02.jpg")}}" alt="">
                     </a>
                   </div>
                   <!-- Photos item -->
                   <div class="col-4">
-                    <a href="assets/images/albums/03.jpg" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="assets/images/albums/03.jpg" alt="">
+                    <a href="{{asset("assets/images/albums/03.jpg")}}" data-gallery="image-popup" data-glightbox="">
+                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/03.jpg")}}" alt="">
                     </a>
                   </div>
                   <!-- Photos item -->
                   <div class="col-4">
-                    <a href="assets/images/albums/04.jpg" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="assets/images/albums/04.jpg" alt="">
+                    <a href="{{asset("assets/images/albums/04.jpg")}}" data-gallery="image-popup" data-glightbox="">
+                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/04.jpg")}}" alt="">
                     </a>
                   </div>
                   <!-- Photos item -->
                   <div class="col-4">
-                    <a href="assets/images/albums/05.jpg" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="assets/images/albums/05.jpg" alt="">
+                    <a href="{{asset("assets/images/albums/05.jpg")}}" data-gallery="image-popup" data-glightbox="">
+                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/05.jpg")}}" alt="">
                     </a>
                     <!-- glightbox Albums left bar END  -->
                   </div>
@@ -312,7 +311,7 @@
                       <!-- Card body -->
                       <div class="card-body p-2 pb-0">
                         <div class="avatar avatar-story avatar-xl">
-                          <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt=""></a>
+                          <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/02.jpg")}}" alt=""></a>
                         </div>
                         <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
                         <p class="mb-0 small lh-sm">16 mutual connections</p>
@@ -332,7 +331,7 @@
                       <!-- Card body -->
                       <div class="card-body p-2 pb-0">
                         <div class="avatar avatar-xl">
-                          <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt=""></a>
+                          <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/03.jpg")}}" alt=""></a>
                         </div>
                         <h6 class="card-title mb-1 mt-3"> <a href="#!"> Samuel Bishop </a></h6>
                         <p class="mb-0 small lh-sm">22 mutual connections</p>
@@ -352,7 +351,7 @@
                       <!-- Card body -->
                       <div class="card-body p-2 pb-0">
                         <div class="avatar avatar-xl">
-                          <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt=""></a>
+                          <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/04.jpg")}}" alt=""></a>
                         </div>
                         <h6 class="card-title mb-1 mt-3"> <a href="#"> Bryan Knight </a></h6>
                         <p class="mb-0 small lh-sm">1 mutual connection</p>
@@ -372,7 +371,7 @@
                       <!-- Card body -->
                       <div class="card-body p-2 pb-0">
                         <div class="avatar avatar-xl">
-                          <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+                          <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/05.jpg")}}" alt=""></a>
                         </div>
                         <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
                         <p class="mb-0 small lh-sm">15 mutual connections</p>
@@ -421,7 +420,7 @@
          <div class="d-flex mb-3">
           <!-- Avatar -->
           <div class="avatar avatar-xs me-2">
-            <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
+            <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/03.jpg")}}" alt="">
           </div>
           <!-- Feed box  -->
           <form class="w-100">
@@ -482,7 +481,7 @@
         <div class="d-flex mb-3">
           <!-- Avatar -->
           <div class="avatar avatar-xs me-2">
-            <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
+            <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/03.jpg")}}" alt="">
           </div>
           <!-- Feed box  -->
           <form class="w-100">
@@ -534,7 +533,7 @@
        <div class="d-flex mb-3">
         <!-- Avatar -->
         <div class="avatar avatar-xs me-2">
-          <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
+          <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/03.jpg")}}" alt="">
         </div>
         <!-- Feed box  -->
         <form class="w-100">
@@ -622,25 +621,25 @@
           <div class="col-12 mt-3">
             <ul class="avatar-group list-unstyled align-items-center mb-0">
               <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
+                <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/01.jpg")}}" alt="avatar">
               </li>
               <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="avatar">
+                <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/02.jpg")}}" alt="avatar">
               </li>
               <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="avatar">
+                <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/03.jpg")}}" alt="avatar">
               </li>
               <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="avatar">
+                <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/04.jpg")}}" alt="avatar">
               </li>
               <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
+                <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/05.jpg")}}" alt="avatar">
               </li>
               <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt="avatar">
+                <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/06.jpg")}}" alt="avatar">
               </li>
               <li class="avatar avatar-xs">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt="avatar">
+                <img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/07.jpg")}}" alt="avatar">
               </li>
               <li class="ms-3">
                 <small> +50 </small>
@@ -676,19 +675,6 @@
 
 <!-- =======================
 JS libraries, plugins and custom scripts -->
-
-<!-- Bootstrap JS -->
-<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Vendors -->
-<script src="assets/vendor/dropzone/dist/dropzone.js"></script>
-<script src="assets/vendor/choices.js/public/assets/scripts/choices.min.js"></script>
-<script src="assets/vendor/glightbox-master/dist/js/glightbox.min.js"></script>
-<script src="assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
-
-<!-- Template Functions -->
-<script src="assets/js/functions.js"></script>
-
 
 @endauth
 @endsection    

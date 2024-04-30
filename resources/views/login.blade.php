@@ -464,6 +464,6 @@
   <script src="assets/vendor/pswmeter/pswmeter.min.js"></script>
   
   <!-- Template Functions -->
-  <script src="assets/js/functions.js"></script>
+  <script src="assets/js/functions.blade.js"></script>
 
 @endsection

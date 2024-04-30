@@ -5,8 +5,8 @@
 		<div class="container">
 			<!-- Logo START -->
 			<a class="navbar-brand" href="/">
-        <img class="light-mode-item navbar-brand-item" src="assets/images/logo.svg" alt="logo">
-				<img class="dark-mode-item navbar-brand-item" src="assets/images/logo.svg" alt="logo">
+        <img class="light-mode-item navbar-brand-item" src="{{ asset("assets/images/logo.svg") }}" alt="logo">
+				<img class="dark-mode-item navbar-brand-item"  src="{{ asset("assets/images/logo.svg") }}" alt="logo">
 			</a>
 			<!-- Logo END -->
 
@@ -172,7 +172,7 @@
                   <li>
                     <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3">
                       <div class="avatar text-center d-none d-sm-inline-block">
-                        <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
+                        <img class="avatar-img rounded-circle" src="{{ asset("assets/images/avatar/01.jpg") }}" alt="">
                       </div>
                       <div class="ms-sm-3">
                         <div class=" d-flex">
@@ -190,7 +190,7 @@
                   <li>
                     <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3 position-relative">
                       <div class="avatar text-center d-none d-sm-inline-block">
-                        <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+                        <img class="avatar-img rounded-circle" src="{{ asset("assets/images/avatar/02.jpg") }}" alt="">
                       </div>
                       <div class="ms-sm-3 d-flex">
                         <div>
@@ -219,7 +219,7 @@
                   <li>
                     <a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 p-3 mb-1">
                       <div class="avatar text-center d-none d-sm-inline-block">
-                        <img class="avatar-img rounded-circle" src="assets/images/logo/12.svg" alt="">
+                        <img class="avatar-img rounded-circle" src="{{ asset("assets/images/logo/12.svg") }}" alt="">
                       </div>
                       <div class="ms-sm-3 d-flex">
                         <p class="small mb-2"><b>Bootstrap in the news:</b> The search giant’s parent company, Alphabet, just joined an exclusive club of tech stocks.</p>

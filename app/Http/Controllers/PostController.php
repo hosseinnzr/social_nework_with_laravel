@@ -34,62 +34,75 @@ class PostController extends Controller
 
             return view('home', ['posts' => $posts]);    
         } else {
+            notify()->error('you not login');
             return redirect()->route('login');
         }
     }
 
 
-    public function create(Request $request){
-                
-        if (Auth::check()) {
+    public function postRoute(Request $request){
+        if(isset($request->id)){
+            $post = Post::findOrFail($request->id);
 
+            if(Auth::user()->id != $post['UID']){
+                notify()->error('you do not have access');
+                return back();
+            }else{
+                return view('post', ['post' => $post]);
+            }
+
+        }else{
+            return view('post');
+        }
+    }
+    public function create(Request $request){
+            
+        if (Auth::check()) {
             $inputs = $request->only([
                 'UID',
                 'title',
                 'post',
-                'hashtag',
+                'tag',
                 'delete',
             ]);
 
             $inputs['UID'] = Auth::id();
 
-            try {
-                Post::create($inputs);
-                return redirect()->route('home');
-            } catch (Exception $error) {
-                return redirect(route('addPost'))->with('error', 'complate reqired fild');
-                // return Response()->json(['status'=> 401, 'message'=> 'Error'], 401);
-            }
+            $post = Post::create($inputs);
+
+            notify()->success('Add post successfully!');
+          
+            return redirect()->route('post', ['id'=> $post->id])
+              ->with('success', true);
+
         }else{
             return redirect()->route('/login');
         }
     }
 
-    // edit updatew update
-    public function update(){
-        return redirect()->route('edit');
-    }
-    public function updatePost(Request $request, $id){
-        $inputs = $request->only([
-            'UID',
-            'fistname_name',
-            'last_name',
-            'phone',
-            'adress',
-            'gender'
-        ]);;
+    
+    public function update(Request $request){
 
-        try {
-            $post = Post::findOrFail($id) -> update($inputs);
+        if (isset($request->id)) {
+            $inputs = $request->only([
+                'title',
+                'post',
+                'tag',
+            ]);
+            // dd($inputs);
+            $post = Post::findOrFail($request->id);
 
-            if($post){
-                return Response()->json('the post updated successfuly', 200); 
-            }else{
-                return Response()->json('Updating the post ins failed!',401);
-            }
-        } catch (Exception $error) {
-            return Response()->json($error, 400);
+            $post->update($inputs);
+
+            notify()->success('update post successfully!');
+          
+            return redirect()->route('post', ['id'=> $post->id])
+              ->with('success', true);
+
+        }else{
+            return redirect()->route('/login');
         }
+
     }
 
     public function delete($id){

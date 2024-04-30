@@ -8,7 +8,6 @@
 
 <html> 
   <body>
-    <br><br><br>
     <main>      
       <!-- Container START -->
       <div class="container">
@@ -86,6 +85,12 @@
                         <li class="nav-item">
                           <a class="nav-link" type="submit" href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">
                             <img class="me-2 h-20px fa-fw" src="assets/images/icon/home-outline-filled.svg" alt=""><span>Profile</span>
+                          </a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a class="nav-link" type="submit" href="{{ route('post') }}">
+                            <img class="me-2 h-20px fa-fw" src="assets/images/icon/add_post.png" alt=""><span>Add post</span>
                           </a>
                         </li>
 
@@ -1237,25 +1242,7 @@
     </div>
     <!-- Modal create events END -->
     
-    <!-- =======================
-    JS libraries, plugins and custom scripts -->
-    
-        <!-- Bootstrap JS -->
-        <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    
-        <!-- Vendors -->
-        <script src="assets/vendor/tiny-slider/dist/tiny-slider.js"></script>
-        <script src="assets/vendor/OverlayScrollbars-master/js/OverlayScrollbars.min.js"></script>
-        <script src="assets/vendor/choices.js/public/assets/scripts/choices.min.js"></script>
-        <script src="assets/vendor/glightbox-master/dist/js/glightbox.min.js"></script>
-        <script src="assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
-        <script src="assets/vendor/plyr/plyr.js"></script>
-        <script src="assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
-    
-        <!-- Template Functions -->
-        <script src="assets/js/functions.js"></script>
-    
-    </body>
+  </body>
 </html> 
 @endauth
 

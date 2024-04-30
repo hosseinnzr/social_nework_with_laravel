@@ -16,16 +16,9 @@ class AuthManager extends Controller
 
     function profile(Request $request){
         if(auth::check()){
-            $user = User::where('user_name', $request->user_name)->first();
+            $posts = Post::latest()->where('delete', 0)->where('UID', auth::id())->get();
+            $user = Auth::user();
 
-            if(isset($request)){
-                $user_id = $user->id;
-            }else{
-                $user_id = null;
-            }
-
-            $posts = Post::latest()->where('delete', 0)->where('UID', $user_id)->get();
-            
             if(isset($request->tag)){
                 $result = array();
                 foreach ($posts as $post) {
@@ -36,8 +29,23 @@ class AuthManager extends Controller
                     $posts=$result;
                 } 
             }
-            
+    
+            // foreach ($posts as $post) {
+            //     $user = User::where('id', $post->UID)->select('user_name')->first();
+            //     $post['user_name'] = $user ? $user->user_name : null;
+            // }
+
             return view('profile', ['posts' => $posts, 'user' => $user]);    
+        } else {
+            notify()->error('you not login');
+            return redirect()->route('login');
+        }
+    }
+
+    function login(){
+        if(auth::check()){
+            notify()->success('you are now login');
+            return redirect()->route('home');  
         }else{
             return view('login');
         }
@@ -52,9 +60,8 @@ class AuthManager extends Controller
         
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
- 
-            // return redirect()->intended('dashboard');
 
+            notify()->success('login successfully');
             return redirect()->route('home');
         }
         return redirect(route('login'))->with('error', 'login details are not valid');
@@ -100,8 +107,8 @@ class AuthManager extends Controller
     }
 
     // edit / update
-    public function setting(User $user){
-        return view('settings', ['user' => $user]);
+    public function setting(){
+        return view('settings');
     }
     public function settingPost(Request $request, $id){
 
