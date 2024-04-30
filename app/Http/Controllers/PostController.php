@@ -108,7 +108,7 @@ class PostController extends Controller
     public function delete(Request $request){
         $post = Post::findOrFail($request->id);
         $post->update(['delete' => true]);
-        return redirect()->route('home');
+        return redirect()->route('profile');
 
     }
 

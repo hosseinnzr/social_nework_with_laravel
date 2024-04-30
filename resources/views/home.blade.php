@@ -186,13 +186,10 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
                           <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
                           <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
-                          @if ($post['UID'] == Auth::id())
-                            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
-                          @endif
                           <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                           <li><hr class="dropdown-divider"></li>
                           <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
-                          </ul>
+                        </ul>
                     </div>
                     <!-- Card share action START -->
                     </div>

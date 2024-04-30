@@ -16,8 +16,12 @@
           @endforeach
         </div>
         @endif
-
-          <h3>Add Post :</h3>
+        
+          @isset($post)
+            <h3>Edit Post :</h3>
+          @else
+            <h3>Add Post :</h3>
+          @endisset
           <br>
           <div class="mb-3">
             <label for="title" class="form-label">title :</label>
@@ -30,7 +34,7 @@
 
           <div class="mb-3">
             <label for="post" class="form-label">post :</label>
-            <textarea type="text" class="form-control" name="post">{{ $post['post'] ?? old('post')}}</textarea>
+            <textarea type="text" class="form-control" name="post" >{{ $post['post'] ?? old('post')}}</textarea>
            
             @error('post')
             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -52,7 +56,7 @@
             @else
                 <div  class="btn btn-primary">add</div>
             @endisset
-        </button>
+          </button>
     </form>
   </main>
 

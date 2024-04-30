@@ -13,10 +13,10 @@ use Exception;
 
 class AuthManager extends Controller
 {
-    function profile(Request $request){
+    function profile(Request $request, $user_name){
         if(auth::check()){
-            $posts = Post::latest()->where('delete', 0)->where('UID', auth::id())->get();
-            $user = Auth::user();
+            $user = User::where('user_name', $user_name)->first();
+            $posts = Post::latest()->where('delete', 0)->where('UID', $user->id)->get();
 
             if(isset($request->tag)){
                 $result = array();
