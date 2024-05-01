@@ -112,7 +112,9 @@ class PostController extends Controller
 
     }
 
-    public function like($id){
+    public function like(Request $request){
+        // dd( $request->postId);
+        $id = $request->postId;
         $is_liked = false;
         $user_liked_id = auth::id();
 
@@ -153,7 +155,9 @@ class PostController extends Controller
         $post->like_number = $like_number;
         $post->save();
 
-        return back();
+        return response()->json(['massage'=> $like_number]);
+
+        // return back();
 
     }
 }

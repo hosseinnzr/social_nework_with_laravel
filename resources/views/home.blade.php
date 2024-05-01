@@ -47,7 +47,7 @@
                           <a href="#!"><img class="avatar-img rounded border border-white border-3" src="https://picsum.photos/id/{{auth()->user()->id}}/200/200" alt=""></a>
                         </div>
                         <!-- Info -->
-                        <h5 class="mb-0"> <a href="#!">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a> </h5>
+                        <h5 class="mb-0"> <a href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a> </h5>
                         <small>{{auth()->user()->email}}</small>
                         <p class="mt-3">{{auth()->user()->biography}}</p>
     

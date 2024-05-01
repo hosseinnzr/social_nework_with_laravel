@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Livewire\LikePost;
 use App\Http\Controllers\AuthManager;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
 // SignUp
@@ -29,8 +30,7 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::get('/delete', [PostController::class, "delete"])->name('delete');
 
 
-    // Like Post
-    Route::post('/Like/{id}', [PostController::class, 'like'])->name('like');
+    // Route::post('/ajaxlike', [PostController::class, 'like']);
 
     // Logout/Login Page
     Route::get('/login', [AuthManager::class, 'login'])->name('login');

@@ -29,8 +29,29 @@
                 <div class="ms-sm-4 mt-sm-3">
                   <!-- Info -->
                   <h1 class="mb-0 h5">{{$user['first_name']}} {{$user['last_name']}} <i class="bi bi-patch-check-fill text-success small"></i></h1>
-                  <p> {{$user['email']}}</p>
-                </div>
+                    <!-- User stat START -->
+                    <div class="hstack gap-2 gap-xl-3 justify-content-center">
+                      <!-- User stat item -->
+                      <div>
+                        <h6 class="mb-0">256</h6>
+                        <small>Post</small>
+                      </div>
+                      <!-- Divider -->
+                      <div class="vr"></div>
+                      <!-- User stat item -->
+                      <div>
+                        <h6 style="text-align: center" class="mb-0">{{auth()->user()->followers_number}}</h6>
+                        <small>Followers</small>
+                      </div>
+                      <!-- Divider -->
+                      <div class="vr"></div>
+                      <!-- User stat item -->
+                      <div>
+                        <h6 style="text-align: center" class="mb-0">{{auth()->user()->following_number}}</h6>
+                        <small>Following</small>
+                      </div>
+                    </div>
+                    <!-- User stat END -->                </div>
                 <!-- Button -->
                 <div class="d-flex mt-3 justify-content-center ms-sm-auto">
 
@@ -82,7 +103,7 @@
                 <div class="d-flex align-items-center">
                     <!-- Avatar -->
                     <div class="avatar me-2">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{asset("assets/images/logo/11.svg")}}" alt=""> </a>
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="https://picsum.photos/id/{{auth()->user()->id}}/200/200" alt=""> </a>
                     </div>
                     <!-- Info -->
                     <div>
@@ -123,7 +144,7 @@
                 <h5>{{$post['title']}}</h5>
                 <p class="mb-0">{{$post['post']}}</p>
                 @foreach(explode(",", $post['tag']) as $tag)
-                <a href="/explore/?tag={{$tag}}">{{$tag}} </a>
+                <a href="/user/{{auth()->user()->user_name}}?tag={{$tag}}">{{$tag}}</a>
                 @endforeach
             </div>
             <!-- Card body END -->
@@ -132,19 +153,30 @@
                 <!-- Feed react START -->
                 <ul class="nav nav-fill nav-stack small">
                 <li class="nav-item">
-                    <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
+
+                  @livewire('like-post', ['post' => $post])
+
+
+                  {{-- <form action="{{url('ajaxlike')}}" method="POST" id="likePost" class="ms-auto me-auto mt-3">
+                    @csrf
+                    <input type="hidden" name="postId" value="{{$post['id']}}">
+                    <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like <div id="massage{{$post['id']}}"></div> </button>
+                  </form> --}}
+
+                    {{-- <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                         @csrf
                         <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like ( {{$post['like_number']}} )</button>
-                    </form>
+                    </form> --}}
+
                 </li>
                 <li class="nav-item">
-                    <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
+                    <form action="#" method="POST" class="ms-auto me-auto mt-3">
                         @csrf
                         <button style="font-size: 12px" type="submit" class="btn btn-link"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</button>
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
+                    <form action="#" method="POST" class="ms-auto me-auto mt-3">
                         @csrf
                         <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
                     </form>
@@ -674,6 +706,8 @@
     </div>
   </div>
 </div>
+
+
 <!-- Modal create events END -->
 
 <!-- =======================
