@@ -55,6 +55,7 @@ class PostController extends Controller
             return view('post');
         }
     }
+    
     public function create(Request $request){
             
         if (Auth::check()) {
@@ -89,7 +90,7 @@ class PostController extends Controller
                 'post',
                 'tag',
             ]);
-            // dd($inputs);
+
             $post = Post::findOrFail($request->id);
 
             $post->update($inputs);

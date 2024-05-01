@@ -23,8 +23,8 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::get('/', [PostController::class, "home"])->name('home');
 
     // Edit User
-    Route::get('/setting', [AuthManager::class, "setting"])->name('settings');
-    Route::post('/setting', [AuthManager::class, "settingPost"])->name('settings.post');
+    Route::get('/settings', [AuthManager::class, "settings"])->name('settings');
+    Route::post('/settings', [AuthManager::class, "update"])->name('settings.post');
 
     // Delete Post
     Route::get('/delete', [PostController::class, "delete"])->name('delete');

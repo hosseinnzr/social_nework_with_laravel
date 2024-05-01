@@ -101,31 +101,32 @@ class AuthManager extends Controller
     }
 
     // edit / update
-    public function setting(){
+    public function settings(){
         return view('settings');
     }
-    public function settingPost(Request $request, $id){
+    public function update(Request $request){
 
         $inputs = $request->only([
             'biography',
             'first_name',
             'last_name',
             'user_name',
+            'additional_name',
+            'birthday',
             'email',
-        ]);;
+            'phone'
+        ]);
 
-        $inputs['password'] = Hash::make($request->password);
+        $userId = Auth::id();
 
-        try {
-            $sesult = user::findOrFail($id) -> update($inputs);
-            if($sesult){
-                return redirect(route('home'))->with('massage', 'he user updated successfuly - 200');
-            }else{
-                return Response()->json('Updating the user in failed!',401);
-            }
-        } catch (Exception $error) {
-            return Response()->json($error, 400);
-        }
+        $user = User::findOrFail($userId);
+
+        $user->update($inputs);
+
+        notify()->success('update user successfully!');
+          
+        return redirect()->route('settings');
+
     }
     public function delete($id){
         try {
