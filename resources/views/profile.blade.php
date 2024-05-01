@@ -156,18 +156,6 @@
 
                   @livewire('like-post', ['post' => $post])
 
-
-                  {{-- <form action="{{url('ajaxlike')}}" method="POST" id="likePost" class="ms-auto me-auto mt-3">
-                    @csrf
-                    <input type="hidden" name="postId" value="{{$post['id']}}">
-                    <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like <div id="massage{{$post['id']}}"></div> </button>
-                  </form> --}}
-
-                    {{-- <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
-                        @csrf
-                        <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like ( {{$post['like_number']}} )</button>
-                    </form> --}}
-
                 </li>
                 <li class="nav-item">
                     <form action="#" method="POST" class="ms-auto me-auto mt-3">

@@ -212,21 +212,18 @@
                   <ul class="nav nav-fill nav-stack small">
 
                     <li class="nav-item">
-                        <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
-                            @csrf
-                            <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-heart pe-1"></i> Like ( {{$post['like_number']}} )</button>
-                        </form>
+                      @livewire('like-post', ['post' => $post])
                     </li>
                     
                     <li class="nav-item">
-                        <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
+                        <form action="#" method="POST" class="ms-auto me-auto mt-3">
                             @csrf
                             <button style="font-size: 12px" type="submit" class="btn btn-link"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</button>
                         </form>
                     </li>
 
                     <li class="nav-item">
-                        <form action="{{route('like', ['id' => $post['id']])}}" method="POST" class="ms-auto me-auto mt-3">
+                        <form action="#" method="POST" class="ms-auto me-auto mt-3">
                             @csrf
                             <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
                         </form>
