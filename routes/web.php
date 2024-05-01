@@ -30,8 +30,6 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::get('/delete', [PostController::class, "delete"])->name('delete');
 
 
-    // Route::post('/ajaxlike', [PostController::class, 'like']);
-
     // Logout/Login Page
     Route::get('/login', [AuthManager::class, 'login'])->name('login');
     Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');

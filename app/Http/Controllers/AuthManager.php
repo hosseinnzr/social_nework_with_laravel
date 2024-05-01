@@ -67,8 +67,10 @@ class AuthManager extends Controller
         $request->session()->invalidate();
  
         $request->session()->regenerateToken();
+
+        notify()->success('logout user successfully!');
          
-        return view('/login');
+        return redirect()->route('login');
     }
     
     

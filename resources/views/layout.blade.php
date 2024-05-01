@@ -37,11 +37,16 @@
 
   </head>
   <body>
+
 	<div style="position: absolute; z-index:9000" class="notifications bottom-right">
 		<x-notify::notify />
 		@notifyJs
 	</div>
-    @include('include.header')
+
+	@auth
+		@include('include.header')
+	@endauth
+
 	<br><br><br>
     @yield('content')
 	<script>

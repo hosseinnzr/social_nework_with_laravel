@@ -1,5 +1,6 @@
+@auth
+  
 <header class="navbar-light fixed-top header-static bg-mode">
-
 	<!-- Logo Nav START -->
 	<nav class="navbar navbar-expand-lg">
 		<div class="container">
@@ -237,7 +238,6 @@
 				</li>
         
         <!-- Notification dropdown END -->
-        @auth
 
         <li class="nav-item ms-2 dropdown">
 					<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
@@ -272,14 +272,12 @@
             </li>
             <li class="dropdown-divider"></li>
 
-            @auth
             <li>
               <form action="{{route('logout')}}" method="POST" class="ms-auto me-auto mt-3">
                 @csrf
                 <button type="submit" class="btn btn-light"><i class="bi bi-power fa-fw me-2"></i>Sign Out</button>
               </form>
             </li>
-            @endauth
             
             <li> <hr class="dropdown-divider"></li>
             <!-- Dark mode switch START -->
@@ -295,7 +293,6 @@
           </ul>
 				</li>
 
-        @endauth
 			  <!-- Profile START -->
         
 			</ul>
@@ -304,3 +301,5 @@
 	</nav>
 	<!-- Logo Nav END -->
 </header>
+
+@endauth

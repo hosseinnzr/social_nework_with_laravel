@@ -40,14 +40,14 @@
                       <div class="vr"></div>
                       <!-- User stat item -->
                       <div>
-                        <h6 style="text-align: center" class="mb-0">{{auth()->user()->followers_number}}</h6>
+                        <h6 style="text-align: center" class="mb-0">{{$user['followers_number']}}</h6>
                         <small>Followers</small>
                       </div>
                       <!-- Divider -->
                       <div class="vr"></div>
                       <!-- User stat item -->
                       <div>
-                        <h6 style="text-align: center" class="mb-0">{{auth()->user()->following_number}}</h6>
+                        <h6 style="text-align: center" class="mb-0">{{$user['following_number']}}</h6>
                         <small>Following</small>
                       </div>
                     </div>
