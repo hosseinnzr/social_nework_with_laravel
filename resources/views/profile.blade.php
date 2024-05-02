@@ -56,15 +56,19 @@
                 <div class="d-flex mt-3 justify-content-center ms-sm-auto">
 
                   @if ($user['user_name'] == auth()->user()->user_name)
-                    <form action="{{route('settings')}}" method="GET" class="ms-auto me-auto mt-3">
-                      {{-- @csrf --}}
-                      <button type="submit" class="btn btn-danger-soft me-2"> <i class="fa fa-edit"></i> Edit Profile</button>
-                    </form>
-                  @else                              
+                    <a class="btn btn-success-soft me-2" type="submit" href="{{ route('post') }}">
+                      <span><i class="fa fa-add"></i> Add post</span>
+                    </a>  
+                  @elseif ( in_array(auth()->id(), explode(",", $user['followers'])) )                            
                     <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                       @csrf
-                      <button type="submit" class="btn btn-primary">follow</button>
+                      <button type="submit" class="btn btn-primary-soft me-2"><i class="fa fa-user"></i> unfollow</button>
                     </form>
+                  @else 
+                    <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
+                      @csrf
+                      <button type="submit" class="btn btn-primary-soft me-2"><i class="fa fa-user"></i> follow</button>
+                    </form> 
                   @endif
 
                 </div>
