@@ -15,21 +15,27 @@ class AuthManager extends Controller
 {
     function profile(Request $request, $user_name){
         if(auth::check()){
-            $user = User::where('user_name', $user_name)->first();
-            $posts = Post::latest()->where('delete', 0)->where('UID', $user->id)->get();
+            if(User::where('user_name', $user_name)->exists()){
+                $user = User::where('user_name', $user_name)->first();
+                $posts = Post::latest()->where('delete', 0)->where('UID', $user->id)->get();
 
-            if(isset($request->tag)){
-                $result = array();
-                foreach ($posts as $post) {
-                    $post_array = explode(',', $post['tag']);
-                    if ((in_array($request->tag, $post_array)) != false){
-                        array_push($result, $post);
-                    }
-                    $posts=$result;
-                } 
+                if(isset($request->tag)){
+                    $result = array();
+                    foreach ($posts as $post) {
+                        $post_array = explode(',', $post['tag']);
+                        if ((in_array($request->tag, $post_array)) != false){
+                            array_push($result, $post);
+                        }
+                        $posts=$result;
+                    } 
+                }
+
+                return view('profile', ['posts' => $posts, 'user' => $user]);   
+            }else{
+                notify()->error('user not found');
+                return back();
             }
-
-            return view('profile', ['posts' => $posts, 'user' => $user]);    
+                 
         } else {
             notify()->error('you not login');
             return redirect()->route('login');
