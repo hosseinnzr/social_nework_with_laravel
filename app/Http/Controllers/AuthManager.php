@@ -103,9 +103,9 @@ class AuthManager extends Controller
         $data['profile_pic'] = '/default/default_profile.jpg';
 
         $user = User::create($data);
-        dd($user);
         if(!$user){
-            return redirect(route('login'))->with('message', 'registration fiald, try again');
+            notify()->success('signup user successfully!');
+            return redirect(route('login'));
         }
         return redirect()->back();
     }
@@ -120,16 +120,16 @@ class AuthManager extends Controller
 
         $user = User::findOrFail($userId);
 
-        $inputs = $request->only([
+        $request->validate([
             'profile_pic',
             'biography',
-            'first_name',
-            'last_name',
-            'user_name',
-            'additional_name',
             'birthday',
-            'email',
-            'phone'
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'user_name' =>  'required',
+            'email' => 'required|email',
+            'phone',
+            'additional_name'
         ]);
 
         if ($request->hasFile('profile_pic')) {
@@ -139,12 +139,10 @@ class AuthManager extends Controller
             $user->profile_pic = '/profile/'.$imageName;
         }
 
-        $user->update($inputs);
+        User::update($request->all());
 
         notify()->success('update user successfully!');
-          
         return redirect()->route('settings');
-
     }
     public function delete($id){
         try {

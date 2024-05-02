@@ -143,6 +143,13 @@
             <div class="card-body">
                 <h5>{{$post['title']}}</h5>
                 <p class="mb-0">{{$post['post']}}</p>
+                <br>
+
+                @isset($post['post_picture'])
+                  <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                  <br>    
+                @endisset
+
                 @foreach(explode(",", $post['tag']) as $tag)
                 <a href="/user/{{auth()->user()->user_name}}?tag={{$tag}}">{{$tag}}</a>
                 @endforeach

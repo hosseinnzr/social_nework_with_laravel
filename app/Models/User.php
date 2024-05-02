@@ -35,4 +35,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function rules()
+    {
+        return [
+            'user_name' => 'required|unique:users,user_name,' . $this->id,
+            'email' => 'required|email|unique:users' . $this->id
+        ];
+    }
+
 }

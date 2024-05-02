@@ -66,15 +66,22 @@ class PostController extends Controller
             
         if (Auth::check()) {
             $inputs = $request->only([
+                'post_picture',
                 'UID',
                 'title',
                 'post',
                 'tag',
-                'delete',
             ]);
+            dd($inputs);
+
+            if ($request->hasFile('post_picture')) {
+                $image = ($request->file('post_picture'));
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('post-picture'), $imageName);
+                $inputs['post_picture'] = '/post-picture/'.$imageName;
+            }
 
             $inputs['UID'] = Auth::id();
-
             $post = Post::create($inputs);
 
             notify()->success('Add post successfully!');
@@ -92,10 +99,18 @@ class PostController extends Controller
 
         if (isset($request->id)) {
             $inputs = $request->only([
+                'post_picture',
                 'title',
                 'post',
                 'tag',
             ]);
+
+            if ($request->hasFile('post_picture')) {
+                $image = ($request->file('post_picture'));
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('post-picture'), $imageName);
+                $inputs['post_picture'] = '/post-picture/'.$imageName;
+            }
 
             $post = Post::findOrFail($request->id);
 

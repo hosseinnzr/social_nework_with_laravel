@@ -126,48 +126,86 @@
                     <div class="col-sm-12 col-lg-12">
                       <label class="form-label">Profile picture</label>
                       <input name="profile_pic" type="file" class="form-control">
+                    
+                      @error('profile_pic')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
                     </div>
                     
                     <!-- First name -->
                     <div class="col-sm-6 col-lg-4">
                       <label class="form-label">First name</label>
                       <input name="first_name" value="{{ Auth::user()->first_name ?? old('first_name')}}" type="text" class="form-control" placeholder="">
+                    
+                      @error('first_name')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
                     </div>
                     <!-- Last name -->
                     <div class="col-sm-6 col-lg-4">
                       <label class="form-label">Last name</label>
                       <input name="last_name" value="{{ Auth::user()->last_name ?? old('last_name')}}" type="text" class="form-control" placeholder="">
+                    
+                      @error('last_name')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
                     </div>
                     <!-- Additional name -->
                     <div class="col-sm-6 col-lg-4">
                       <label class="form-label">Additional name</label>
-                      <input name="additional_name" value="" type="text" class="form-control" placeholder="">
+                      <input name="additional_name" value="{{ Auth::user()->additional_name ?? old('additional_name')}}" type="text" class="form-control" placeholder="">
+                    
+                      @error('additional_name')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
                     </div>
                     <!-- User name -->
                     <div class="col-sm-6">
                       <label class="form-label">User name</label>
                       <input name="user_name" value="{{ Auth::user()->user_name ?? old('user_name')}}" type="text" class="form-control" placeholder="">
+                    
+                      @error('user_name')
+                      <p class="text-red-500 text-xs mt-1">{{$errors->first('user_name')}}</p>
+                      @enderror
+
+                      
                     </div>
                     <!-- Birthday -->
                     <div class="col-lg-6">
                       <label class="form-label">Birthday </label>
                       <input name="birthday" value="2000/10/02" type="text" class="form-control flatpickr">
+                    
+                      @error('birthday')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
                     </div>
                     <!-- Phone number -->
                     <div class="col-sm-6">
                       <label class="form-label">Phone number</label>
                       <input name="phone" type="text" class="form-control" placeholder="" value="{{ Auth::user()->phone ?? old('phone')}}">
+                    
+                      @error('phone')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
                     </div>
                     <!-- Phone number -->
                     <div class="col-sm-6">
                       <label class="form-label">Email</label>
                       <input name="email" type="text" class="form-control" placeholder="" value="{{ Auth::user()->email  ?? old('email ')}}">
+                    
+                      @error('email')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
                     </div>
                     <!-- Page information -->
                     <div class="col-12">
                       <label class="form-label">Biography</label>
                       <textarea name="biography" class="form-control" rows="4" placeholder="Description (Required)">{{ Auth::user()->biography ?? old('biography')}}</textarea>
                       <small>Character limit: 300</small>
+
+                      @error('biography')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
                     </div>
                     <!-- Button  -->
                     <div class="col-12 text-end">

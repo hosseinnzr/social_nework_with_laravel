@@ -9,7 +9,7 @@
     <div class="container">
       <div class="row justify-content-center align-items-center vh-100 py-5">
         <div class="col-sm-10 col-md-8 col-lg-8 col-xl-7 col-xxl-6">
-          <div class="card card-body rounded-3 p-4 p-sm-5">
+          <div class="card card-body rounded-3 p-4 p-sm-5"> 
             <form method="POST" action="{{ isset($post) ? route('post.update', ['id' => $post->id]) : route('post.store')}}" class="mt-4" enctype="multipart/form-data">
                 @csrf
 
@@ -28,6 +28,16 @@
                   @endisset
                   <br>
                   <div class="mb-3 position-relative">
+                    <!-- post picture -->
+                    <div class="col-sm-12 col-lg-12">
+                      <label class="form-label">post picture :</label>
+                      <input name="post_picture" type="file" class="form-control">
+                    
+                      @error('post_picture')
+                      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                      @enderror
+                    </div>
+
                     <div class="mb-3 input-group-lg">
                       <label for="title" class="form-label">title :</label>
                       <input value="{{ $post['title'] ?? old('title')}}" type="text" class="form-control" name="title">
