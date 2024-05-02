@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use Exception;
+use Illuminate\Support\Str;
+
 
 
 
@@ -118,28 +120,29 @@ class AuthManager extends Controller
 
         $userId = Auth::id();
 
-        $user = User::findOrFail($userId);
+        $user =  User::findOrFail($userId);
 
-        $request->validate([
-            'profile_pic',
+        $input = $request->only([
+            'birthday',
+            'profile_pic' ,
             'biography',
             'birthday',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'user_name' =>  'required',
-            'email' => 'required|email',
+            'first_name',
+            'last_name',
+            'user_name',
+            'email',
             'phone',
             'additional_name'
         ]);
 
         if ($request->hasFile('profile_pic')) {
             $image = ($request->file('profile_pic'));
-            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $imageName = $imageName = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('profile'), $imageName);
-            $user->profile_pic = '/profile/'.$imageName;
+            $input['profile_pic'] = '/profile/'.$imageName;
         }
 
-        User::update($request->all());
+        $user->update($input);
 
         notify()->success('update user successfully!');
         return redirect()->route('settings');
@@ -163,14 +166,14 @@ class AuthManager extends Controller
     // follow
     public function follow($id){
         $is_follow = false;
-        $user_login = auth::user();
+        $user_login = User::findOrFail(auth::id());
         $user = User::findOrFail($id);
 
+        $user_login_id_following = $user_login->following;
         $user_followers = $user->followers;
-        $user_login_id_following = auth::user()->following;
 
-        $user_follower_array = explode(",", $user_followers);
         $user_login_id_following_array = explode(",", $user_login_id_following);
+        $user_follower_array = explode(",", $user_followers);
 
         foreach($user_follower_array as $followers_number){
             if ($user_login->id == $followers_number){
@@ -193,23 +196,23 @@ class AuthManager extends Controller
         }
 
         // save follow
-        $user->followers = $followers;
         $user_login->following = $followings;
+        $user->followers = $followers;
 
         $user_login->save();
         $user->save();
 
-            if ($user->followers == "0"){
-                $followers_number = 1;
-            }else{
-                $followers_number = count(explode(",", $user->followers));
-            }
+        if ($user->followers == "0"){
+            $followers_number = 1;
+        }else{
+            $followers_number = count(explode(",", $user->followers));
+        }
 
-            if ($user_login->following == "0"){
-                $following_number = 1;
-            }else{
-                $following_number = count(explode(",", $user->followers));
-            }
+        if ($user_login->following == "0"){
+            $following_number = 1;
+        }else{
+            $following_number = count(explode(",", $user->following));
+        }
         
         $user->followers_number = $followers_number -1;
         $user_login->following_number = $following_number -1;

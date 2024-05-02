@@ -30,7 +30,10 @@
                   <div class="mb-3 position-relative">
                     <!-- post picture -->
                     <div class="col-sm-12 col-lg-12">
-                      <label class="form-label">post picture :</label>
+                      @isset($post['post_picture'])
+                        <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                      @endisset
+                      <br>
                       <input name="post_picture" type="file" class="form-control">
                     
                       @error('post_picture')
@@ -39,6 +42,7 @@
                     </div>
 
                     <div class="mb-3 input-group-lg">
+                      <br>
                       <label for="title" class="form-label">title :</label>
                       <input value="{{ $post['title'] ?? old('title')}}" type="text" class="form-control" name="title">
 

@@ -16,6 +16,7 @@ class PostController extends Controller
         if(auth::check()){
 
             $user_following = explode(",", Auth::user()->following);
+            $user_follower = explode(",", Auth::user()->followers);
 
             $posts = Post::latest()->where('delete', 0)->whereIn('UID', $user_following)->get();
 
@@ -38,7 +39,10 @@ class PostController extends Controller
                 $post['user_profile_pic'] = $user['profile_pic'];
             }
 
-            return view('home', ['posts' => $posts]);    
+            $follower_user = User::whereIn('id', $user_follower)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
+            $following_user = User::whereIn('id', $user_following)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
+
+            return view('home', ['posts' => $posts, 'follower_user' => $follower_user, 'following_user' => $following_user]);    
         } else {
             notify()->error('you not login');
             return redirect()->route('login');

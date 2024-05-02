@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', "post")
+@section('title', "settings")
 @section('content')
 @auth
   {{ csrf_field() }}
@@ -125,7 +125,7 @@
                     <!-- Profile picture -->
                     <div class="col-sm-12 col-lg-12">
                       <label class="form-label">Profile picture</label>
-                      <input name="profile_pic" type="file" class="form-control">
+                      <input name="profile_pic" type="file" class="form-control" value="1234">
                     
                       @error('profile_pic')
                       <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -173,7 +173,7 @@
                     <!-- Birthday -->
                     <div class="col-lg-6">
                       <label class="form-label">Birthday </label>
-                      <input name="birthday" value="2000/10/02" type="text" class="form-control flatpickr">
+                      <input name="birthday" value="{{ Auth::user()->birthday ?? old('birthday')}}" type="date" class="form-control">
                     
                       @error('birthday')
                       <p class="text-red-500 text-xs mt-1">{{$message}}</p>

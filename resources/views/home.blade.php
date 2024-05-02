@@ -61,14 +61,14 @@
                           <!-- Divider -->
                           <div class="vr"></div>
                           <!-- User stat item -->
-                          <div>
+                          <div data-bs-toggle="offcanvas" href="#showFollowers" role="button" aria-controls="offcanvasChat">
                             <h6 class="mb-0">{{auth()->user()->followers_number}}</h6>
                             <small>Followers</small>
                           </div>
                           <!-- Divider -->
                           <div class="vr"></div>
                           <!-- User stat item -->
-                          <div>
+                          <div data-bs-toggle="offcanvas" href="#showFollowing" role="button" aria-controls="offcanvasChat">
                             <h6 class="mb-0">{{auth()->user()->following_number}}</h6>
                             <small>Following</small>
                           </div>
@@ -81,42 +81,10 @@
     
                       <!-- Side Nav START -->
                       <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
-
                         <li class="nav-item">
-                          <a class="nav-link" type="submit" href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">
-                            <img class="me-2 h-20px fa-fw" src="assets/images/icon/home-outline-filled.svg" alt=""><span>Profile</span>
-                          </a>
-                        </li>
-
-                        <li class="nav-item">
-                          <a class="nav-link" type="submit" href="{{ route('post') }}">
-                            <img class="me-2 h-20px fa-fw" src="assets/images/icon/add_post.png" alt=""><span>Add post</span>
-                          </a>
-                        </li>
-
-                        <li class="nav-item">
-                          <a class="nav-link" href="my-profile-connections.html">
-                            <img class="me-2 h-20px fa-fw" src="assets/images/icon/person-outline-filled.svg" alt=""><span>Followers </span>
-                          </a>
-                        </li>
-
-                        <li class="nav-item">
-                          <a class="nav-link" href="blog.html">
-                            <img class="me-2 h-20px fa-fw" src="assets/images/icon/earth-outline-filled.svg" alt=""><span>Latest News </span>
-                          </a>
-                        </li>
-
-                        <li class="nav-item">
-                          <a class="nav-link" href="events.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/calendar-outline-filled.svg" alt=""><span>Events </span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="groups.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/chat-outline-filled.svg" alt=""><span>Groups </span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="notifications.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/notification-outlined-filled.svg" alt=""><span>Notifications </span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="settings.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/cog-outline-filled.svg" alt=""><span>Settings </span></a>
+                          <div class=" text-center py-2">
+                            <a class="btn btn-link text-secondary btn-sm" type="submit" href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">view Profile </a>
+                          </div>
                         </li>
                       </ul>
                       <!-- Side Nav END -->
@@ -413,253 +381,91 @@
       <a class="icon-md btn btn-primary position-fixed end-0 bottom-0 me-5 mb-5" data-bs-toggle="offcanvas" href="#offcanvasChat" role="button" aria-controls="offcanvasChat">
         <i class="bi bi-chat-left-text-fill"></i>
       </a>
-      <!-- Chat sidebar START -->
-      <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasChat">
-        <!-- Offcanvas header -->
-        <div class="offcanvas-header d-flex justify-content-between">
-          <h5 class="offcanvas-title">Messaging</h5>
-          <div class="d-flex">
-            <!-- New chat box open button -->
-            <a href="#" class="btn btn-secondary-soft-hover py-1 px-2">
-              <i class="bi bi-pencil-square"></i>
-            </a>
-            <!-- Chat action START -->
-            <div class="dropdown">
-              <a href="#" class="btn btn-secondary-soft-hover py-1 px-2" id="chatAction" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-three-dots"></i>
+
+        <!-- show follower START -->
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="showFollowers">
+          <!-- Offcanvas header -->
+          <div class="offcanvas-header d-flex justify-content-between">
+            <h5 class="offcanvas-title">Show Followers</h5>
+            <div class="d-flex">
+
+              <!-- Close  -->
+              <a href="#" class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
               </a>
-              <!-- Chat action menu -->
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatAction">
-                <li><a class="dropdown-item" href="#"> <i class="bi bi-check-square fa-fw pe-2"></i>Mark all as read</a></li>
-                <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Chat setting </a></li>
-                <li><a class="dropdown-item" href="#"> <i class="bi bi-bell fa-fw pe-2"></i>Disable notifications</a></li>
-                <li><a class="dropdown-item" href="#"> <i class="bi bi-volume-up-fill fa-fw pe-2"></i>Message sounds</a></li>
-                <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block setting</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#"> <i class="bi bi-people fa-fw pe-2"></i>Create a group chat</a></li>
+      
+            </div>
+          </div>
+          <!-- Offcanvas body START -->
+
+            <div class="offcanvas-body pt-0 custom-scrollbar">
+              <ul class="list-unstyled">
+                @foreach ( $follower_user as $single_follower)
+                <!-- Contact item -->
+                <li class="mt-3 hstack gap-3 align-items-center position-relative toast-btn" data-target="chatToast">
+                  <!-- Avatar -->
+                  <div class="avatar">
+                    <img class="avatar-img rounded-circle" src={{$single_follower['profile_pic']}} alt="">
+                  </div>
+                  <!-- Info -->
+                  <div class="overflow-hidden">
+                    <a class="h6 mb-0 stretched-link" href="{{ route('profile', ['user_name' => $single_follower['user_name']]) }}">{{$single_follower['user_name']}}</a>
+                    <div class="small text-secondary text-truncate">{{$single_follower['first_name']}} {{$single_follower['last_name']}}</div>
+                  </div>
+                  <!-- Chat time -->
+                  <div class="small ms-auto text-nowrap"> Just now </div>
+                </li>
+                @endforeach
+
               </ul>
             </div>
-            <!-- Chat action END -->
-            
-            <!-- Close  -->
-            <a href="#" class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="offcanvas" aria-label="Close">
-              <i class="fa-solid fa-xmark"></i>
-            </a>
-    
+
+          <!-- Offcanvas body END -->
+        </div>
+        <!-- show follower END -->
+
+        <!-- show following START -->
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="showFollowing">
+          <!-- Offcanvas header -->
+          <div class="offcanvas-header d-flex justify-content-between">
+            <h5 class="offcanvas-title">Show Following</h5>
+            <div class="d-flex">
+
+              <!-- Close  -->
+              <a href="#" class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+              </a>
+      
+            </div>
           </div>
+          <!-- Offcanvas body START -->
+
+            <div class="offcanvas-body pt-0 custom-scrollbar">
+              <ul class="list-unstyled">
+                @foreach ( $following_user as $single_following)
+                <!-- Contact item -->
+                <li class="mt-3 hstack gap-3 align-items-center position-relative toast-btn" data-target="chatToast">
+                  <!-- Avatar -->
+                  <div class="avatar">
+                    <img class="avatar-img rounded-circle" src={{$single_following['profile_pic']}} alt="">
+                  </div>
+                  <!-- Info -->
+                  <div class="overflow-hidden">
+                    <a class="h6 mb-0 stretched-link" href="{{ route('profile', ['user_name' => $single_follower['user_name']]) }}">{{$single_following['user_name']}}</a>
+                    <div class="small text-secondary text-truncate">{{$single_following['first_name']}} {{$single_following['last_name']}}</div>
+                  </div>
+                  <!-- Chat time -->
+                  <div class="small ms-auto text-nowrap"> Just now </div>
+                </li>
+                @endforeach
+
+              </ul>
+            </div>
+
+          <!-- Offcanvas body END -->
         </div>
-        <!-- Offcanvas body START -->
-        <div class="offcanvas-body pt-0 custom-scrollbar">
-          <!-- Search contact START -->
-          <form class="rounded position-relative">
-            <input class="form-control ps-5 bg-light" type="search" placeholder="Search..." aria-label="Search">
-            <button class="btn bg-transparent px-3 py-0 position-absolute top-50 start-0 translate-middle-y" type="submit"><i class="bi bi-search fs-5"> </i></button>
-          </form>
-          <!-- Search contact END -->
-          <ul class="list-unstyled">
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative toast-btn" data-target="chatToast">
-              <!-- Avatar -->
-              <div class="avatar status-online">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Frances Guerrero </a>
-                <div class="small text-secondary text-truncate">Frances sent a photo.</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> Just now </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative toast-btn" data-target="chatToast2">
-              <!-- Avatar -->
-              <div class="avatar status-online">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Lori Ferguson </a>
-                <div class="small text-secondary text-truncate">You missed a call form Carolyn🤙</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 1min </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar status-offline">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/placeholder.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Samuel Bishop </a>
-                <div class="small text-secondary text-truncate">Day sweetness why cordially 😊</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 2min </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Dennis Barrett </a>
-                <div class="small text-secondary text-truncate">Happy birthday🎂</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 10min </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar avatar-story status-online">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Judy Nguyen </a>
-                <div class="small text-secondary text-truncate">Thank you!</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 2hrs </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar status-online">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Carolyn Ortiz </a>
-                <div class="small text-secondary text-truncate">Greetings from Webestica.</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 1 day </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="flex-shrink-0 avatar">
-                <ul class="avatar-group avatar-group-four">
-                  <li class="avatar avatar-xxs">
-                    <img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt="avatar">
-                  </li>
-                  <li class="avatar avatar-xxs">
-                    <img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt="avatar">
-                  </li>
-                  <li class="avatar avatar-xxs">
-                    <img class="avatar-img rounded-circle" src="assets/images/avatar/08.jpg" alt="avatar">
-                  </li>
-                  <li class="avatar avatar-xxs">
-                    <img class="avatar-img rounded-circle" src="assets/images/avatar/09.jpg" alt="avatar">
-                  </li>
-                </ul>
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link text-truncate d-inline-block" href="#!">Frances, Lori, Amanda, Lawson </a>
-                <div class="small text-secondary text-truncate">Btw are you looking for job change?</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 4 day </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar status-offline">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/08.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Bryan Knight </a>
-                <div class="small text-secondary text-truncate">if you are available to discuss🙄</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 6 day </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/09.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Louis Crawford </a>
-                <div class="small text-secondary text-truncate">🙌Congrats on your work anniversary!</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 1 day </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar status-online">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Jacqueline Miller </a>
-                <div class="small text-secondary text-truncate">No sorry, Thanks.</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 15, dec </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Amanda Reed </a>
-                <div class="small text-secondary text-truncate">Interested can share CV at.</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 18, dec </div>
-            </li>
-    
-            <!-- Contact item -->
-            <li class="mt-3 hstack gap-3 align-items-center position-relative">
-              <!-- Avatar -->
-              <div class="avatar status-online">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/12.jpg" alt="">
-              </div>
-              <!-- Info -->
-              <div class="overflow-hidden">
-                <a class="h6 mb-0 stretched-link" href="#!">Larry Lawson </a>
-                <div class="small text-secondary text-truncate">Hope you're doing well and Safe.</div>
-              </div>
-              <!-- Chat time -->
-              <div class="small ms-auto text-nowrap"> 20, dec </div>
-            </li>
-            <!-- Button -->
-            <li class="mt-3 d-grid">
-              <a class="btn btn-primary-soft" href="messaging.html"> See all in messaging </a>
-            </li>
-    
-          </ul>
-        </div>
-        <!-- Offcanvas body END -->
-      </div>
-      <!-- Chat sidebar END -->
+
+        <!-- show following END -->
     
       <!-- Chat END -->
     
