@@ -44,10 +44,10 @@
                         <div class="text-center">
                         <!-- Avatar -->
                         <div class="avatar avatar-xl mt-n5 mb-3">
-                          <a href="#!"><img class="avatar-img rounded border border-white border-3" src="https://picsum.photos/id/{{auth()->user()->id}}/200/200" alt=""></a>
+                          <a href="#!"><img class="avatar-img rounded border border-white border-3" src="{{auth()->user()->profile_pic}}" alt=""></a>
                         </div>
                         <!-- Info -->
-                        <h5 class="mb-0"> <a href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a> </h5>
+                        <h5 class="mb-0"> <a href="/user/{{auth()->user()->user_name}}">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a> </h5>
                         <small>{{auth()->user()->email}}</small>
                         <p class="mt-3">{{auth()->user()->biography}}</p>
     
@@ -169,11 +169,11 @@
                     <div class="d-flex align-items-center">
                         <!-- Avatar -->
                         <div class="avatar me-2">
-                        <a href="#!"> <img class="avatar-img rounded-circle" src="https://picsum.photos/id/{{$post['UID']}}/200/200" alt="user_img"> </a>
+                        <a href="#!"> <img class="avatar-img rounded-circle" src="{{$post['user_profile_pic']}}" alt="user_img"> </a>
                         </div>
                         <!-- Info -->
                         <div>
-                        <h6 class="card-title mb-0"> <a href="#!">  {{$post['user_name']}}   </a></h6>
+                        <h6 class="card-title mb-0"> <a href="/user/{{$post['user_name']}}">  {{$post['user_name']}}   </a></h6>
                         <p class="small mb-0">{{$post['created_at']}}</p>
                         </div>
                     </div>

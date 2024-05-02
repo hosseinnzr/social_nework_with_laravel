@@ -14,7 +14,10 @@ class PostController extends Controller
     
     public function home(Request $request){
         if(auth::check()){
-            $posts = Post::latest()->where('delete', 0)->where('UID', '!=', Auth::id())->get();
+
+            $user_following = explode(",", Auth::user()->following);
+
+            $posts = Post::latest()->where('delete', 0)->whereIn('UID', $user_following)->get();
 
             if(isset($request->tag)){
                 $result = array();
@@ -26,10 +29,13 @@ class PostController extends Controller
                     $posts=$result;
                 } 
             }
-    
+            
+                
             foreach ($posts as $post) {
-                $user = User::where('id', $post->UID)->select('user_name')->first();
-                $post['user_name'] = $user ? $user->user_name : null;
+                $user = User::where('id', $post->UID)->select('id', 'user_name', 'profile_pic')->first();
+                $post['user_id'] = $user['id'];
+                $post['user_name'] = $user['user_name'];
+                $post['user_profile_pic'] = $user['profile_pic'];
             }
 
             return view('home', ['posts' => $posts]);    

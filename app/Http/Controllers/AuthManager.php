@@ -29,7 +29,7 @@ class AuthManager extends Controller
                         $posts=$result;
                     } 
                 }
-
+                // dd($user);
                 return view('profile', ['posts' => $posts, 'user' => $user]);   
             }else{
                 notify()->error('user not found');
@@ -114,7 +114,12 @@ class AuthManager extends Controller
     }
     public function update(Request $request){
 
+        $userId = Auth::id();
+
+        $user = User::findOrFail($userId);
+
         $inputs = $request->only([
+            'profile_pic',
             'biography',
             'first_name',
             'last_name',
@@ -125,9 +130,12 @@ class AuthManager extends Controller
             'phone'
         ]);
 
-        $userId = Auth::id();
-
-        $user = User::findOrFail($userId);
+        if ($request->hasFile('profile_pic')) {
+            $image = ($request->file('profile_pic'));
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('profile'), $imageName);
+            $user->profile_pic = '/profile/'.$imageName;
+        }
 
         $user->update($inputs);
 
@@ -166,10 +174,10 @@ class AuthManager extends Controller
 
         foreach($user_follower_array as $followers_number){
             if ($user_login->id == $followers_number){
-                // delete follower
+                // delete follower  
                 $user_follower_array = array_diff($user_follower_array, array($followers_number));
                 // delete following
-                $user_login_id_following_array = array_diff($user_login_id_following_array, array($followers_number));
+                $user_login_id_following_array = array_diff($user_login_id_following_array, array($user->id));
 
                 $followers = implode(",", $user_follower_array);
                 $followings = implode(",", $user_login_id_following_array);
@@ -181,7 +189,7 @@ class AuthManager extends Controller
 
         if(!$is_follow){
             $followers = $user->followers . ',' . $user_login->id;
-            $followings = $user_login->following . ',' . $user_login->id;   
+            $followings = $user_login->following . ',' . $user->id;   
         }
 
         // save follow

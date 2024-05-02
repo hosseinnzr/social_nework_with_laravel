@@ -241,7 +241,7 @@
 
         <li class="nav-item ms-2 dropdown">
 					<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-						<img class="avatar-img rounded-2" src="https://picsum.photos/id/{{auth()->user()->id}}/200/200" alt="">
+						<img class="avatar-img rounded-2" src="{{auth()->user()->profile_pic}}" alt="">
 					</a>
           <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3" aria-labelledby="profileDropdown">
             <!-- Profile info -->
@@ -249,14 +249,14 @@
               <div class="d-flex align-items-center position-relative">
                 <!-- Avatar -->
                 <div class="avatar me-3">
-                  <img class="avatar-img rounded-circle" src="https://picsum.photos/id/{{auth()->user()->id}}/200/200" alt="avatar">
+                  <img class="avatar-img rounded-circle" src="{{auth()->user()->profile_pic}}" alt="avatar">
                 </div>
                 <div>
                   <a class="h6 stretched-link">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a>
                   <p class="small m-0">Web Developer</p>
                 </div>
               </div>
-              <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" href="my-profile.html">View profile</a>
+              
             </li>
             <!-- Links -->
             <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings & Privacy</a></li>
@@ -273,7 +273,7 @@
             <li class="dropdown-divider"></li>
 
             <li>
-              <form action="{{route('logout')}}" method="POST" class="ms-auto me-auto mt-3">
+              <form action="{{route('logout')}}" method="POST" class="dropdown-item btn btn-sm my-2 text-center">
                 @csrf
                 <button type="submit" class="btn btn-light"><i class="bi bi-power fa-fw me-2"></i>Sign Out</button>
               </form>

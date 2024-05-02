@@ -119,8 +119,15 @@
                 <!-- Card body START -->
                 <div class="card-body">
                   <!-- Form settings START -->
-                  <form  method="POST" action="{{ route('settings.post') }}" class="row g-3">
+                  <form  method="POST" action="{{ route('settings.post') }}" class="row g-3" enctype="multipart/form-data">
                     @csrf
+
+                    <!-- Profile picture -->
+                    <div class="col-sm-12 col-lg-12">
+                      <label class="form-label">Profile picture</label>
+                      <input name="profile_pic" type="file" class="form-control">
+                    </div>
+                    
                     <!-- First name -->
                     <div class="col-sm-6 col-lg-4">
                       <label class="form-label">First name</label>

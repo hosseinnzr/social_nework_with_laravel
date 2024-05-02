@@ -23,7 +23,7 @@
                 <div>
                   <!-- Avatar -->
                   <div class="avatar avatar-xxl mt-n5 mb-3">
-                    <img class="avatar-img rounded-circle border border-white border-3" src="https://picsum.photos/id/{{auth()->user()->id}}/200/200" alt="">
+                    <img class="avatar-img rounded-circle border border-white border-3" src="{{$user['profile_pic']}}" alt="">
                   </div>
                 </div>
                 <div class="ms-sm-4 mt-sm-3">
@@ -103,11 +103,11 @@
                 <div class="d-flex align-items-center">
                     <!-- Avatar -->
                     <div class="avatar me-2">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="https://picsum.photos/id/{{auth()->user()->id}}/200/200" alt=""> </a>
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{$user['profile_pic']}}" alt=""> </a>
                     </div>
                     <!-- Info -->
                     <div>
-                    <h6 class="card-title mb-0"> <a href="#!">  {{$post['user_name']}}   </a></h6>
+                    <h6 class="card-title mb-0"> <a href="/user/{{$user['user_name']}}">{{$user['user_name']}}</a></h6>
                     <p class="small mb-0">{{$post['created_at']}}</p>
                     </div>
                 </div>
