@@ -87,11 +87,12 @@ class AuthManager extends Controller
     public function signupPost(Request $request){
 
         $request->validate([
+            'profile_pic',
             'first_name' => 'required',
             'last_name' => 'required',
-            'user_name' => 'required',
+            'user_name' => 'required|unique:users',
             'email' => 'required|email|unique:users',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         $data['first_name'] = $request->first_name;
@@ -99,13 +100,14 @@ class AuthManager extends Controller
         $data['user_name'] = $request->user_name;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
+        $data['profile_pic'] = '/default/default_profile.jpg';
 
         $user = User::create($data);
-
+        dd($user);
         if(!$user){
-            return redirect(route('home'))->with('error', 'registration fiald, try again');
+            return redirect(route('login'))->with('message', 'registration fiald, try again');
         }
-        return redirect(route('home'))->with('success', 'registration successfully ');
+        return redirect()->back();
     }
 
     // edit / update
