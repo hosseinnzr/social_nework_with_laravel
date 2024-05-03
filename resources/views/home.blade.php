@@ -51,29 +51,10 @@
                         <small>{{auth()->user()->email}}</small>
                         <p class="mt-3">{{auth()->user()->biography}}</p>
     
-                        <!-- User stat START -->
-                        <div class="hstack gap-2 gap-xl-3 justify-content-center">
-                          <!-- User stat item -->
-                          <div>
-                            <h6 class="mb-0">256</h6>
-                            <small>Post</small>
-                          </div>
-                          <!-- Divider -->
-                          <div class="vr"></div>
-                          <!-- User stat item -->
-                          <div data-bs-toggle="offcanvas" href="#showFollowers" role="button" aria-controls="offcanvasChat">
-                            <h6 class="mb-0">{{auth()->user()->followers_number}}</h6>
-                            <small>Followers</small>
-                          </div>
-                          <!-- Divider -->
-                          <div class="vr"></div>
-                          <!-- User stat item -->
-                          <div data-bs-toggle="offcanvas" href="#showFollowing" role="button" aria-controls="offcanvasChat">
-                            <h6 class="mb-0">{{auth()->user()->following_number}}</h6>
-                            <small>Following</small>
-                          </div>
-                        </div>
-                        <!-- User stat END -->
+                        <!-- post, follow, following START -->
+                        <x-post-follower-following :user="auth()->user()"/>
+                        <!-- post, follow, following END -->
+
                       </div>
     
                       <!-- Divider -->

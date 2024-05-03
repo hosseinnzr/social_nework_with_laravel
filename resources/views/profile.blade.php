@@ -29,29 +29,12 @@
                 <div class="ms-sm-4 mt-sm-3">
                   <!-- Info -->
                   <h1 class="mb-0 h5">{{$user['first_name']}} {{$user['last_name']}} <i class="bi bi-patch-check-fill text-success small"></i></h1>
-                    <!-- User stat START -->
-                    <div class="hstack gap-2 gap-xl-3 justify-content-center">
-                      <!-- User stat item -->
-                      <div>
-                        <h6 class="mb-0">256</h6>
-                        <small>Post</small>
-                      </div>
-                      <!-- Divider -->
-                      <div class="vr"></div>
-                      <!-- User stat item -->
-                      <div>
-                        <h6 style="text-align: center" class="mb-0">{{$user['followers_number']}}</h6>
-                        <small>Followers</small>
-                      </div>
-                      <!-- Divider -->
-                      <div class="vr"></div>
-                      <!-- User stat item -->
-                      <div>
-                        <h6 style="text-align: center" class="mb-0">{{$user['following_number']}}</h6>
-                        <small>Following</small>
-                      </div>
-                    </div>
-                    <!-- User stat END -->                </div>
+                    
+                  <!-- post, follow, following START -->
+                    <x-post-follower-following :user="auth()->user()"/>
+                  <!-- post, follow, following END -->
+
+                </div>
                 <!-- Button -->
                 <div class="d-flex mt-3 justify-content-center ms-sm-auto">
 
