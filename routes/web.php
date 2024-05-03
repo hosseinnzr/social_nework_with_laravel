@@ -34,6 +34,9 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::get('/login', [AuthManager::class, 'login'])->name('login');
     Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
     
+    Route::get('/logout', function(){
+        return redirect()->route('login');
+    });
     Route::post('/logout', [AuthManager::class, 'logout'])->name('logout');
 
     
