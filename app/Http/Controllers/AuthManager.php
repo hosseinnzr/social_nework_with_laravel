@@ -211,7 +211,7 @@ class AuthManager extends Controller
         if ($user_login->following == "0"){
             $following_number = 1;
         }else{
-            $following_number = count(explode(",", $user->following));
+            $following_number = count(explode(",", $user_login->following));
         }
         
         $user->followers_number = $followers_number -1;
