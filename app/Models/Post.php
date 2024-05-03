@@ -24,6 +24,7 @@ class Post extends Model
         'delete',
         'like',
         'like_number',
-        'post_picture'
+        'post_picture',
+        'post_number',
         ];
 }

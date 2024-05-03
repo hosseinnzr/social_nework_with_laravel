@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {   
-    
+    public function UpdateUserPostNumber(){
+        
+    }
+
     public function home(Request $request){
         if(auth::check()){
 
@@ -42,7 +45,12 @@ class PostController extends Controller
             $follower_user = User::whereIn('id', $user_follower)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
             $following_user = User::whereIn('id', $user_following)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
 
-            return view('home', ['posts' => $posts, 'follower_user' => $follower_user, 'following_user' => $following_user]);    
+            return view('home', [
+                'posts' => $posts,
+                'follower_user' => $follower_user,
+                'following_user' => $following_user
+            ]);    
+            
         } else {
             notify()->error('you not login');
             return redirect()->route('login');
@@ -69,6 +77,7 @@ class PostController extends Controller
     public function create(Request $request){
             
         if (Auth::check()) {
+
             $inputs = $request->only([
                 'post_picture',
                 'UID',
@@ -76,7 +85,6 @@ class PostController extends Controller
                 'post',
                 'tag',
             ]);
-            dd($inputs);
 
             if ($request->hasFile('post_picture')) {
                 $image = ($request->file('post_picture'));
@@ -87,6 +95,12 @@ class PostController extends Controller
 
             $inputs['UID'] = Auth::id();
             $post = Post::create($inputs);
+
+            // update user post number
+            $login_user_post_number = Post::where('delete', 0)->where('UID', Auth::id())->count();
+            $user = User::findOrFail(Auth::id());
+            $user->post_number = $login_user_post_number;
+            $user->save();
 
             notify()->success('Add post successfully!');
           
@@ -117,13 +131,19 @@ class PostController extends Controller
             }
 
             $post = Post::findOrFail($request->id);
-
             $post->update($inputs);
+
+            // update user post number
+            $login_user_post_number = Post::where('delete', 0)->where('UID', Auth::id())->count();
+            $user = User::findOrFail(Auth::id());
+            $user->post_number = $login_user_post_number;
+            $user->save();
 
             notify()->success('update post successfully!');
           
-            return redirect()->route('post', ['id'=> $post->id])
-              ->with('success', true);
+            return redirect()
+                ->route('post', ['id'=> $post->id])
+                ->with('success', true);
 
         }else{
             return redirect()->route('/login');
@@ -134,12 +154,11 @@ class PostController extends Controller
     public function delete(Request $request){
         $post = Post::findOrFail($request->id);
         $post->update(['delete' => true]);
-        return redirect()->route('profile');
-
+        return redirect()->back();
     }
 
     public function like(Request $request){
-        // dd( $request->postId);
+
         $id = $request->postId;
         $is_liked = false;
         $user_liked_id = auth::id();
