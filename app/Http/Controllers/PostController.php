@@ -133,12 +133,6 @@ class PostController extends Controller
             $post = Post::findOrFail($request->id);
             $post->update($inputs);
 
-            // update user post number
-            $login_user_post_number = Post::where('delete', 0)->where('UID', Auth::id())->count();
-            $user = User::findOrFail(Auth::id());
-            $user->post_number = $login_user_post_number;
-            $user->save();
-
             notify()->success('update post successfully!');
           
             return redirect()
@@ -154,6 +148,13 @@ class PostController extends Controller
     public function delete(Request $request){
         $post = Post::findOrFail($request->id);
         $post->update(['delete' => true]);
+
+        // update user post number
+        $login_user_post_number = Post::where('delete', 0)->where('UID', Auth::id())->count();
+        $user = User::findOrFail(Auth::id());
+        $user->post_number = $login_user_post_number;
+        $user->save();
+        
         return redirect()->back();
     }
 

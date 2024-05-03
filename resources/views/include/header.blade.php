@@ -22,16 +22,26 @@
 
       <!-- Nav Search START -->
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="nav mt-3 mt-lg-0 flex-nowrap align-items-center px-4 px-lg-0">
-          <div class="nav-item w-100">
-            <form class="rounded position-relative">
-              <input class="form-control ps-5 bg-light" type="search" placeholder="Search..." aria-label="Search">
-              <button class="btn bg-transparent px-2 py-0 position-absolute top-50 start-0 translate-middle-y" type="submit"><i class="bi bi-search fs-5"> </i></button>
-            </form>
+          <div class="nav mt-3 mt-lg-0 flex flex-nowrap align-items-center px-4 px-lg-0">
+            <div class="nav-item w-100">
+
+              <!-- Nav Search START -->
+              @livewire('search-bar')
+              <!-- Nav Search END -->
+
           </div>
         </div>
-			</div>
-			<!-- Nav Search END -->
+        
+				<ul class="navbar-nav navbar-nav-scroll ms-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+					</li>
+				</ul>
+
+      </div>
+      <!-- Nav Search END -->
+      
+
 
 			<!-- Nav right START -->
 			<ul class="nav flex-nowrap align-items-center ms-sm-3 list-unstyled">
@@ -40,11 +50,13 @@
 						<i class="bi bi-chat-left-text-fill fs-6"> </i>
 					</a>
 				</li>
+        
         <li class="nav-item ms-2">
 					<a class="nav-link icon-md btn btn-light p-0" href="{{ route('settings')}}">
 						<i class="bi bi-gear-fill fs-6"> </i>
 					</a>
 				</li>
+
         <li class="nav-item dropdown ms-2">
 					<a class="nav-link icon-md btn btn-light p-0" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
             <span class="badge-notif animation-blink"></span>

@@ -110,5 +110,22 @@
 	<!-- liveWire -->
     @livewireScripts
 
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+    const searchToggle = document.getElementById('searchToggle');
+    const searchBox = document.getElementById('searchBox');
+
+    searchToggle.addEventListener('click', function() {
+        if (!searchBox.classList.contains('show')) {
+            searchBox.classList.add('show');
+        }
+    });
+
+    searchBox.addEventListener('keyup', function(event) {
+        // Do nothing for now, or add any additional functionality for search
+    });
+});
+
+	</script>
   </body>
 </html>

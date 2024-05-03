@@ -66,6 +66,7 @@
                         <a class="btn btn-link text-secondary btn-sm" type="submit" href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">view Profile </a>
                       </div>
                     </li>
+
                   </ul>
                   <!-- Side Nav END -->
                 </div>
