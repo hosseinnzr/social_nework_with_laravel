@@ -31,8 +31,21 @@ class AuthManager extends Controller
                         $posts=$result;
                     } 
                 }
-                // dd($user);
-                return view('profile', ['posts' => $posts, 'user' => $user]);   
+
+                $user_follower = explode(",", $user->followers);
+                $user_following = explode(",", $user->following);
+
+                $follower_user = User::whereIn('id', $user_follower)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
+                $following_user = User::whereIn('id', $user_following)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
+
+
+                return view('profile', [
+                    'posts' => $posts,
+                    'user' => $user,
+                    'follower_user' => $follower_user,
+                    'following_user' => $following_user
+                ]);   
+
             }else{
                 notify()->error('user not found');
                 return back();

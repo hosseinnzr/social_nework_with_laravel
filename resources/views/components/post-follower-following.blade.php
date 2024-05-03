@@ -2,7 +2,7 @@
 <div class="hstack gap-2 gap-xl-3 justify-content-center">
     <!-- User stat item -->
     <div>
-        <h6 style="text-align: center" class="mb-0">256</h6>
+        <h6 style="text-align: center" class="mb-0">{{$user['post_number']}}</h6>
         <small>Post</small>
     </div>
     <!-- Divider -->
