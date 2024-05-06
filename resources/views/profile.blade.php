@@ -144,10 +144,9 @@
             <div class="card-footer py-3">
                 <!-- Feed react START -->
                 <ul class="nav nav-fill nav-stack small">
+                  
                 <li class="nav-item">
-
                   @livewire('like-post', ['post' => $post])
-
                 </li>
 
                 <li class="nav-item">

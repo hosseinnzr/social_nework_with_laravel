@@ -32,7 +32,6 @@
     </div>
     <!-- Comment wrap START -->
     <ul class="comment-wrap list-unstyled">
-        
         @foreach ($post_comments as $single_comment)
         <!-- Comment item START -->
         <li wire:poll.visible class="comment-item">
@@ -44,23 +43,23 @@
             <div style="width: 280px;" class="ms-2">
                 <!-- Comment by -->
                 <div class="bg-light rounded-start-top-0 p-3 rounded">
-                <div class="d-flex justify-content-between">
-                    <h6 class="mb-1"> <a href="#!">{{$single_comment['user_name']}}</a></h6>
-                    <p class="ms-2">{{$single_comment['created_at']->diffForHumans()}}</p>
-                </div>
-                <p class="small mb-0">{{$single_comment['comment_value']}}</p>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-1"> <a href="#!">{{$single_comment['user_name']}}</a></h6>
+                        <p class="ms-2">{{$single_comment['created_at']->diffForHumans()}}</p>
+                    </div>
+                    <p class="small mb-0">{{$single_comment['comment_value']}}</p>
                 </div>
                 <!-- Comment react -->
                 <ul class="nav nav-divider py-2 small">
-                <li class="nav-item">
-                    <a class="nav-link" href="#!"> Like (3)</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#!"> Reply</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#!"> View 5 replies</a>
-                </li>
+                    <li class="nav-item">
+                        <button wire:click="like({{$single_comment}})"><i class="bi bi-heart pe-1"></i>like ( {{ $single_comment['like_number'] }} )</button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!"> Reply</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!"> View 5 replies</a>
+                    </li>
                 </ul>
             </div>
             </div>
