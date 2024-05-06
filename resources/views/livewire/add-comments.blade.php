@@ -12,7 +12,6 @@
             <div class=" rounded-end-lg-0 border-end-lg-0">
               <!-- Search chat START -->
 
-
               <form wire:submit="save({{$postId}})">
                 <label>             
                     <input wire:model="comment" id="cmnt-input" class="form-control py-2" type="text" placeholder="Add Comment ..." aria-label="Search">
@@ -52,7 +51,14 @@
                 <!-- Comment react -->
                 <ul class="nav nav-divider py-2 small">
                     <li class="nav-item">
-                        <button wire:click="like({{$single_comment}})"><i class="bi bi-heart pe-1"></i>like ( {{ $single_comment['like_number'] }} )</button>
+                        <div wire:poll.visible style="text-align: center">
+                            @if (in_array(Auth::id(), explode(",", $single_comment['like'])))
+                        
+                                <button style="color:red" wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill pe-1"></i>liked ( {{ $single_comment['like_number'] }} )</button>
+                            @else
+                                <button  wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill pe-1"></i>like ( {{ $single_comment['like_number'] }} )</button>
+                            @endif
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#!"> Reply</a>
