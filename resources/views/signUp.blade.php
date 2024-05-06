@@ -10,7 +10,9 @@
           <form action="{{route('signup.post')}}" method="POST" class="mt-4">
               @csrf
                 
-                <h3>Sign Up :</h3>
+                <!-- Title -->
+                <h2 style="text-align: center" class="h1 mb-2">Sign Up</h2>
+                <p style="text-align: center">Have an account?<a href="/login"> sign in</a></p>
                 <br>
                 <div class="mb-3 input-group-lg">
                   <label for="user_name" class="form-label">user name : </label>

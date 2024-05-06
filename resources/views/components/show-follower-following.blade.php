@@ -2,7 +2,7 @@
 <div class="d-block d-lg-block">
     
     <!-- show follower START -->
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="showFollowers">
+    <div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="showFollowers">
         <!-- Offcanvas header -->
         <div class="offcanvas-header d-flex justify-content-between">
             <h5 class="offcanvas-title">Show Followers</h5>
@@ -42,7 +42,7 @@
     <!-- show follower END -->
 
     <!-- show following START -->
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="showFollowing">
+    <div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="showFollowing">
         <!-- Offcanvas header -->
         <div class="offcanvas-header d-flex justify-content-between">
         <h5 class="offcanvas-title">Show Following</h5>

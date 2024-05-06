@@ -374,7 +374,7 @@
             <div class="card card-body p-4 p-sm-5 mt-sm-n5 mb-n5">
               <!-- Title -->
               <h2 class="h1 mb-2">Sign in</h2>
-              <p>Don't have an account?<a href="/signup"> Click here to sign up</a></p>
+              <p>Don't have an account?<a href="/signup"> sign up</a></p>
               <!-- Form START -->
 
               <form  action="{{route('login.post')}}" method="POST" class="mt-4">

@@ -14,13 +14,13 @@
         <!-- My profile START -->
         <div class="card">
           <!-- Cover image -->
-          <div class="h-200px rounded-top" style="background-image:url(assets/images/bg/05.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+          <div class="h-90px rounded-top"></div>
             <!-- Card body START -->
             <div class="card-body py-0">
               <div class="d-sm-flex align-items-start text-center text-sm-start">
                 <div>
                   <!-- Avatar -->
-                  <div class="avatar avatar-xxl mt-n5 mb-3">
+                  <div class="avatar avatar-xxxl mt-n5 mb-3">
                     <img class="avatar-img rounded-circle border border-white border-3" src="{{$user['profile_pic']}}" alt="">
                   </div>
                 </div>
@@ -56,8 +56,10 @@
               </div>
               <!-- List profile -->
               <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
-                <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> Lead Developer</li>
-                <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> New Hampshire</li>
+                <li class="list-inline-item">{{$user['biography']}} </li>
+                <br><br>
+                <li class="list-inline-item"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Birthday : {{ str_replace("-", ".", $user['birthday']) }} </li>
+                <li class="list-inline-item"> <i class="bi bi-envelope fa-fw pe-1"></i> Email: {{$user['email']}}</li>
                 <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{$user['created_at']}}</li>
               </ul>
             </div>
@@ -74,8 +76,8 @@
                 <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Activity</a> </li>
               </ul>
             </div>
-          </div>
-          <!-- My profile END -->
+        </div>
+        <!-- My profile END -->
 
       <!-- Main content START -->
       <div class="col-md-12 col-lg-12 vstack gap-4">
@@ -150,31 +152,28 @@
                 </li>
 
                 <li class="nav-item">
-                  <div data-bs-toggle="offcanvas" href="#showComments{{$post['id']}}" role="button" aria-controls="offcanvasChat">
+                  <div data-bs-toggle="modal" data-bs-target="#showComments{{$post['id']}}" aria-controls="offcanvasChat">
                     <small style="text-align: center" class="mb-0"> <i class="bi bi-chat-fill pe-1"></i> Comments</small>
                   </div>
                 </li>
 
-                <!-- scroll show comment START -->
-                  <div class="d-block d-lg-block">
-                    <div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="showComments{{$post['id']}}">
+                  <!-- scroll show comment START -->
+                  <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
 
-                        <!-- Close Start -->
-                        <div class="offcanvas-header d-flex justify-content-between">
-                            <h5 class="offcanvas-title">Comment</h5>
-                            <div class="d-flex">
-                                <!-- Close  -->
-                                <a href="#" class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="offcanvas" aria-label="Close">
-                                <i class="fa-solid fa-xmark"></i>
-                                </a>
-                            </div>
+                        <!-- Modal feed header START -->
+                        <div class="modal-header">
+                          <h6 class="modal-title">Comments </h6>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <!-- Close END -->
-
-                            @livewire('add-comments', ['postId' => $post['id']])
+                        <!-- Modal feed header END -->
+                        <br>
+                        @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                      </div>
                     </div>
                   </div>
-                <!-- scroll show comment END -->
+                  <!-- scroll show comment END -->
 
                 <li class="nav-item">
                     <form action="#" method="POST" class="ms-auto me-auto mt-3">
@@ -195,236 +194,106 @@
       <!-- Right sidebar START -->
       <div class="col-lg-4">
         <div class="row g-4">
-          <!-- Card START -->
-          <div class="col-md-6 col-lg-12">
-            <div class="card">
-              <div class="card-header border-0 pb-0">
-                <h5 class="card-title">Biography :</h5>
-                <!-- Button modal -->
-              </div>
-              <!-- Card body START -->
-              <div class="card-body position-relative pt-0">
-                <p>{{$user['biography']}}</p>
-                <!-- Date time -->
-                <ul class="list-unstyled mt-3 mb-0">
-                  <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Birthday : <strong> {{ str_replace("-", ".", $user['birthday']) }} </strong> </li>
-                  <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status : <strong> Single </strong> </li>
-                  <li> <i class="bi bi-envelope fa-fw pe-1"></i> Email : <strong> {{$user['email']}} </strong> </li>
-                </ul>
-              </div>
-              <!-- Card body END -->
-            </div>
-          </div>
-          <!-- Card END -->
 
-          <!-- Card START -->
-          <div class="col-md-6 col-lg-12">
-            <div class="card">
-              <!-- Card header START -->
-              <div class="card-header d-flex justify-content-between border-0">
-                <h5 class="card-title">Experience</h5>
-                <a class="btn btn-primary-soft btn-sm" href="#!"> <i class="fa-solid fa-plus"></i> </a>
-              </div>
-              <!-- Card header END -->
-              <!-- Card body START -->
-              <div class="card-body position-relative pt-0">
-                <!-- Experience item START -->
-                <div class="d-flex">
-                  <!-- Avatar -->
-                  <div class="avatar me-3">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{asset("assets/images/logo/08.svg")}}" alt=""> </a>
-                  </div>
-                  <!-- Info -->
-                  <div>
-                    <h6 class="card-title mb-0"><a href="#!"> Apple Computer, Inc. </a></h6>
-                    <p class="small">May 2015 – Present Employment Duration 8 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
-                  </div>
+            <!-- Card START -->
+            <div class="col-md-12 col-lg-12">
+              <div class="card">
+                <!-- Card header START -->
+                <div class="card-header d-sm-flex justify-content-between align-items-center border-0">
+                  <h5 class="card-title">Friends <span class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
+                  <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a>
                 </div>
-                <!-- Experience item END -->
+                <!-- Card header END -->
+                <!-- Card body START -->
+                <div class="card-body position-relative pt-0">
+                  <div class="row g-3">
 
-                <!-- Experience item START -->
-                <div class="d-flex">
-                  <!-- Avatar -->
-                  <div class="avatar me-3">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{asset("assets/images/logo/09.svg")}}" alt=""> </a>
-                  </div>
-                  <!-- Info -->
-                  <div>
-                    <h6 class="card-title mb-0"><a href="#!"> Microsoft Corporation </a></h6>
-                    <p class="small">May 2017 – Present Employment Duration 1 yrs 5 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
-                  </div>
-                </div>
-                <!-- Experience item END -->
-
-                <!-- Experience item START -->
-                <div class="d-flex">
-                  <!-- Avatar -->
-                  <div class="avatar me-3">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{asset("assets/images/logo/10.svg")}}" alt=""> </a>
-                  </div>
-                  <!-- Info -->
-                  <div>
-                    <h6 class="card-title mb-0"><a href="#!"> Tata Consultancy Services. </a></h6>
-                    <p class="small mb-0">May 2022 – Present Employment Duration 6 yrs 10 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
-                  </div>
-                </div>
-                <!-- Experience item END -->
-
-              </div>
-              <!-- Card body END -->
-            </div>
-          </div>
-          <!-- Card END -->
-          
-          <!-- Card START -->
-          <div class="col-md-6 col-lg-12">
-            <div class="card">
-              <!-- Card header START -->
-              <div class="card-header d-sm-flex justify-content-between border-0">
-                <h5 class="card-title">Photos</h5>
-                <a class="btn btn-primary-soft btn-sm" href="#!"> See all photo</a>
-              </div>
-              <!-- Card header END -->
-              <!-- Card body START -->
-              <div class="card-body position-relative pt-0">
-                <div class="row g-2">
-                  <!-- Photos item -->
-                  <div class="col-6">
-                    <a href="{{asset("assets/images/albums/01.jpg")}}" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/01.jpg")}}" alt="">
-                    </a>
-                  </div>
-                  <!-- Photos item -->
-                  <div class="col-6">
-                    <a href="{{asset("assets/images/albums/02.jpg")}}" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/02.jpg")}}" alt="">
-                    </a>
-                  </div>
-                  <!-- Photos item -->
-                  <div class="col-4">
-                    <a href="{{asset("assets/images/albums/03.jpg")}}" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/03.jpg")}}" alt="">
-                    </a>
-                  </div>
-                  <!-- Photos item -->
-                  <div class="col-4">
-                    <a href="{{asset("assets/images/albums/04.jpg")}}" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/04.jpg")}}" alt="">
-                    </a>
-                  </div>
-                  <!-- Photos item -->
-                  <div class="col-4">
-                    <a href="{{asset("assets/images/albums/05.jpg")}}" data-gallery="image-popup" data-glightbox="">
-                      <img class="rounded img-fluid" src="{{asset("assets/images/albums/05.jpg")}}" alt="">
-                    </a>
-                    <!-- glightbox Albums left bar END  -->
-                  </div>
-                </div>
-              </div>
-              <!-- Card body END -->
-            </div>
-          </div>
-          <!-- Card END -->
-
-          <!-- Card START -->
-          <div class="col-md-6 col-lg-12">
-            <div class="card">
-              <!-- Card header START -->
-              <div class="card-header d-sm-flex justify-content-between align-items-center border-0">
-                <h5 class="card-title">Friends <span class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
-                <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a>
-              </div>
-              <!-- Card header END -->
-              <!-- Card body START -->
-              <div class="card-body position-relative pt-0">
-                <div class="row g-3">
-
-                  <div class="col-6">
-                    <!-- Friends item START -->
-                    <div class="card shadow-none text-center h-100">
-                      <!-- Card body -->
-                      <div class="card-body p-2 pb-0">
-                        <div class="avatar avatar-story avatar-xl">
-                          <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/02.jpg")}}" alt=""></a>
+                    <div class="col-6">
+                      <!-- Friends item START -->
+                      <div class="card shadow-none text-center h-100">
+                        <!-- Card body -->
+                        <div class="card-body p-2 pb-0">
+                          <div class="avatar avatar-story avatar-xl">
+                            <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/02.jpg")}}" alt=""></a>
+                          </div>
+                          <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
+                          <p class="mb-0 small lh-sm">16 mutual connections</p>
                         </div>
-                        <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
-                        <p class="mb-0 small lh-sm">16 mutual connections</p>
-                      </div>
-                      <!-- Card footer -->
-                      <div class="card-footer p-2 border-0">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
-                      </div>
-                    </div>
-                    <!-- Friends item END -->
-                  </div>
-
-                  <div class="col-6">
-                    <!-- Friends item START -->
-                    <div class="card shadow-none text-center h-100">
-                      <!-- Card body -->
-                      <div class="card-body p-2 pb-0">
-                        <div class="avatar avatar-xl">
-                          <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/03.jpg")}}" alt=""></a>
+                        <!-- Card footer -->
+                        <div class="card-footer p-2 border-0">
+                          <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
+                          <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
                         </div>
-                        <h6 class="card-title mb-1 mt-3"> <a href="#!"> Samuel Bishop </a></h6>
-                        <p class="mb-0 small lh-sm">22 mutual connections</p>
                       </div>
-                      <!-- Card footer -->
-                      <div class="card-footer p-2 border-0">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
-                      </div>
+                      <!-- Friends item END -->
                     </div>
-                    <!-- Friends item END -->
-                  </div>
 
-                  <div class="col-6">
-                    <!-- Friends item START -->
-                    <div class="card shadow-none text-center h-100">
-                      <!-- Card body -->
-                      <div class="card-body p-2 pb-0">
-                        <div class="avatar avatar-xl">
-                          <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/04.jpg")}}" alt=""></a>
+                    <div class="col-6">
+                      <!-- Friends item START -->
+                      <div class="card shadow-none text-center h-100">
+                        <!-- Card body -->
+                        <div class="card-body p-2 pb-0">
+                          <div class="avatar avatar-xl">
+                            <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/03.jpg")}}" alt=""></a>
+                          </div>
+                          <h6 class="card-title mb-1 mt-3"> <a href="#!"> Samuel Bishop </a></h6>
+                          <p class="mb-0 small lh-sm">22 mutual connections</p>
                         </div>
-                        <h6 class="card-title mb-1 mt-3"> <a href="#"> Bryan Knight </a></h6>
-                        <p class="mb-0 small lh-sm">1 mutual connection</p>
-                      </div>
-                      <!-- Card footer -->
-                      <div class="card-footer p-2 border-0">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
-                      </div>
-                    </div>
-                    <!-- Friends item END -->
-                  </div>
-
-                  <div class="col-6">
-                    <!-- Friends item START -->
-                    <div class="card shadow-none text-center h-100">
-                      <!-- Card body -->
-                      <div class="card-body p-2 pb-0">
-                        <div class="avatar avatar-xl">
-                          <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/05.jpg")}}" alt=""></a>
+                        <!-- Card footer -->
+                        <div class="card-footer p-2 border-0">
+                          <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
+                          <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
                         </div>
-                        <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
-                        <p class="mb-0 small lh-sm">15 mutual connections</p>
                       </div>
-                      <!-- Card footer -->
-                      <div class="card-footer p-2 border-0">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
-                      </div>
+                      <!-- Friends item END -->
                     </div>
-                    <!-- Friends item END -->
-                  </div>
 
+                    <div class="col-6">
+                      <!-- Friends item START -->
+                      <div class="card shadow-none text-center h-100">
+                        <!-- Card body -->
+                        <div class="card-body p-2 pb-0">
+                          <div class="avatar avatar-xl">
+                            <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/04.jpg")}}" alt=""></a>
+                          </div>
+                          <h6 class="card-title mb-1 mt-3"> <a href="#"> Bryan Knight </a></h6>
+                          <p class="mb-0 small lh-sm">1 mutual connection</p>
+                        </div>
+                        <!-- Card footer -->
+                        <div class="card-footer p-2 border-0">
+                          <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
+                          <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
+                        </div>
+                      </div>
+                      <!-- Friends item END -->
+                    </div>
+
+                    <div class="col-6">
+                      <!-- Friends item START -->
+                      <div class="card shadow-none text-center h-100">
+                        <!-- Card body -->
+                        <div class="card-body p-2 pb-0">
+                          <div class="avatar avatar-xl">
+                            <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/05.jpg")}}" alt=""></a>
+                          </div>
+                          <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
+                          <p class="mb-0 small lh-sm">15 mutual connections</p>
+                        </div>
+                        <!-- Card footer -->
+                        <div class="card-footer p-2 border-0">
+                          <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
+                          <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
+                        </div>
+                      </div>
+                      <!-- Friends item END -->
+                    </div>
+
+                  </div>
                 </div>
+                <!-- Card body END -->
               </div>
-              <!-- Card body END -->
             </div>
-          </div>
-          <!-- Card END -->
+            <!-- Card END -->
         </div>
 
       </div>

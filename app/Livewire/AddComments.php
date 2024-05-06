@@ -13,6 +13,8 @@ class AddComments extends Component
 
     public $postId;
 
+    public $post;
+
     public $post_comments;
 
     public $single_comment;
@@ -58,7 +60,7 @@ class AddComments extends Component
         }
 
         if(!$is_liked){
-            $like = $comment->like . $user_liked_id;   
+            $like = $comment->like .','. $user_liked_id;   
         }
 
         // save like
@@ -68,7 +70,7 @@ class AddComments extends Component
             if ($comment->like == ""){
                 $like_number = 0;
             }else{
-                $like_number = count(explode(",", $comment->like));
+                $like_number = count(explode(",", $comment->like)) -1;
             }
         
         // save like_number

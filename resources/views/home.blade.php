@@ -45,6 +45,7 @@
                     <div class="avatar avatar-xl mt-n5 mb-3">
                       <a href="#!"><img class="avatar-img rounded border border-white border-3" src="{{auth()->user()->profile_pic}}" alt=""></a>
                     </div>
+
                     <!-- Info -->
                     <h5 class="mb-0"> <a href="/user/{{auth()->user()->user_name}}">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a> </h5>
                     <small>{{auth()->user()->email}}</small>
@@ -105,13 +106,15 @@
       </div>
       <!-- Sidenav END -->
 
+
+      
       <!-- Main content START -->
       <div class="col-md-8 col-lg-6 vstack gap-4">
 
         <!-- Card feed item START -->
         @foreach ($posts as $post)
 
-            <div class="card">
+          <div class="card">
             <!-- Card header START -->
             <div class="card-header">
                 <div class="d-flex align-items-center justify-content-between">
@@ -172,31 +175,28 @@
                 </li>
 
                 <li class="nav-item">
-                  <div data-bs-toggle="offcanvas" href="#showComments{{$post['id']}}" role="button" aria-controls="offcanvasChat">
+                  <div data-bs-toggle="modal" data-bs-target="#showComments{{$post['id']}}" aria-controls="offcanvasChat">
                     <small style="text-align: center" class="mb-0"> <i class="bi bi-chat-fill pe-1"></i> Comments</small>
                   </div>
                 </li>
 
-                <!-- scroll show comment START -->
-                  <div class="d-block d-lg-block">
-                    <div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="showComments{{$post['id']}}">
+                  <!-- scroll show comment START -->
+                  <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
 
-                        <!-- Close Start -->
-                        <div class="offcanvas-header d-flex justify-content-between">
-                            <h5 class="offcanvas-title">Comment</h5>
-                            <div class="d-flex">
-                                <!-- Close  -->
-                                <a href="#" class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="offcanvas" aria-label="Close">
-                                <i class="fa-solid fa-xmark"></i>
-                                </a>
-                            </div>
+                        <!-- Modal feed header START -->
+                        <div class="modal-header">
+                          <h6 class="modal-title">Comments </h6>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <!-- Close END -->
-
-                            @livewire('add-comments', ['postId' => $post['id']])
+                        <!-- Modal feed header END -->
+                        <br>
+                        @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                      </div>
                     </div>
                   </div>
-                <!-- scroll show comment END -->
+                  <!-- scroll show comment END -->
 
                 <li class="nav-item">
                     <form action="#" method="POST" class="ms-auto me-auto mt-3">
@@ -209,7 +209,7 @@
             </div>
             <!-- Card Footer END -->
     
-            </div>
+          </div>
 
         @endforeach
         <!-- Card feed item END -->
@@ -744,58 +744,6 @@
   </div>
 </div>
 <!-- Modal create feed END -->
-
-<!-- Modal create Feed photo START -->
-<div class="modal fade" id="feedActionPhoto" tabindex="-1" aria-labelledby="feedActionPhotoLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <!-- Modal feed header START -->
-      <div class="modal-header">
-        <h5 class="modal-title" id="feedActionPhotoLabel">Add post photo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <!-- Modal feed header END -->
-
-        <!-- Modal feed body START -->
-        <div class="modal-body">
-        <!-- Add Feed -->
-        <div class="d-flex mb-3">
-          <!-- Avatar -->
-          <div class="avatar avatar-xs me-2">
-            <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
-          </div>
-          <!-- Feed box  -->
-          <form class="w-100">
-            <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
-          </form>
-        </div>
-
-        <!-- Dropzone photo START -->
-        <div>
-          <label class="form-label">Upload attachment</label>
-          <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-            <div class="dz-message">
-              <i class="bi bi-images display-3"></i>
-              <p>Drag here or click to upload photo.</p>
-            </div>
-          </div>
-        </div>
-        <!-- Dropzone photo END -->
-
-        </div>
-        <!-- Modal feed body END -->
-
-        <!-- Modal feed footer -->
-        <div class="modal-footer ">
-          <!-- Button -->
-            <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success-soft">Post</button>
-        </div>
-        <!-- Modal feed footer -->
-    </div>
-  </div>
-</div>
-<!-- Modal create Feed photo END -->
 
 <!-- Modal create Feed video START -->
 <div class="modal fade" id="feedActionVideo" tabindex="-1" aria-labelledby="feedActionVideoLabel" aria-hidden="true">

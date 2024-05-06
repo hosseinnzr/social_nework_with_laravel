@@ -138,6 +138,7 @@ class AuthManager extends Controller
         $request->validate([
             'user_name' => 'required|unique:users,user_name,' . $user->id,
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'required|max:11|unique:users,phone,' . $user->id,
         ]);
 
         $input = $request->only([
