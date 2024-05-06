@@ -93,7 +93,7 @@
                     <!-- Info -->
                     <div>
                     <h6 class="card-title mb-0"> <a href="/user/{{$user['user_name']}}">{{$user['user_name']}}</a></h6>
-                    <p class="small mb-0">{{$post['created_at']}}</p>
+                    <p class="small mb-0">{{$post['created_at']->diffForHumans()}}</p>
                     </div>
                 </div>
                 <!-- Card share action START -->
@@ -149,12 +149,34 @@
                   @livewire('like-post', ['post' => $post])
 
                 </li>
+
                 <li class="nav-item">
-                    <form action="#" method="POST" class="ms-auto me-auto mt-3">
-                        @csrf
-                        <button style="font-size: 12px" type="submit" class="btn btn-link"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</button>
-                    </form>
+                  <div data-bs-toggle="offcanvas" href="#showComments{{$post['id']}}" role="button" aria-controls="offcanvasChat">
+                    <small style="text-align: center" class="mb-0"> <i class="bi bi-chat-fill pe-1"></i> Comments</small>
+                  </div>
                 </li>
+
+                <!-- scroll show comment START -->
+                  <div class="d-block d-lg-block">
+                    <div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="showComments{{$post['id']}}">
+
+                        <!-- Close Start -->
+                        <div class="offcanvas-header d-flex justify-content-between">
+                            <h5 class="offcanvas-title">Comment</h5>
+                            <div class="d-flex">
+                                <!-- Close  -->
+                                <a href="#" class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="offcanvas" aria-label="Close">
+                                <i class="fa-solid fa-xmark"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Close END -->
+
+                            @livewire('add-comments', ['postId' => $post['id']])
+                    </div>
+                  </div>
+                <!-- scroll show comment END -->
+
                 <li class="nav-item">
                     <form action="#" method="POST" class="ms-auto me-auto mt-3">
                         @csrf

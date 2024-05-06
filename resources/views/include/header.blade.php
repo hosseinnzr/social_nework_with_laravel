@@ -31,13 +31,7 @@
 
           </div>
         </div>
-        
-				<ul class="navbar-nav navbar-nav-scroll ms-auto">
-					<li class="nav-item dropdown">
-						<a class="nav-link" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-					</li>
-				</ul>
-
+						<a class="nav-link" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
       </div>
       <!-- Nav Search END -->
       
