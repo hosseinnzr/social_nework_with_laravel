@@ -38,12 +38,4 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function rules()
-    {
-        return [
-            'user_name' => 'required|unique:users,user_name,' . $this->id,
-            'email' => 'required|email|unique:users' . $this->id
-        ];
-    }
-
 }

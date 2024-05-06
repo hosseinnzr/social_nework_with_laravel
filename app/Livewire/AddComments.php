@@ -17,6 +17,8 @@ class AddComments extends Component
 
     public $single_comment;
 
+    public $error;
+
     public function save($postId)
     {
         $input = [
@@ -29,8 +31,9 @@ class AddComments extends Component
             'user_name' => Auth::user()->user_name 
         ];
 
-        $comment = Comments::create($input);
-
+        if($input['comment_value'] != null){
+            Comments::create($input);
+        }
     }
 
     public function like($single_comment)

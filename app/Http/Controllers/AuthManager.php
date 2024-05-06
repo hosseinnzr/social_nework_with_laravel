@@ -135,6 +135,11 @@ class AuthManager extends Controller
 
         $user =  User::findOrFail($userId);
 
+        $request->validate([
+            'user_name' => 'required|unique:users,user_name,' . $user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
+        ]);
+
         $input = $request->only([
             'birthday',
             'profile_pic' ,
@@ -159,6 +164,7 @@ class AuthManager extends Controller
 
         notify()->success('update user successfully!');
         return redirect()->route('settings');
+        
     }
     public function delete($id){
         try {

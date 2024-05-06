@@ -167,7 +167,6 @@
                       @error('user_name')
                       <p class="text-red-500 text-xs mt-1">{{$errors->first('user_name')}}</p>
                       @enderror
-
                       
                     </div>
                     <!-- Birthday -->
