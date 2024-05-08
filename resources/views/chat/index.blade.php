@@ -10,23 +10,10 @@
   
   <!-- Container START -->
   <div class="container">
-		<div class="row gx-0">
 
       <!-- Sidebar START -->
-      <div class="col-lg-4 col-xxl-3" id="chatTabs" role="tablist">
-        @livewire('show-user-chat', [ 'conversations' => $conversations ])
-      </div>
+        @livewire('show-user-chat')
       <!-- Sidebar START -->
-
-      <!-- Chat conversation START -->
-      <div class="col-lg-8 col-xxl-9">
-        @livewire('show-message-chat', [ 'conversations' => $conversations ])
-      </div>
-      <!-- Chat conversation END -->
-
-    </div> <!-- Row END -->
-    <!-- =======================
-    Chat END -->
 
 	</div>
   <!-- Container END -->
