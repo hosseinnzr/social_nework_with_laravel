@@ -40,7 +40,7 @@
 			<!-- Nav right START -->
 			<ul class="nav flex-nowrap align-items-center ms-sm-3 list-unstyled">
 				<li class="nav-item ms-2">
-					<a class="nav-link icon-md btn btn-light p-0" href="messaging.html">
+					<a class="nav-link icon-md btn btn-light p-0" href="{{ route('chat') }}">
 						<i class="bi bi-chat-left-text-fill fs-6"> </i>
 					</a>
 				</li>

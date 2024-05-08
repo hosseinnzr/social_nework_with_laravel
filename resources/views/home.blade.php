@@ -191,7 +191,24 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <!-- Modal feed header END -->
+
+                        <!-- show post START -->
+                          <!-- Card body START -->
+                          <div class="card-body">
+                              <h5>{{$post['title']}}</h5>
+                              <p class="mb-0">{{$post['post']}}</p>
+                              <br>
+                              
+                              @isset($post['post_picture'])
+                              <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                              <br>    
+                              @endisset 
+
+                          </div>
+                          <!-- Card body END -->
                         <br>
+                        <!-- show post END -->
+
                         @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
                       </div>
                     </div>

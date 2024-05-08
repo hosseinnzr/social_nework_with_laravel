@@ -52,47 +52,6 @@
 
     @yield('content')
 
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			const theme = localStorage.getItem('data-theme');
-			const style = document.getElementById("style-switch");
-			const dir = document.getElementsByTagName("html")[0].getAttribute('dir');
-
-			const changeThemeToDark = () => {
-				document.documentElement.setAttribute("data-theme", "dark");
-
-					style.setAttribute('href', '{{ asset("assets/css/style-dark.css") }}');
-				
-				localStorage.setItem("data-theme", "dark");
-			}
-
-			const changeThemeToLight = () => {
-				document.documentElement.setAttribute("data-theme", "light");
-
-					style.setAttribute('href', '{{ asset("assets/css/style.css") }}');
-				
-				localStorage.setItem("data-theme", 'light');
-			}
-
-			if (theme === 'dark') {
-				changeThemeToDark();
-			} else {
-				changeThemeToLight();
-			}
-
-			const dms = document.getElementById('darkModeSwitch');
-			if (dms) {
-				dms.addEventListener('click', () => {
-					const currentTheme = localStorage.getItem('data-theme');
-					if (currentTheme === 'dark') {
-						changeThemeToLight();
-					} else {
-						changeThemeToDark();
-					}
-				});
-			}
-		});
-	</script>
 
 	<!-- Bootstrap JS -->
 	<script src="{{asset("assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js")}}"></script>
@@ -105,7 +64,8 @@
 	<script src="{{	asset("assets/vendor/OverlayScrollbars-master/js/OverlayScrollbars.min.js")}}"></script>
 
 	<!-- Template Functions -->
-	<script src="{{asset("assets/js/functions.js")}}"></script>
+	<script src="{{asset("assets/js/functionsChat.js")}}"></script> {{-- in functions.js comment dark mode them --}}
+
 
 
 	<!-- liveWire -->

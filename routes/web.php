@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\LikePost;
 use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
@@ -42,6 +42,11 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     
     // profile
     Route::get('/user/{user_name}', [AuthManager::class, "profile"])->name('profile');
+
+    // chat
+    Route::get('/chat', [ChatController::class, "index"])->name('chat');
+
+    Route::post('/chat', [ChatController::class, "makaConversation"])->name('conversation');
 
 });
 

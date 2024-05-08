@@ -427,9 +427,9 @@ var e = {
 			var changeThemeToDark = () => {
 				document.documentElement.setAttribute("data-theme", "dark") // set theme to dark
 				if(dir == 'rtl') {
-						style.setAttribute('href', '{{asset("assets/css/style-dark-rtl.css")}}');
+						style.setAttribute('href', 'assets/css/style-dark-rtl.css');
 				} else {
-						style.setAttribute('href', '{{asset("assets/css/style-dark.css');
+						style.setAttribute('href', 'assets/css/style-dark.css');
 				}
 				localStorage.setItem("data-theme", "dark") // save theme to local storage
 			}
@@ -437,9 +437,9 @@ var e = {
 			var changeThemeToLight = () => {
 				document.documentElement.setAttribute("data-theme", "light") // set theme light
 				if(dir == 'rtl') {
-						style.setAttribute('href', '{{asset("assets/css/style-rtl.css")}}');
+						style.setAttribute('href', 'assets/css/style-rtl.css');
 				} else {
-						style.setAttribute('href', '{{asset("assets/css/style.css")}}');
+						style.setAttribute('href', 'assets/css/style.css');
 				}
 				
 				localStorage.setItem("data-theme", 'light') // save theme to local storage

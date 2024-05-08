@@ -45,6 +45,10 @@
                       @csrf
                       <button type="submit" class="btn btn-primary-soft me-2"><i class="fa fa-user"></i> unfollow</button>
                     </form>
+                    <form action="{{route('conversation', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
+                      @csrf
+                      <button type="submit" class="btn btn-success-soft me-2"><i class="fa bi-chat-left-text-fill"></i> message</button>
+                    </form>
                   @else 
                     <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                       @csrf
@@ -169,6 +173,25 @@
                         </div>
                         <!-- Modal feed header END -->
                         <br>
+                        
+                        <!-- show post START -->
+                        <br>
+                            <!-- Card body START -->
+                            <div class="card-body">
+                                <h5>{{$post['title']}}</h5>
+                                <p class="mb-0">{{$post['post']}}</p>
+                                <br>
+                                
+                                @isset($post['post_picture'])
+                                <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                                <br>    
+                                @endisset 
+
+                            </div>
+                            <!-- Card body END -->
+                        <br>
+                        <!-- show post END -->
+
                         @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
                       </div>
                     </div>
