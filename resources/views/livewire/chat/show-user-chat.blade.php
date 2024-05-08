@@ -1,4 +1,4 @@
-<div class="row gx-0">
+<div wire:poll.visible class="row gx-0">
     <div class="col-lg-4 col-xxl-3" id="chatTabs" role="tablist">
         <!-- Divider -->
         <div class="d-flex align-items-center mb-4 d-lg-none">
@@ -53,15 +53,15 @@
                                     {{-- <div class="flex-shrink-0 avatar avatar-story me-2 status-online">
                                     <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
                                     </div> --}}
-                                    {{-- <div class="flex-grow-1 d-block"> --}}
-                                    {{-- <h6 class="mb-0 mt-1">Frances Guerrero</h6> --}}
-                                    {{-- <div class="small text-secondary">Frances sent a photo.</div> --}}
+                                    <div class="flex-grow-1 d-block">
+                                    <h6 class="mb-0 mt-1">Frances Guerrero</h6>
+                                    <div class="small text-secondary">{{$conversation->sender_id}} - {{$conversation->receiver_id}}</div>
                                     
                                     <form wire:submit="result({{$conversation->id}})" >
                                         <button class="btn btn-light" id="btn" type="submit">  <i class="fa-solid fa-comment"></i></button>
                                     </form>
 
-                                    {{-- </div> --}}
+                                    </div>
                                 {{-- </div> --}}
                                 {{-- </a> --}}
                             </li>
@@ -78,7 +78,7 @@
         </nav>
     </div>
     <!-- Chat conversation START -->
-    <div class="col-lg-8 col-xxl-9">
+    <div  class="col-lg-8 col-xxl-9">
         <div class="card card-chat rounded-start-lg-0 border-start-lg-0">
             <div class="card-body h-100">
             <div class="tab-content py-0 mb-0 h-100" id="chatTabsContent">
@@ -91,7 +91,7 @@
                         <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
                     </div>
                     <div class="d-block flex-grow-1">
-                        <h6 class="mb-0 mt-1">{{$user_in_chat}}</h6>
+                        {{-- <h6 class="mb-0 mt-1">{{$alluser}}</h6> --}}
                         <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
                     </div>
                     </div>
@@ -117,62 +117,53 @@
                 <!-- Top avatar and status END -->
                 <hr>
                 <!-- Chat conversation START -->
-                <div class="chat-conversation-content custom-scrollbar">
-                    <!-- Chat time -->
-                    <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
-                    <!-- Chat message left -->
-                    <div class="d-flex mb-1">
-                    <div class="flex-shrink-0 avatar avatar-xs me-2">
-                        <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
-                    </div>
-                    <div class="flex-grow-1">
-                        <div class="w-100">
-                        <div class="d-flex flex-column align-items-start">
-                            <div class="bg-light text-secondary p-2 px-3 rounded-2">Applauded no discovery in newspaper allowance am northward😊</div>
-                            <div class="small my-2">6:15 AM</div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                    
-                    <!-- Chat time -->
-                    <div class="text-center small my-2">{{$show_messages}}</div>
-                    <!-- Chat message left -->
-                    <div class="d-flex mb-2">
-                    <div class="flex-shrink-0 avatar avatar-xs me-2">
-                        <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
-                    </div>
-                    <div class="flex-grow-1">
-                        <div class="w-100">
-                        <div class="d-flex flex-column align-items-start">
-                            <div class="bg-light text-secondary p-2 px-3 rounded-2">Traveling alteration impression 🤐 six all uncommonly Chamber hearing inhabit joy highest private.</div>
-                        </div>
-                        </div>
-                    </div>
+                <div  style="height: calc(100% - 150px); overflow-y:scroll" class="chat-conversation-content custom-scrollbar">
+                    <!-- Chat time -->                    
+                        @for ($i = 0; $i < $show_messages_count; $i++)
+                            @if ( $show_messages[$i]['sender_id'] == $userId )
+                                <!-- Chat message right -->
+                                <div div class="d-flex justify-content-end text-end mb-1">
+                                    <div class="w-100">
+                                    <div class="d-flex flex-column align-items-end">
+                                        <div class="bg-primary text-white p-2 px-3 rounded-2">{{$show_messages[$i]['body']}}</div>
+                                    </div>
+                                    </div>
+                                </div>  
+                            @else
+                                <!-- Chat message left -->
+                                <div class="d-flex mb-1">
+                                    <div class="flex-shrink-0 avatar avatar-xs me-2">
+                                        <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="w-100">
+                                        <div class="d-flex flex-column align-items-start">
+                                            <div class="bg-light text-secondary p-2 px-3 rounded-2">A{{$show_messages[$i]['body']}}</div>
+                                            <div class="small my-2">6:15 AM</div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            @endif
+                        @endfor
                     </div>
 
                     
+                        <!-- Conversation item END -->
+                        <div class="card-footer w-full px-0">                 
+                            <form class="d-flex gap-1 items-stretch w-full" wire:submit="save({{$user_in_chat}})" >
+                                    <input wire:model="message" name="message" id="cmnt-input" class="form-control py-2 w-full" type="text" placeholder="Add Comment ..." aria-label="Search">
+                                <button class="btn btn-light" id="cmnt-btn" type="submit"> <i class="fa-solid fa-paper-plane fs-6"></i></button>
+                            </form>
+                            <script>
+                                document.getElementById('cmnt-btn').addEventListener('click', function() {
+                                    document.getElementById('cmnt-input').value = '';
+                                })
+                            </script>
+                        <!-- Chat conversation END -->
+                        </div>
+                    </div>
                 </div>
-                <!-- Conversation item END -->
-                <div class="card-footer">
-                                    
-                    <form wire:submit="save({{$user_in_chat}})" >
-                        <label>    
-                            <p>{{$user_in_chat}}</p>         
-                            <input wire:model="message" name="message" id="cmnt-input" class="form-control py-2" type="text" placeholder="Add Comment ..." aria-label="Search">
-                        </label>
-                            <button class="btn btn-light" id="cmnt-btn" type="submit"> <i class="fa-solid fa-paper-plane fs-6"></i></button>
-                    </form>
-                    <script>
-                        document.getElementById('cmnt-btn').addEventListener('click', function() {
-                            document.getElementById('cmnt-input').value = '';
-                        })
-                    </script>
-                <!-- Chat conversation END -->
-                </div>
-                </div>
-            </div>
-            
             </div>
         </div>
     </div>

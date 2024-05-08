@@ -3,6 +3,7 @@
 namespace App\Livewire;
 use Livewire\Component;
 use App\Models\messages;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\conversations;
 
@@ -10,13 +11,16 @@ class ShowUserChat extends Component
 {
 
     public $conversations;
-
+    public $userId;
     public $user_in_chat;
     public $conversation_id;
     public $chat_result;
     public $message;
 
     public $show_messages;
+    public $show_messages_count;
+
+    public $alluser;
 
     public function save($user_in_chat){
 
@@ -30,6 +34,7 @@ class ShowUserChat extends Component
         
         if($createdMessage){
             $this->show_messages = messages::where('conversation_id', $this->conversation_id)->get();
+            $this->show_messages_count = messages::where('conversation_id', $this->conversation_id)->count();
         }
     }
 
@@ -45,15 +50,18 @@ class ShowUserChat extends Component
         $this->user_in_chat = $user_in_chat;
 
         $this->chat_result = conversations::where('id', $conversation_id)->get();
+
         $this->show_messages = messages::where('conversation_id', $conversation_id)->get();
+        $this->show_messages_count = messages::where('conversation_id', $conversation_id)->count();
 
     }
 
     public function render()
     {
-        $Id = auth::id();
+        $this->userId = auth::id();
+        $this->conversations = conversations::where('sender_id', $this->userId)->orWhere('receiver_id', $this->userId)->get();
 
-        $this->conversations = conversations::where('sender_id', $Id)->orWhere('receiver_id', $Id)->get();
+        $this->alluser = User::select('id', 'first_name', 'last_name', 'profile_pic', 'user_name')->get();
 
         return view('livewire.chat.show-user-chat');
     }
