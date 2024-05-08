@@ -21,8 +21,7 @@ class AddComments extends Component
 
     public $error;
 
-    public function save($postId)
-    {
+    public function save($postId){
         $input = [
             'UID' => Auth::id(),
             'post_id' => $postId,

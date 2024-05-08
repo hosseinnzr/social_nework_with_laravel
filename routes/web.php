@@ -45,6 +45,7 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
 
     // chat
     Route::get('/chat', [ChatController::class, "index"])->name('chat');
+    Route::get('/chat/{query}', [ChatController::class, "show"])->name('user.chat');
 
     Route::post('/chat', [ChatController::class, "makaConversation"])->name('conversation');
 

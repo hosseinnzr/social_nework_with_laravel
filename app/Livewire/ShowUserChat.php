@@ -7,7 +7,7 @@ use Livewire\Component;
 class ShowUserChat extends Component
 {
 
-    public $users;
+    public $conversations;
     public function render()
     {
         return view('livewire.chat.show-user-chat');

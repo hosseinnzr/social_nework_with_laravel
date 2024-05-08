@@ -15,7 +15,15 @@ class ChatController extends Controller
 {
     public function index(Request $request){
 
-        $query = $request->get('query');
+        $Id = auth::id();
+
+        $conversations = conversations::where('sender_id', $Id)->orWhere('receiver_id', $Id)->get();
+
+        return view('chat.index', [
+            'conversations' => $conversations,
+        ]);
+    }
+    public function show(Request $request, $query){
 
         $Id = auth::id();
 
