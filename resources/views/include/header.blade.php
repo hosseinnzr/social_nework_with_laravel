@@ -39,6 +39,7 @@
 
 			<!-- Nav right START -->
 			<ul class="nav flex-nowrap align-items-center ms-sm-3 list-unstyled">
+
 				<li class="nav-item ms-2">
 					<a class="nav-link icon-md btn btn-light p-0" href="{{ route('chat') }}">
 						<i class="bi bi-chat-left-text-fill fs-6"> </i>
@@ -170,7 +171,7 @@
             <li>
               <form action="{{route('logout')}}" method="POST" class="dropdown-item btn btn-sm my-2 text-center">
                 @csrf
-                <button type="submit" class="btn btn-light"><i class="bi bi-power fa-fw me-2"></i>Sign Out</button>
+                <button type="submit" class="btn btn-danger-soft"><i class="bi bi-power fa-fw me-2"></i>Sign Out</button>
               </form>
             </li>
             
