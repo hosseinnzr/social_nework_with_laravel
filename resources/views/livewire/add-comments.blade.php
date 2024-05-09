@@ -9,12 +9,12 @@
 
         <!-- Comment box START -->
         <div class="offcanvas-body p-0">
-            <div class=" rounded-end-lg-0 border-end-lg-0">
+            <div class=" rounded-end-lg-0 w-full border-end-lg-0">
               <!-- add comment START -->
 
               <form wire:submit="save({{$postId}})" >
                 <label>             
-                    <input wire:model="comment" name="comment" id="cmnt-input" class="form-control py-2" type="text" placeholder="Add Comment ..." aria-label="Search">
+                    <input wire:model="comment" name="comment" id="cmnt-input" class="form-control py-2 w-full" type="text" placeholder="Add Comment ..." aria-label="Search">
                 </label>
                     <button class="btn btn-light" id="cmnt-btn" type="submit">  <i class="fa-solid fa-comment"></i></button>
               </form>

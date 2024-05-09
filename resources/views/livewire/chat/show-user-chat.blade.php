@@ -14,29 +14,29 @@
             </div>
         </div>
 
-        <nav class="navbar navbar-light navbar-expand-lg mx-0">
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+
+        <nav class="d-flex navbar navbar-light navbar-expand-lg mx-0">
+          <div class=" offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
             <!-- Offcanvas header -->
-                        <div class="offcanvas-header">
-                            <button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas"></button>
-                        </div>
+						<div class="offcanvas-header">
+							<button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas"></button>
+						</div>
 
             <!-- Offcanvas body -->
             <div class="offcanvas-body p-0">
-            <div class="card card-chat-list rounded-end-lg-0 card-body border-end-lg-0 rounded-top-0">
+              <div class="card card-chat-list rounded-end-lg-0 card-body border-end-lg-0 rounded-top-0">
                 
                 <!-- Search chat START -->
                 <form class="position-relative">
-                <input class="form-control py-2" type="search" placeholder="Search for chats" aria-label="Search">
-                <button class="btn bg-transparent text-secondary px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit">
+                  <input class="form-control py-2" type="search" placeholder="Search for chats" aria-label="Search">
+                  <button class="btn bg-transparent text-secondary px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit">
                     <i class="bi bi-search fs-5"></i>
-                </button>
+                  </button>
                 </form>
                 <!-- Search chat END -->
-                
                 <!-- Chat list tab START -->
                 <div class="mt-4 h-100">
-                <div class="chat-tab-list custom-scrollbar">
+                  <div class="chat-tab-list custom-scrollbar">
                     <ul wire:poll.visible class="nav flex-column nav-pills nav-pills-soft">
                         @foreach ($conversations as $conversation)
                             @if ($conversation->sender_id == $userId)
@@ -46,14 +46,14 @@
                                         <form wire:submit="result({{$conversation->id}})" >
                                             <div class="d-grid gap-2">
                                                 <button id="btn" type="submit">
-                                                    <div class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab">
+                                                    <div style="background-color: #ffeaa9c7" class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab">
                                                         <div class="d-flex">
                                                             <div class="flex-shrink-0 avatar me-2 ">
                                                                 <img class="avatar-img rounded-circle" src="{{$alluser[$m]['profile_pic']}}" alt="">
                                                             </div>
                                                             <div class="flex-grow-1 d-block">
-                                                            <h6 class="mb-0 mt- "> {{$alluser[$m]['user_name']}}</h6>
-                                                            <div class="small text-secondary">last message ...</div>
+                                                                <h6 style="color: black"> {{$alluser[$m]['user_name']}}</h6>
+                                                                <div  style="color: black; font-size: 12px">last message ...</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -70,14 +70,14 @@
                                         <form wire:submit="result({{$conversation->id}})" >
                                             <div class="d-grid gap-2">
                                                 <button id="btn" type="submit">
-                                                    <div class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab">
+                                                    <div style="background-color: #ffeaa9c7" class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab">
                                                         <div class="d-flex">
                                                             <div class="flex-shrink-0 avatar me-2 ">
                                                                 <img class="avatar-img rounded-circle" src="{{$alluser[$m]['profile_pic']}}" alt="">
                                                             </div>
                                                             <div class="flex-grow-1 d-block">
-                                                            <h6 class="mb-0 mt-1"> {{$alluser[$m]['user_name']}}</h6>
-                                                            <div class="small text-secondary">last message ...</div>
+                                                                <h6 style="color: black"> {{$alluser[$m]['user_name']}}</h6>
+                                                                <div  style="color: black; font-size: 12px">last message ...</div>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -89,6 +89,89 @@
                                 @endfor 
                             @endif
                         @endforeach
+
+                                          <!-- Notif item -->
+                  <li>
+                    <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3">
+                      <div class="avatar text-center d-none d-sm-inline-block">
+                        <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+                      </div>
+                      <div class="ms-sm-3 d-flex">
+                        <div>
+                          <p class="small mb-2">Wish <b>Amanda Reed</b> a happy birthday (Nov 12)</p>
+                          <button class="btn btn-sm btn-outline-light py-1 me-2">Say happy birthday 🎂</button>
+                        </div>
+                        <p class="small ms-3">2min</p>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- Notif item -->
+                  <li>
+                    <a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 mb-1 p-3">
+                      <div class="avatar text-center d-none d-sm-inline-block">
+                        <div class="avatar-img rounded-circle bg-success"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">WB</span></div>
+                      </div>
+                      <div class="ms-sm-3">
+                        <div class="d-flex">
+                          <p class="small mb-2">Webestica has 15 like and 1 new activity</p>
+                          <p class="small ms-3">1hr</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- Notif item -->
+                  <li>
+                    <a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 p-3 mb-1">
+                      <div class="avatar text-center d-none d-sm-inline-block">
+                        <img class="avatar-img rounded-circle" src="assets/images/logo/12.svg" alt="">
+                      </div>
+                      <div class="ms-sm-3 d-flex">
+                        <p class="small mb-2"><b>Bootstrap in the news:</b> The search giant’s parent company, Alphabet, just joined an exclusive club of tech stocks.</p>
+                        <p class="small ms-3">4hr</p>
+                      </div>
+                    </a>
+                  </li>
+                                    <!-- Notif item -->
+                                    <li>
+                                        <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3 position-relative">
+                                          <div class="avatar text-center d-none d-sm-inline-block">
+                                            <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+                                          </div>
+                                          <div class="ms-sm-3 d-flex">
+                                            <div>
+                                              <p class="small mb-2">Wish <b>Amanda Reed</b> a happy birthday (Nov 12)</p>
+                                              <button class="btn btn-sm btn-outline-light py-1 me-2">Say happy birthday 🎂</button>
+                                            </div>
+                                            <p class="small ms-3">2min</p>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <!-- Notif item -->
+                                      <li>
+                                        <a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 mb-1 p-3">
+                                          <div class="avatar text-center d-none d-sm-inline-block">
+                                            <div class="avatar-img rounded-circle bg-success"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">WB</span></div>
+                                          </div>
+                                          <div class="ms-sm-3">
+                                            <div class="d-flex">
+                                              <p class="small mb-2">Webestica has 15 like and 1 new activity</p>
+                                              <p class="small ms-3">1hr</p>
+                                            </div>
+                                          </div>
+                                        </a>
+                                      </li>
+                                      <!-- Notif item -->
+                                      <li>
+                                        <a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 p-3 mb-1">
+                                          <div class="avatar text-center d-none d-sm-inline-block">
+                                            <img class="avatar-img rounded-circle" src="assets/images/logo/12.svg" alt="">
+                                          </div>
+                                          <div class="ms-sm-3 d-flex">
+                                            <p class="small mb-2"><b>Bootstrap in the news:</b> The search giant’s parent company, Alphabet, just joined an exclusive club of tech stocks.</p>
+                                            <p class="small ms-3">4hr</p>
+                                          </div>
+                                        </a>
+                                      </li>
                     
                     </ul>
                 </div>
@@ -106,7 +189,7 @@
             <div class="card-body h-100">
                 <div class="tab-content py-0 mb-0 h-100" id="chatTabsContent">
                     <!-- Conversation item START -->
-                    <div class="fade tab-pane show active h-100" id="chat-1" role="tabpanel" aria-labelledby="chat-1-tab">
+                    <div class="fade tab-pane show active h-100" role="tabpanel" aria-labelledby="chat-1-tab">
                     <!-- Top avatar and status START -->
                     <div class="d-sm-flex justify-content-between align-items-center">   
                         @for ($j = 0; $j < $alluser_count; $j++)
@@ -155,8 +238,8 @@
                                         <div div class="d-flex justify-content-end text-end mb-1">
                                             <div class="w-100">
                                             <div class="d-flex flex-column align-items-end">
-                                                <div class="bg-primary text-white p-2 px-3 rounded-2">{{$show_messages[$i]['body']}} 
-                                                    <br> <small style="font-size: 10px" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
+                                                <div style="background-color: #ffeaa9c7; color: black"  class="p-2 px-3 rounded-2">{{$show_messages[$i]['body']}} 
+                                                    <br><small style="font-size: 10px; color: black" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
                                                 </div>
                                             </div>
                                             </div>
