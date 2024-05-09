@@ -1,4 +1,6 @@
 <div class="row gx-0">
+
+    <!-- User conversation START -->
     <div class="col-lg-4 col-xxl-4" id="chatTabs" role="tablist">
       
         <!-- Divider -->
@@ -114,7 +116,8 @@
         </div>
         </nav>
     </div>
-    
+    <!-- User conversation START -->
+
     <!-- Chat conversation START -->
     <div  class="col-lg-8 col-xxl-8">
       <div id="showmesaage">
@@ -217,6 +220,8 @@
 
       </div>
     </div>
+    <!-- Chat conversation END -->
+
   </div>
 </div>
 
