@@ -6,8 +6,8 @@
 		<div class="container">
 			<!-- Logo START -->
 			<a class="navbar-brand" href="/">
-        <img class="light-mode-item navbar-brand-item" src="{{ asset("assets/images/logo.svg") }}" alt="logo">
-				<img class="dark-mode-item navbar-brand-item"  src="{{ asset("assets/images/logo.svg") }}" alt="logo">
+        <img class="light-mode-item navbar-brand-item" src="{{ asset("assets/images/favicon.png") }}" alt="logo">
+				<img class="dark-mode-item navbar-brand-item"  src="{{ asset("assets/images/favicon.png") }}" alt="logo">
 			</a>
 			<!-- Logo END -->
 

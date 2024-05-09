@@ -11,7 +11,7 @@
 	<meta name="description" content="Bootstrap 5 based Social Media Network and Community Theme">
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+	<link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}">
 
 	<!-- Google Font -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
