@@ -40,20 +40,25 @@
                     <a class="btn btn-success-soft me-2" type="submit" href="{{ route('post') }}">
                       <span><i class="fa fa-add"></i> Add post</span>
                     </a>  
-                  @elseif ( in_array(auth()->id(), explode(",", $user['followers'])) )                            
+                  @elseif ( in_array(auth()->id(), explode(",", $user['followers'])) )    
+
                     <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                       @csrf
                       <button type="submit" class="btn btn-primary-soft me-2"><i class="fa fa-user"></i> unfollow</button>
                     </form>
+
                     <form action="{{route('conversation', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                       @csrf
                       <button type="submit" class="btn btn-success-soft me-2"><i class="fa bi-chat-left-text-fill"></i> message</button>
                     </form>
+
                   @else 
+
                     <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
                       @csrf
                       <button type="submit" class="btn btn-primary-soft me-2"><i class="fa fa-user"></i> follow</button>
                     </form> 
+                    
                   @endif
 
                 </div>

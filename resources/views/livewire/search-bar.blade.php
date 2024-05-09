@@ -21,20 +21,6 @@
                             <p class="mb-0 small text-truncate">{{$user['first_name']}} {{$user['last_name']}}</p>
                         </div>
 
-                        <!-- Button -->
-
-                        @if ( in_array(auth()->id(), explode(",", $user['followers'])) )                            
-                            <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
-                            @csrf
-                            <button type="submit" class="btn btn-primary-soft me-2"><i class="fa fa-user"></i> unfollow</button>
-                            </form>
-                        @else 
-                            <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
-                            @csrf
-                            <button type="submit" class="btn btn-primary-soft me-2"><i class="fa fa-user"></i> follow</button>
-                            </form> 
-                        @endif
-
                     </div>
                     <!-- Connection item END -->
                 </div>
