@@ -23,7 +23,8 @@ class ShowUserChat extends Component
     public $show_messages_count;
 
     public $alluser;
-    public $alluser_count;
+    public $alluser_count; 
+
 
     public function save($user_in_chat){
 
