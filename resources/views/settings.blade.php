@@ -181,7 +181,7 @@
                     <!-- Phone number -->
                     <div class="col-sm-6">
                       <label class="form-label">Phone number</label>
-                      <input name="phone" type="text" class="form-control" placeholder="" value="{{ Auth::user()->phone ?? old('phone')}}">
+                      <input name="phone" type="text" class="form-control" placeholder="0912 345 6789" value="{{ Auth::user()->phone ?? old('phone')}}">
                     
                       @error('phone')
                       <p class="text-red-500 text-xs mt-1">{{$message}}</p>

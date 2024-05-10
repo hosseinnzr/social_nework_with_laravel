@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/prfile
+/public/post-picture
 /public/storage
 /storage/*.key
 /vendor
