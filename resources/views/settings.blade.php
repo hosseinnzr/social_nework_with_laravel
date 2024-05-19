@@ -456,62 +456,16 @@
                 </div>
               </div>
               <!-- Privacy and safety END -->
+
               <br>
+
               <!-- Change your password START -->
-              <div class="card">
-                <!-- Title START -->
-                <div class="card-header border-0 pb-0">
-                  <h5 class="card-title">Change your password</h5>
-                </div>
-                <!-- Title START -->
-                <div class="card-body">
-
-                  <!-- Settings START -->
-                  <form class="row g-3"  action="{{ route('postChangePassword') }}" method="post">
-                    @csrf
-
-                    <!-- Current password -->
-                    <div class="col-12">
-                      <label class="form-label">Current password</label>
-                      <input name="current_password" value="{{ old('first_name')}}" type="text" class="form-control" type="password" placeholder="Enter Current password">
-                    </div>
-
-                    @error('current_password')
-                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                    @enderror
-
-                    <!-- New password -->
-                    <div class="col-12">
-                      <label class="form-label">New password</label>
-                      <input name="new_password" value="{{ old('first_name')}}" type="text" class="form-control" type="password" placeholder="Enter new password">
-                    </div>
-
-                    @error('new_password')
-                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                    @enderror
-
-                    <!-- Confirm password -->
-                    <div class="col-12">
-                      <label class="form-label">Confirm new password</label>
-                      <input name="new_password_confirmation" value="{{ old('first_name')}}" type="text" class="form-control" type="password" placeholder="Enter new password agian">
-                    </div>
-
-                    @error('new_password_confirmation')
-                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                    @enderror
-
-                    <!-- Button  -->
-                    <div class="col-12 text-end">
-                      <button type="submit" class="btn btn-primary mb-0">Update password</button>
-                    </div>
-                  </form>
-                  <!-- Settings END -->
-
-                </div>
-              </div>
+                @livewire('settings.change-password')
               <!-- Account settings tab END -->
+
             </div>
             <!-- Privacy and safety tab END -->
+
             <br>
             <!-- Communications tab START -->
             <div class="tab-pane fade" id="nav-setting-tab-4">

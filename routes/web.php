@@ -26,9 +26,6 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::get('/settings', [AuthManager::class, "settings"])->name('settings');
     Route::post('/settings', [AuthManager::class, "update"])->name('settings.post');
 
-    // Change Password
-    Route::post('/change-password', [AuthManager::class, 'changePassword'])->name('postChangePassword');
-
     // Delete Post
     Route::get('/delete', [PostController::class, "delete"])->name('delete');
 
