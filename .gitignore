@@ -2,7 +2,7 @@
 /node_modules
 /public/build
 /public/hot
-/public/prfile
+/public/profile
 /public/post-picture
 /public/storage
 /storage/*.key
