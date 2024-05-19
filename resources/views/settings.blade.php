@@ -462,48 +462,57 @@
                 <!-- Title START -->
                 <div class="card-header border-0 pb-0">
                   <h5 class="card-title">Change your password</h5>
-                  <p class="mb-0">See resolved goodness felicity shy civility domestic had but.</p>
                 </div>
                 <!-- Title START -->
                 <div class="card-body">
+
                   <!-- Settings START -->
-                  <form class="row g-3">
+                  <form class="row g-3"  action="{{ route('postChangePassword') }}" method="post">
+                    @csrf
+
                     <!-- Current password -->
                     <div class="col-12">
                       <label class="form-label">Current password</label>
-                      <input type="text" class="form-control" placeholder="">
+                      <input name="current_password" value="{{ old('first_name')}}" type="text" class="form-control" type="password" placeholder="Enter Current password">
                     </div>
+
+                    @error('current_password')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
+
                     <!-- New password -->
                     <div class="col-12">
                       <label class="form-label">New password</label>
-                      <!-- Input group -->
-                      <div class="input-group">
-                        <input class="form-control fakepassword" type="password" id="psw-input" placeholder="Enter new password">
-                        <span class="input-group-text p-0">
-                          <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
-                        </span>
-                      </div>
-                      <!-- Pswmeter -->
-                      <div id="pswmeter" class="mt-2"></div>
-                      <div id="pswmeter-message" class="rounded mt-1"></div>
+                      <input name="new_password" value="{{ old('first_name')}}" type="text" class="form-control" type="password" placeholder="Enter new password">
                     </div>
+
+                    @error('new_password')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
+
                     <!-- Confirm password -->
                     <div class="col-12">
-                      <label class="form-label">Confirm password</label>
-                      <input type="text" class="form-control" placeholder="">
+                      <label class="form-label">Confirm new password</label>
+                      <input name="new_password_confirmation" value="{{ old('first_name')}}" type="text" class="form-control" type="password" placeholder="Enter new password agian">
                     </div>
+
+                    @error('new_password_confirmation')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
+
                     <!-- Button  -->
                     <div class="col-12 text-end">
                       <button type="submit" class="btn btn-primary mb-0">Update password</button>
                     </div>
                   </form>
                   <!-- Settings END -->
+
                 </div>
               </div>
               <!-- Account settings tab END -->
             </div>
             <!-- Privacy and safety tab END -->
-
+            <br>
             <!-- Communications tab START -->
             <div class="tab-pane fade" id="nav-setting-tab-4">
               <!-- Communications START -->
