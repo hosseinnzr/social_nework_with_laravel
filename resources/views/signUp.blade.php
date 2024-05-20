@@ -12,7 +12,7 @@
                 
                 <!-- Title -->
                 <h2 style="text-align: center" class="h1 mb-2">Sign Up</h2>
-                <p style="text-align: center">Have an account?<a href="/signIn"> sign in</a></p>
+                <p style="text-align: center">Have an account?<a href="/signin"> sign in</a></p>
                 <br>
                 <div class="mb-3 input-group-lg">
                   <label for="user_name" class="form-label">user name : </label>
@@ -43,7 +43,7 @@
                 
                 <div class="mb-3 input-group-lg">
                   <label for="email" class="form-label">Email address : </label>
-                  <input value="{{old('email')}}" type="text" class="form-control" name="email">
+                  <input value="{{old('email')}}" type="email" class="form-control" name="email">
 
                   @error('email')
                   <p class="text-red-500 text-xs mt-1">{{$message}}</p>

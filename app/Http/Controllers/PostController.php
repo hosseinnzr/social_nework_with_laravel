@@ -57,11 +57,10 @@ class PostController extends Controller
             ]);    
             
         } else {
-            notify()->error('you not signIn');
-            return redirect()->route('signIn');
+            notify()->error('you not signin');
+            return redirect()->route('signin');
         }
     }
-
 
     public function postRoute(Request $request){
         if(isset($request->id)){
@@ -113,7 +112,7 @@ class PostController extends Controller
               ->with('success', true);
 
         }else{
-            return redirect()->route('/signIn');
+            return redirect()->route('/signin');
         }
     }
 
@@ -145,7 +144,7 @@ class PostController extends Controller
                 ->with('success', true);
 
         }else{
-            return redirect()->route('/signIn');
+            return redirect()->route('/signin');
         }
 
     }

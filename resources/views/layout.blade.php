@@ -101,16 +101,16 @@
 	<script src="{{asset("assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js")}}"></script>
 
 	<!-- Vendors -->
-	<script src="{{	asset("assets/vendor/tiny-slider/dist/tiny-slider.js")}}"></script>
+
 	<script src="{{	asset("assets/vendor/dropzone/dist/dropzone.js")}}"></script>
 	<script src="{{	asset("assets/vendor/choices.js/public/assets/scripts/choices.min.js")}}"></script>
 	<script src="{{	asset("assets/vendor/glightbox-master/dist/js/glightbox.min.js")}}"></script>
 	<script src="{{	asset("assets/vendor/flatpickr/dist/flatpickr.min.js")}}"></script>
 	<script src="{{	asset("assets/vendor/OverlayScrollbars-master/js/OverlayScrollbars.min.js")}}"></script>
+	
+	<script src="{{	asset("assets/vendor/tiny-slider/dist/tiny-slider.js")}}"></script>
 	<script src="{{	asset("assets/vendor/plyr/plyr.js")}}"></script>
 	<script src="{{	asset("assets/vendor/dropzone/dist/min/dropzone.min.js")}}"></script>
-	<script src="{{	asset("assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js")}}"></script>
-
 
 	<!-- Template Functions -->
 	<script src="{{asset("assets/js/functions.js")}}"></script>

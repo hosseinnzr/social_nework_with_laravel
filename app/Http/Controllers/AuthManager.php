@@ -51,22 +51,22 @@ class AuthManager extends Controller
             }
                  
         } else {
-            notify()->error('you not signIn');
-            return redirect()->route('signIn');
+            notify()->error('you not signin');
+            return redirect()->route('signin');
         }
     }
 
-    // signIn / singUp / logout
-    function signIn(){
+    // signin / singUp / logout
+    function signin(){
         if(auth::check()){
-            notify()->success('you are now signIn');
+            notify()->success('you are now signin');
             return redirect()->route('home');  
         }else{
-            return view('signIn');
+            return view('signin');
         }
     }
 
-    function signInPost(Request $request){
+    function signinPost(Request $request){
 
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -76,10 +76,10 @@ class AuthManager extends Controller
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            notify()->success('signIn successfully');
+            notify()->success('signin successfully');
             return redirect()->route('home');
         }
-        return redirect(route('signIn'))->with('error', 'signIn details are not valid');
+        return redirect(route('signin'))->with('error', 'signin details are not valid');
     }
 
     public function signupPost(Request $request){
@@ -103,7 +103,7 @@ class AuthManager extends Controller
         $user = User::create($data);
         if(!$user){
             notify()->success('signup user successfully!');
-            return redirect(route('signIn'));
+            return redirect(route('signin'));
         }
         return redirect()->back();
     }
@@ -119,11 +119,15 @@ class AuthManager extends Controller
  
         $request->session()->regenerateToken();
 
-        notify()->success('logout user successfully!');
+        notify()->success('signout user successfully!');
          
-        return redirect()->route('signIn');
+        return redirect()->route('signin');
     }
     
+    // forgot password
+    public function forgotPasswordPost(Request $request){
+        dd($request);
+    } 
 
     // edit / update
     public function settings(){

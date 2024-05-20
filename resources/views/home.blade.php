@@ -8,17 +8,15 @@
 <main>      
   <!-- Container START -->
   <div class="container">
-    <!-- Row START -->
     <div class="row g-4">
 
       <!-- Left sidebar START -->
-      <div style="" class="col-lg-3">
+      <div style="position: -webkit-sticky; position: sticky; top: 70px; height:100% ; overflow-y: auto; z-index: 99999;" class="col-lg-3 ">
 
         <!-- Advanced filter responsive toggler START -->
         <div class="d-flex align-items-center d-lg-none">
           <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
             <i class="btn btn-primary fw-bold fa-solid fa-sliders-h"></i>
-            <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
           </button>
         </div>
         <!-- Advanced filter responsive toggler END -->
@@ -79,7 +77,6 @@
         <!-- Navbar END-->
       </div>
       <!-- Left sidebar END -->
-
 
       <!-- Main content START -->
       <div class="col-md-8 col-lg-6 vstack gap-4">
@@ -304,12 +301,11 @@
       </div>
       <!-- Main content END -->
 
-
       <!-- Right sidebar START -->
-      <div class="col-lg-3 d-none d-lg-block">
+      <div class="col-lg-3 d-sm-none d-md-block">
         <div class="row g-4">
           <!-- New Users START -->
-          <div class="col-sm-none col-lg-12">
+          <div class="col-sm-6 col-lg-12">
             <div class="card">
               <!-- Card header START -->
               <div class="card-header pb-0 border-0">
@@ -374,8 +370,7 @@
       </div>
       <!-- Right sidebar END -->
 
-    </div> 
-    <!-- Row END -->
+    </div> <!-- Row END -->
   </div>  
   <!-- Container END -->
 

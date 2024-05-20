@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'signIn')
+@section('title', 'signin')
 @section('content')
 
 <main>
@@ -16,7 +16,7 @@
           <p>Don't have an account?<a href="/signup"> sign up</a></p>
           <!-- Form START -->
 
-            <form  action="{{route('signIn.post')}}" method="POST" class="mt-4">
+            <form  action="{{route('signin.post')}}" method="POST" class="mt-4">
               @csrf
 
               <div class="mb-3 position-relative input-group-lg">
@@ -30,18 +30,17 @@
                     <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
                   </span>
                 </div>
-
-                <!-- Pswmeter -->
-                <div id="pswmeter" class="mt-2"></div>
-                <div class="d-flex mt-1">
-                  <div id="pswmeter-message" class="rounded"></div>
-                  <!-- Password message notification -->
-                  <div class="ms-auto">
-                    <i class="bi bi-info-circle ps-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Include at least one uppercase, one lowercase, one special character, one number and 8 characters long." data-bs-original-title="" title=""></i>
-                  </div>
-                </div>
-
               </div>
+              
+              <!-- Remember me -->
+              <div class="mb-3 d-sm-flex justify-content-between">
+                {{-- <div>
+                  <input type="checkbox" class="form-check-input" id="rememberCheck">
+                  <label class="form-check-label" for="rememberCheck">Remember me?</label>
+                </div> --}}
+                <a href="/forgot-password">Forgot password?</a>
+              </div>
+              
               <!-- Button -->
               <div class="d-grid">
                 <button type="submit" class="btn btn-lg btn-primary-soft">sign in</button>

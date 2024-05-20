@@ -30,15 +30,22 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::get('/delete', [PostController::class, "delete"])->name('delete');
 
 
-    // Logout/signIn Page
-    Route::get('/signIn', [AuthManager::class, 'signIn'])->name('signIn');
-    Route::post('/signIn', [AuthManager::class, 'signInPost'])->name('signIn.post');
+    // Logout/signin Page
+    Route::get('/signin', [AuthManager::class, 'signin'])->name('signin');
+    Route::post('/signin', [AuthManager::class, 'signinPost'])->name('signin.post');
     
     Route::get('/logout', function(){
-        return redirect()->route('signIn');
+        return redirect()->route('signin');
     });
     
     Route::post('/logout', [AuthManager::class, 'logout'])->name('logout');
+
+    // forgetPassword
+    Route::get('/forgot-password', function () {
+        return view('forgotPassword');
+    })->name('forgot-password');
+
+    Route::post('/forgot-password', [AuthManager::class, 'forgotPasswordPost'])->name('forgot-password.post');
 
     
     // profile
