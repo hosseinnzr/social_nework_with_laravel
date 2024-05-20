@@ -56,6 +56,7 @@ class AuthManager extends Controller
         }
     }
 
+    // signIn / singUp / logout
     function signIn(){
         if(auth::check()){
             notify()->success('you are now signIn');
@@ -79,23 +80,6 @@ class AuthManager extends Controller
             return redirect()->route('home');
         }
         return redirect(route('signIn'))->with('error', 'signIn details are not valid');
-    }
-
-    function logout(Request $request){
-        Auth::logout();
-
-        $request->session()->invalidate();
- 
-        $request->session()->regenerateToken();
-
-        notify()->success('logout user successfully!');
-         
-        return redirect()->route('signIn');
-    }
-    
-    
-    function signup(){
-        return view('signUp');
     }
 
     public function signupPost(Request $request){
@@ -123,6 +107,23 @@ class AuthManager extends Controller
         }
         return redirect()->back();
     }
+ 
+    function signup(){
+        return view('signUp');
+    }
+
+    function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+ 
+        $request->session()->regenerateToken();
+
+        notify()->success('logout user successfully!');
+         
+        return redirect()->route('signIn');
+    }
+    
 
     // edit / update
     public function settings(){
@@ -182,8 +183,6 @@ class AuthManager extends Controller
         }
     }
     
-    // public function changePassword(Request $request){
-
     //     $this->validate($request, [
     //         'current_password' => 'required|string',
     //         'new_password' => 'required|confirmed|min:4|string'

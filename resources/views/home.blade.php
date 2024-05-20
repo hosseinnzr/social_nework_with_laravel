@@ -217,9 +217,10 @@
             <div class="card">
               <!-- Card header START -->
               <div class="card-header pb-0 border-0">
-                <h5 class="card-title mb-0">Who to follow</h5>
+                <h5 class="card-title mb-0">New Users</h5>
               </div>
               <!-- Card header END -->
+
               <!-- Card body START -->
               <div class="card-body">
                 <!-- Connection item START -->
@@ -237,6 +238,7 @@
                   <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
                 </div>
                 <!-- Connection item END -->
+                
                 <!-- Connection item START -->
                   <div class="hstack gap-2 mb-3">
                     <!-- Avatar -->

@@ -18,6 +18,8 @@ class PostController extends Controller
     public function home(Request $request){
         if(auth::check()){
 
+            $new_users = User::where()
+
             $user_following = explode(",", Auth::user()->following);
             $user_follower = explode(",", Auth::user()->followers);
 
@@ -48,7 +50,8 @@ class PostController extends Controller
             return view('home', [
                 'posts' => $posts,
                 'follower_user' => $follower_user,
-                'following_user' => $following_user
+                'following_user' => $following_user,
+                'new_users' => $new_users
             ]);    
             
         } else {
