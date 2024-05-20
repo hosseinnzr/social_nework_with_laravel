@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'login')
+@section('title', 'signIn')
 @section('content')
 
 <main>
@@ -16,7 +16,7 @@
           <p>Don't have an account?<a href="/signup"> sign up</a></p>
           <!-- Form START -->
 
-            <form  action="{{route('login.post')}}" method="POST" class="mt-4">
+            <form  action="{{route('signIn.post')}}" method="POST" class="mt-4">
               @csrf
 
               <div class="mb-3 position-relative input-group-lg">
@@ -44,7 +44,7 @@
               </div>
               <!-- Button -->
               <div class="d-grid">
-                <button type="submit" class="btn btn-lg btn-primary-soft">Login</button>
+                <button type="submit" class="btn btn-lg btn-primary-soft">sign in</button>
               </div>
             </form>
 

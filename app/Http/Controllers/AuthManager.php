@@ -51,21 +51,21 @@ class AuthManager extends Controller
             }
                  
         } else {
-            notify()->error('you not login');
-            return redirect()->route('login');
+            notify()->error('you not signIn');
+            return redirect()->route('signIn');
         }
     }
 
-    function login(){
+    function signIn(){
         if(auth::check()){
-            notify()->success('you are now login');
+            notify()->success('you are now signIn');
             return redirect()->route('home');  
         }else{
-            return view('login');
+            return view('signIn');
         }
     }
 
-    function loginPost(Request $request){
+    function signInPost(Request $request){
 
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -75,10 +75,10 @@ class AuthManager extends Controller
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            notify()->success('login successfully');
+            notify()->success('signIn successfully');
             return redirect()->route('home');
         }
-        return redirect(route('login'))->with('error', 'login details are not valid');
+        return redirect(route('signIn'))->with('error', 'signIn details are not valid');
     }
 
     function logout(Request $request){
@@ -90,7 +90,7 @@ class AuthManager extends Controller
 
         notify()->success('logout user successfully!');
          
-        return redirect()->route('login');
+        return redirect()->route('signIn');
     }
     
     
@@ -119,7 +119,7 @@ class AuthManager extends Controller
         $user = User::create($data);
         if(!$user){
             notify()->success('signup user successfully!');
-            return redirect(route('login'));
+            return redirect(route('signIn'));
         }
         return redirect()->back();
     }
@@ -181,6 +181,7 @@ class AuthManager extends Controller
             return Response()->json($error, 400);
         }
     }
+    
     // public function changePassword(Request $request){
 
     //     $this->validate($request, [
@@ -213,26 +214,26 @@ class AuthManager extends Controller
 
 
     // follow
-    public function follow($id){
+    public function follow($id){ 
         $is_follow = false;
-        $user_login = User::findOrFail(auth::id());
+        $user_signin = User::findOrFail(auth::id());
         $user = User::findOrFail($id);
 
-        $user_login_id_following = $user_login->following;
+        $user_signin_id_following = $user_signin->following;
         $user_followers = $user->followers;
 
-        $user_login_id_following_array = explode(",", $user_login_id_following);
+        $user_signin_id_following_array = explode(",", $user_signin_id_following);
         $user_follower_array = explode(",", $user_followers);
 
         foreach($user_follower_array as $followers_number){
-            if ($user_login->id == $followers_number){
+            if ($user_signin->id == $followers_number){
                 // delete follower  
                 $user_follower_array = array_diff($user_follower_array, array($followers_number));
                 // delete following
-                $user_login_id_following_array = array_diff($user_login_id_following_array, array($user->id));
+                $user_signin_id_following_array = array_diff($user_signin_id_following_array, array($user->id));
 
                 $followers = implode(",", $user_follower_array);
-                $followings = implode(",", $user_login_id_following_array);
+                $followings = implode(",", $user_signin_id_following_array);
 
                 $is_follow = true;
                 break;
@@ -240,15 +241,15 @@ class AuthManager extends Controller
         }
 
         if(!$is_follow){
-            $followers = $user->followers . ',' . $user_login->id;
-            $followings = $user_login->following . ',' . $user->id;   
+            $followers = $user->followers . ',' . $user_signin->id;
+            $followings = $user_signin->following . ',' . $user->id;   
         }
 
         // save follow
-        $user_login->following = $followings;
+        $user_signin->following = $followings;
         $user->followers = $followers;
 
-        $user_login->save();
+        $user_signin->save();
         $user->save();
 
         if ($user->followers == "0"){
@@ -257,16 +258,16 @@ class AuthManager extends Controller
             $followers_number = count(explode(",", $user->followers));
         }
 
-        if ($user_login->following == "0"){
+        if ($user_signin->following == "0"){
             $following_number = 1;
         }else{
-            $following_number = count(explode(",", $user_login->following));
+            $following_number = count(explode(",", $user_signin->following));
         }
         
         $user->followers_number = $followers_number -1;
-        $user_login->following_number = $following_number -1;
+        $user_signin->following_number = $following_number -1;
 
-        $user_login->save();
+        $user_signin->save();
         $user->save();
 
         return back();

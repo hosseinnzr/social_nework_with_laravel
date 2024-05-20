@@ -12,7 +12,7 @@
                 
                 <!-- Title -->
                 <h2 style="text-align: center" class="h1 mb-2">Sign Up</h2>
-                <p style="text-align: center">Have an account?<a href="/login"> sign in</a></p>
+                <p style="text-align: center">Have an account?<a href="/signIn"> sign in</a></p>
                 <br>
                 <div class="mb-3 input-group-lg">
                   <label for="user_name" class="form-label">user name : </label>
@@ -54,7 +54,7 @@
                   <input value="{{old('password')}}" type="password" class="form-control" name="password">
                 </div>
                 
-                <button type="submit" class="btn btn-primary">signup</button>
+                <button type="submit" class="btn btn-primary">sign up</button>
           </form>
         </div>
       </div>

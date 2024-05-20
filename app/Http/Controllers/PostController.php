@@ -52,8 +52,8 @@ class PostController extends Controller
             ]);    
             
         } else {
-            notify()->error('you not login');
-            return redirect()->route('login');
+            notify()->error('you not signIn');
+            return redirect()->route('signIn');
         }
     }
 
@@ -97,9 +97,9 @@ class PostController extends Controller
             $post = Post::create($inputs);
 
             // update user post number
-            $login_user_post_number = Post::where('delete', 0)->where('UID', Auth::id())->count();
+            $signin_user_post_number = Post::where('delete', 0)->where('UID', Auth::id())->count();
             $user = User::findOrFail(Auth::id());
-            $user->post_number = $login_user_post_number;
+            $user->post_number = $signin_user_post_number;
             $user->save();
 
             notify()->success('Add post successfully!');
@@ -108,7 +108,7 @@ class PostController extends Controller
               ->with('success', true);
 
         }else{
-            return redirect()->route('/login');
+            return redirect()->route('/signIn');
         }
     }
 
@@ -140,7 +140,7 @@ class PostController extends Controller
                 ->with('success', true);
 
         }else{
-            return redirect()->route('/login');
+            return redirect()->route('/signIn');
         }
 
     }
@@ -150,9 +150,9 @@ class PostController extends Controller
         $post->update(['delete' => true]);
 
         // update user post number
-        $login_user_post_number = Post::where('delete', 0)->where('UID', Auth::id())->count();
+        $signin_user_post_number = Post::where('delete', 0)->where('UID', Auth::id())->count();
         $user = User::findOrFail(Auth::id());
-        $user->post_number = $login_user_post_number;
+        $user->post_number = $signin_user_post_number;
         $user->save();
         
         return redirect()->back();
