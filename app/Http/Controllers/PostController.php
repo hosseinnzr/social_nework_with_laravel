@@ -18,10 +18,12 @@ class PostController extends Controller
     public function home(Request $request){
         if(auth::check()){
 
-            $new_users = User::where()
-
             $user_following = explode(",", Auth::user()->following);
             $user_follower = explode(",", Auth::user()->followers);
+
+            $signin_user_id = Auth::id();
+
+            $new_users = User::all()->sortByDesc('id')->whereNotIn('id', $user_following)->whereNotIn('id', $user_follower)->where('id', '!=', $signin_user_id)->take(5);
 
             $posts = Post::latest()->where('delete', 0)->whereIn('UID', $user_following)->get();
 

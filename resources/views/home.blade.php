@@ -8,10 +8,11 @@
 <main>      
   <!-- Container START -->
   <div class="container">
+    <!-- Row START -->
     <div class="row g-4">
 
-      <!-- Sidenav START -->
-      <div class="col-lg-3">
+      <!-- Left sidebar START -->
+      <div style="" class="col-lg-3">
 
         <!-- Advanced filter responsive toggler START -->
         <div class="d-flex align-items-center d-lg-none">
@@ -77,143 +78,238 @@
         </nav>
         <!-- Navbar END-->
       </div>
-      <!-- Sidenav END -->
+      <!-- Left sidebar END -->
 
 
-      
       <!-- Main content START -->
       <div class="col-md-8 col-lg-6 vstack gap-4">
 
-        <!-- Card feed item START -->
-        @foreach ($posts as $post)
+        @if ($posts != '[]')
+          <!-- Card feed item START -->
+          @foreach ($posts as $post)
 
-          <div class="card">
-            <!-- Card header START -->
-            <div class="card-header">
-                <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                    <!-- Avatar -->
-                    <div class="avatar me-2">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="{{$post['user_profile_pic']}}" alt="user_img"> </a>
-                    </div>
-                    <!-- Info -->
-                    <div>
-                    <h6 class="card-title mb-0"> <a href="/user/{{$post['user_name']}}">  {{$post['user_name']}}   </a></h6>
-                    <p class="small mb-0">{{$post['created_at']->diffForHumans()}}</p>
-                    </div>
-                </div>
-                <!-- Card share action START -->
-                <div class="dropdown">
-                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-three-dots"></i>
-                    </a>
-                    <!-- Card share action dropdown menu -->
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$post['user_name']}}</a></li>
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$post['user_name']}}</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
-                    </ul>
-                </div>
-                <!-- Card share action START -->
-                </div>
-            </div>
-            <!-- Card header START -->
-            
-            <!-- Card body START -->
-            <div class="card-body">
-                <h5>{{$post['title']}}</h5>
-                <p class="mb-0">{{$post['post']}}</p>
-                <br>
-                
-                @isset($post['post_picture'])
-                <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
-                <br>    
-                @endisset 
-                
-                @foreach(explode(",", $post['tag']) as $tag)
-                <a href="/?tag={{$tag}}">{{$tag}} </a>
-                @endforeach
-            </div>
-            <!-- Card body END -->
-    
-            <!-- Card Footer START -->
-            <div class="card-footer py-3"> 
-                <!-- Feed react START -->
-              <ul class="nav nav-fill nav-stack small">
-
-                <li class="nav-item">
-                  @livewire('like-post', ['post' => $post])
-                </li>
-
-                <li class="nav-item">
-                  <div data-bs-toggle="modal" data-bs-target="#showComments{{$post['id']}}" aria-controls="offcanvasChat">
-                    <small style="text-align: center" class="mb-0"> <i class="bi bi-chat-fill pe-1"></i> Comments</small>
+            <div class="card">
+              <!-- Card header START -->
+              <div class="card-header">
+                  <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex align-items-center">
+                      <!-- Avatar -->
+                      <div class="avatar me-2">
+                      <a href="#!"> <img class="avatar-img rounded-circle" src="{{$post['user_profile_pic']}}" alt="user_img"> </a>
+                      </div>
+                      <!-- Info -->
+                      <div>
+                      <h6 class="card-title mb-0"> <a href="/user/{{$post['user_name']}}">  {{$post['user_name']}}   </a></h6>
+                      <p class="small mb-0">{{$post['created_at']->diffForHumans()}}</p>
+                      </div>
                   </div>
-                </li>
+                  <!-- Card share action START -->
+                  <div class="dropdown">
+                      <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-three-dots"></i>
+                      </a>
+                      <!-- Card share action dropdown menu -->
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                        <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$post['user_name']}}</a></li>
+                        <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$post['user_name']}}</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                      </ul>
+                  </div>
+                  <!-- Card share action START -->
+                  </div>
+              </div>
+              <!-- Card header START -->
+              
+              <!-- Card body START -->
+              <div class="card-body">
+                  <h5>{{$post['title']}}</h5>
+                  <p class="mb-0">{{$post['post']}}</p>
+                  <br>
+                  
+                  @isset($post['post_picture'])
+                  <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                  <br>    
+                  @endisset 
+                  
+                  @foreach(explode(",", $post['tag']) as $tag)
+                  <a href="/?tag={{$tag}}">{{$tag}} </a>
+                  @endforeach
+              </div>
+              <!-- Card body END -->
+      
+              <!-- Card Footer START -->
+              <div class="card-footer py-3"> 
+                  <!-- Feed react START -->
+                <ul class="nav nav-fill nav-stack small">
 
-                  <!-- scroll show comment START -->
-                  <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
+                  <li class="nav-item">
+                    @livewire('like-post', ['post' => $post])
+                  </li>
 
-                        <!-- Modal feed header START -->
-                        <div class="modal-header">
-                          <h6 class="modal-title">Comments </h6>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <!-- Modal feed header END -->
+                  <li class="nav-item">
+                    <div data-bs-toggle="modal" data-bs-target="#showComments{{$post['id']}}" aria-controls="offcanvasChat">
+                      <small style="text-align: center" class="mb-0"> <i class="bi bi-chat-fill pe-1"></i> Comments</small>
+                    </div>
+                  </li>
 
-                        <!-- show post START -->
-                          <!-- Card body START -->
-                          <div class="card-body">
-                              <h5>{{$post['title']}}</h5>
-                              <p class="mb-0">{{$post['post']}}</p>
-                              <br>
-                              
-                              @isset($post['post_picture'])
-                              <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
-                              <br>    
-                              @endisset 
+                    <!-- scroll show comment START -->
+                    <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
 
+                          <!-- Modal feed header START -->
+                          <div class="modal-header">
+                            <h6 class="modal-title">Comments </h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
-                          <!-- Card body END -->
-                        <br>
-                        <!-- show post END -->
+                          <!-- Modal feed header END -->
 
-                        @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                          <!-- show post START -->
+                            <!-- Card body START -->
+                            <div class="card-body">
+                                <h5>{{$post['title']}}</h5>
+                                <p class="mb-0">{{$post['post']}}</p>
+                                <br>
+                                
+                                @isset($post['post_picture'])
+                                <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                                @endisset 
+
+                            </div>
+                            <!-- Card body END -->
+                          <hr>
+                          <!-- show post END -->
+
+                          @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- scroll show comment END -->
+                    <!-- scroll show comment END -->
 
-                <li class="nav-item">
-                    <form action="#" method="POST" class="ms-auto me-auto mt-3">
-                        @csrf
-                        <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
-                    </form>
-                </li>
-              </ul>
-                <!-- Feed react END -->
+                  <li class="nav-item">
+                      <form action="#" method="POST" class="ms-auto me-auto mt-3">
+                          @csrf
+                          <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
+                      </form>
+                  </li>
+                </ul>
+                  <!-- Feed react END -->
+              </div>
+              <!-- Card Footer END -->
+      
             </div>
-            <!-- Card Footer END -->
-    
-          </div>
 
-        @endforeach
-        <!-- Card feed item END -->
+          @endforeach
+          <!-- Card feed item END -->    
+        @else    
+          <!-- Card feed item START -->
+          <div class="card">
+            <!-- Card header START -->
+            <div class="card-header d-flex justify-content-between align-items-center border-0 pb-0">
+              <h6 class="card-title mb-0">People you may know</h6>
+              <button class="btn btn-sm btn-primary-soft"> See all </button>
+            </div>      
+            <!-- Card header START -->
+  
+            <!-- Card body START -->
+            <div class="card-body">
+              <div class="tiny-slider arrow-hover">
+                <div class="tiny-slider-inner ms-n4" data-arrow="true" data-dots="false" data-items-xl="3" data-items-lg="2" data-items-md="2" data-items-sm="2" data-items-xs="1" data-gutter="12" data-edge="30">
+                  <!-- Slider items -->
+                  <div> 
+                    <!-- Card add friend item START -->
+                    <div class="card shadow-none text-center">
+                      <!-- Card body -->
+                      <div class="card-body p-2 pb-0">
+                        <div class="avatar avatar-xl">
+                          <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/09.jpg" alt=""></a>
+                        </div>
+                        <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
+                        <p class="mb-0 small lh-sm">50 mutual connections</p>
+                      </div>
+                      <!-- Card footer -->
+                      <div class="card-footer p-2 border-0">
+                        <button class="btn btn-sm btn-primary-soft w-100"> Add friend </button>
+                      </div>
+                    </div>
+                    <!-- Card add friend item END -->
+                  </div>
+                  <div>
+                    <!-- Card add friend item START -->
+                    <div class="card shadow-none text-center">
+                      <!-- Card body -->
+                      <div class="card-body p-2 pb-0">
+                        <div class="avatar avatar-story avatar-xl">
+                          <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt=""></a>
+                        </div>
+                        <h6 class="card-title mb-1 mt-3"> <a href="#!"> Larry Lawson </a></h6>
+                        <p class="mb-0 small lh-sm">33 mutual connections</p>
+                      </div>
+                      <!-- Card footer -->
+                      <div class="card-footer p-2 border-0">
+                        <button class="btn btn-sm btn-primary-soft w-100"> Add friend </button>
+                      </div>
+                    </div>
+                    <!-- Card add friend item END -->
+                  </div>
+                  <div>
+                    <!-- Card add friend item START -->
+                    <div class="card shadow-none text-center">
+                      <!-- Card body -->
+                      <div class="card-body p-2 pb-0">
+                        <div class="avatar avatar-xl">
+                          <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt=""></a>
+                        </div>
+                        <h6 class="card-title mb-1 mt-3"> <a href="#!"> Louis Crawford </a></h6>
+                        <p class="mb-0 small lh-sm">45 mutual connections</p>
+                      </div>
+                      <!-- Card footer -->
+                      <div class="card-footer p-2 border-0">
+                        <button class="btn btn-sm btn-primary-soft w-100"> Add friend </button>
+                      </div>
+                    </div>
+                    <!-- Card add friend item END -->
+                  </div>
+                  <div>
+                    <!-- Card add friend item START -->
+                    <div class="card shadow-none text-center">
+                      <!-- Card body -->
+                      <div class="card-body p-2 pb-0">
+                        <div class="avatar avatar-xl">
+                          <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/12.jpg" alt=""></a>
+                        </div>
+                        <h6 class="card-title mb-1 mt-3"> <a href="#!"> Dennis Barrett </a></h6>
+                        <p class="mb-0 small lh-sm">21 mutual connections</p>
+                      </div>
+                      <!-- Card footer -->
+                      <div class="card-footer p-2 border-0">
+                        <button class="btn btn-sm btn-primary-soft w-100"> Add friend </button>
+                      </div>
+                    </div>
+                    <!-- Card add friend item END -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Card body END -->
+          </div>
+          <!-- Card feed item END -->
+        @endif
+
 
         <br>
 
       </div>
       <!-- Main content END -->
 
+
       <!-- Right sidebar START -->
-      <div class="col-lg-3">
+      <div class="col-lg-3 d-none d-lg-block">
         <div class="row g-4">
-          <!-- Card follow START -->
-          <div class="col-sm-6 col-lg-12">
+          <!-- New Users START -->
+          <div class="col-sm-none col-lg-12">
             <div class="card">
               <!-- Card header START -->
               <div class="card-header pb-0 border-0">
@@ -223,145 +319,63 @@
 
               <!-- Card body START -->
               <div class="card-body">
+
                 <!-- Connection item START -->
-                <div class="hstack gap-2 mb-3">
-                  <!-- Avatar -->
-                  <div class="avatar">
-                    <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt=""></a>
-                  </div>
-                  <!-- Title -->
-                  <div class="overflow-hidden">
-                    <a class="h6 mb-0" href="#!">Judy Nguyen </a>
-                    <p class="mb-0 small text-truncate">News anchor</p>
-                  </div>
-                  <!-- Button -->
-                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
-                </div>
-                <!-- Connection item END -->
-                
-                <!-- Connection item START -->
+                @foreach ($new_users as $new_user)
                   <div class="hstack gap-2 mb-3">
                     <!-- Avatar -->
-                    <div class="avatar avatar-story">
-                      <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""> </a>
+                    <div class="avatar">
+                      <a href="/user/{{$new_user->user_name}}"><img class="avatar-img rounded-circle" src="{{$new_user->profile_pic}}" alt=""></a>
                     </div>
                     <!-- Title -->
                     <div class="overflow-hidden">
-                      <a class="h6 mb-0" href="#!">Amanda Reed </a>
-                      <p class="mb-0 small text-truncate">Web Developer</p>
+                      <a class="h6 mb-0" href="/user/{{$new_user->user_name}}" >{{$new_user->user_name}}</a>
+                      <p class="mb-0 small text-truncate">{{$new_user->first_name}} {{$new_user->last_name}}</p>
                     </div>
                     <!-- Button -->
-                    <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
-                </div>
+                    <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="/user/{{$new_user->user_name}}" ><i class="fa-solid fa-plus"> </i></a>
+                  </div>
+                @endforeach
                 <!-- Connection item END -->
 
-                <!-- Connection item START -->
-                <div class="hstack gap-2 mb-3">
-                  <!-- Avatar -->
-                  <div class="avatar">
-                    <a href="#"> <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt=""> </a>
-                  </div>
-                  <!-- Title -->
-                  <div class="overflow-hidden">
-                    <a class="h6 mb-0" href="#!">Billy Vasquez </a>
-                    <p class="mb-0 small text-truncate">News anchor</p>
-                  </div>
-                  <!-- Button -->
-                  <a class="btn btn-primary rounded-circle icon-md ms-auto" href="#"><i class="bi bi-person-check-fill"> </i></a>
-                </div>
-                <!-- Connection item END -->
-                
-                <!-- Connection item START -->
-                <div class="hstack gap-2 mb-3">
-                  <!-- Avatar -->
-                  <div class="avatar">
-                    <a href="#"> <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt=""> </a>
-                  </div>
-                  <!-- Title -->
-                  <div class="overflow-hidden">
-                    <a class="h6 mb-0" href="#!">Lori Ferguson </a>
-                    <p class="mb-0 small text-truncate">Web Developer at Webestica</p>
-                  </div>
-                  <!-- Button -->
-                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
-                </div>
-                <!-- Connection item END -->
-
-                <!-- Connection item START -->
-                <div class="hstack gap-2 mb-3">
-                  <!-- Avatar -->
-                  <div class="avatar">
-                    <a href="#"> <img class="avatar-img rounded-circle" src="assets/images/avatar/placeholder.jpg" alt=""> </a>
-                  </div>
-                  <!-- Title -->
-                  <div class="overflow-hidden">
-                    <a class="h6 mb-0" href="#!">Carolyn Ortiz </a>
-                    <p class="mb-0 small text-truncate">News anchor</p>
-                  </div>
-                  <!-- Button -->
-                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
-                </div>
-                <!-- Connection item END -->
-
-                <!-- View more button -->
-                <div class="d-grid mt-3">
-                  <a class="btn btn-sm btn-primary-soft" href="#!">View more</a>
-                </div>
               </div>
               <!-- Card body END -->
-            </div>
-          </div>
-          <!-- Card follow START -->
 
-          <!-- Card News START -->
-          <div class="col-sm-6 col-lg-12">
-            <div class="card">
-              <!-- Card header START -->
-              <div class="card-header pb-0 border-0">
-                <h5 class="card-title mb-0">Today’s news</h5>
-              </div>
-              <!-- Card header END -->
-              <!-- Card body START -->
-              <div class="card-body">
-                <!-- News item -->
-                <div class="mb-3">
-                  <h6 class="mb-0"><a href="blog-details.html">Ten questions you should answer truthfully</a></h6>
-                  <small>2hr</small>
-                </div>
-                <!-- News item -->
-                <div class="mb-3">
-                  <h6 class="mb-0"><a href="blog-details.html">Five unbelievable facts about money</a></h6>
-                  <small>3hr</small>
-                </div>
-                <!-- News item -->
-                <div class="mb-3">
-                  <h6 class="mb-0"><a href="blog-details.html">Best Pinterest Boards for learning about business</a></h6>
-                  <small>4hr</small>
-                </div>
-                <!-- News item -->
-                <div class="mb-3">
-                  <h6 class="mb-0"><a href="blog-details.html">Skills that you can learn from business</a></h6>
-                  <small>6hr</small>
-                </div>
-                <!-- Load more comments -->
-                <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
-                  <div class="spinner-dots me-2">
-                    <span class="spinner-dot"></span>
-                    <span class="spinner-dot"></span>
-                    <span class="spinner-dot"></span>
-                  </div>
-                  View all latest news
-                </a>
-              </div>
-              <!-- Card body END -->
             </div>
           </div>
-          <!-- Card News END -->
+          <!-- New Users START -->
+
+          <!-- Helper link START -->
+          <ul class="nav small mt-4 justify-content-center lh-1">
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="/settings">Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="#">Support </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="#">Docs </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="#">Help</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="#">Privacy & terms</a>
+            </li>
+          </ul>
+          <!-- Helper link END -->
+          <!-- Copyright -->
+          <p class="small text-center mt-1">©2024 <a class="text-body" target="_blank" href="/">THEZOOM</a></p>
+
         </div>
       </div>
       <!-- Right sidebar END -->
 
-    </div> <!-- Row END -->
+    </div> 
+    <!-- Row END -->
   </div>  
   <!-- Container END -->
 

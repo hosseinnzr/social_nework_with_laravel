@@ -165,10 +165,8 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <!-- Modal feed header END -->
-                        <br>
                         
                         <!-- show post START -->
-                        <br>
                             <!-- Card body START -->
                             <div class="card-body">
                                 <h5>{{$post['title']}}</h5>
@@ -177,12 +175,11 @@
                                 
                                 @isset($post['post_picture'])
                                 <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
-                                <br>    
                                 @endisset 
 
                             </div>
                             <!-- Card body END -->
-                        <br>
+                        <hr>
                         <!-- show post END -->
 
                         @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
