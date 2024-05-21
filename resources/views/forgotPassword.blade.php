@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'signin')
+@section('title', 'forget password')
 @section('content')
 
 <main>
@@ -16,29 +16,7 @@
           <p class="text-center">back to <a href="/signin"> sign in</a> page</p>
           <!-- Form START -->
 
-            <form  action="{{route('forgot-password.post')}}" method="POST" class="mt-4">
-              @csrf
-
-              <div class="mb-3 position-relative input-group-lg">
-                <label for="new_password" class="form-label">New password:</label>
-                <input name="new_password" type="text" class="form-control" placeholder="New password">
-              </div>
-
-              <div class="mb-3 position-relative input-group-lg">
-                <label for="confirm_new_password" class="form-label">Confirm password:</label>
-                <input name="confirm_new_password" type="text" class="form-control" placeholder="Confirm password">
-              </div>
-              <hr>
-              <div class="mb-3 position-relative input-group-lg">
-                <label for="verify_code" class="form-label">Verify code:</label>
-                <input name="verify_code" type="text" class="form-control" placeholder="Verify code">
-              </div>
-              <br>
-              <!-- Button -->
-              <div class="d-grid">
-                <button type="submit" class="btn btn-lg btn-primary-soft">reset password</button>
-              </div>
-            </form>
+            @livewire('forget-password')
 
           <!-- Form END -->
         </div>

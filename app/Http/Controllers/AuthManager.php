@@ -123,11 +123,6 @@ class AuthManager extends Controller
          
         return redirect()->route('signin');
     }
-    
-    // forgot password
-    public function forgotPasswordPost(Request $request){
-        dd($request);
-    } 
 
     // edit / update
     public function settings(){

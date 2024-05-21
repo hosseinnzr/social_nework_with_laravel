@@ -45,8 +45,6 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
         return view('forgotPassword');
     })->name('forgot-password');
 
-    Route::post('/forgot-password', [AuthManager::class, 'forgotPasswordPost'])->name('forgot-password.post');
-
     
     // profile
     Route::get('/user/{user_name}', [AuthManager::class, "profile"])->name('profile');
