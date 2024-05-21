@@ -41,9 +41,7 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::post('/logout', [AuthManager::class, 'logout'])->name('logout');
 
     // forgetPassword
-    Route::get('/forgot-password', function () {
-        return view('forgotPassword');
-    })->name('forgot-password');
+    Route::get('/forgot-password', [AuthManager::class, 'forgotPassword'])->name('forgot-password');
 
     
     // profile

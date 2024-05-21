@@ -123,6 +123,15 @@ class AuthManager extends Controller
          
         return redirect()->route('signin');
     }
+    
+    // forgot password
+    public function forgotPassword(){
+        if(Auth::check()){
+            return redirect()->route('home');
+        }else{
+            return view('forgotPassword');
+        }
+    } 
 
     // edit / update
     public function settings(){

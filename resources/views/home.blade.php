@@ -11,12 +11,12 @@
     <div class="row g-4">
 
       <!-- Left sidebar START -->
-      <div style="position: -webkit-sticky; position: sticky; top: 70px; height:100% ; overflow-y: auto; z-index: 99999;" class="col-lg-3 ">
+      <div style="position: -webkit-sticky; position: sticky; top: 70px; height:100% ; overflow-y: auto; z-index: 999;" class="col-lg-3 ">
 
         <!-- Advanced filter responsive toggler START -->
         <div class="d-flex align-items-center d-lg-none">
-          <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
-            <i class="btn btn-primary fw-bold fa-solid fa-sliders-h"></i>
+          <button style="background-color: rgba(255, 174, 0, 0.763); border-radius: 33px" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+            <i style="color: rgb(255, 255, 255)" class="btn fw-bold bi bi-person-fill"></i>
           </button>
         </div>
         <!-- Advanced filter responsive toggler END -->
@@ -302,7 +302,7 @@
       <!-- Main content END -->
 
       <!-- Right sidebar START -->
-      <div class="col-lg-3 d-sm-none d-md-block">
+      <div class="col-lg-3 d-none d-lg-block">
         <div class="row g-4">
           <!-- New Users START -->
           <div class="col-sm-6 col-lg-12">
