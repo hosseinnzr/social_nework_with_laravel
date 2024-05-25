@@ -390,7 +390,7 @@
             <!-- Privacy and safety tab START -->
             <div class="tab-pane fade" id="nav-setting-tab-3">
               <!-- Privacy and safety START -->
-              <div class="card">
+              {{-- <div class="card">
                 <!-- Card header START -->
                 <div class="card-header border-0 pb-0">
                   <h5 class="card-title">Privacy and safety</h5>
@@ -454,7 +454,7 @@
                 <div class="card-footer pt-0 text-end border-0">
                   <button type="submit" class="btn btn-sm btn-primary mb-0">Save changes</button>
                 </div>
-              </div>
+              </div> --}}
               <!-- Privacy and safety END -->
 
               <br>

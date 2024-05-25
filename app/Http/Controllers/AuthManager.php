@@ -101,7 +101,7 @@ class AuthManager extends Controller
         $data['profile_pic'] = '/default/default_profile.jpg';
 
         $user = User::create($data);
-        if(!$user){
+        if($user){
             notify()->success('signup user successfully!');
             return redirect(route('signin'));
         }

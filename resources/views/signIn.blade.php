@@ -25,7 +25,7 @@
 
               <div class="mb-3">
                 <div class="input-group input-group-lg">
-                  <input name="password" class="form-control fakepassword" type="password" id="psw-input" placeholder="Enter new password">
+                  <input name="password" class="form-control fakepassword" type="password" id="psw-input" placeholder="Enter password">
                   <span class="input-group-text p-0">
                     <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
                   </span>

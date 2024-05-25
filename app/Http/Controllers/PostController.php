@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {   
-    public function UpdateUserPostNumber(){
-        
-    }
 
     public function home(Request $request){
         if(auth::check()){
@@ -57,7 +54,6 @@ class PostController extends Controller
             ]);    
             
         } else {
-            notify()->error('you not signin');
             return redirect()->route('signin');
         }
     }

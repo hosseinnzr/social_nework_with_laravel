@@ -52,7 +52,7 @@
 					</a>
 				</li>
 
-        <li class="nav-item dropdown ms-2">
+        {{-- <li class="nav-item dropdown ms-2">
 					<a class="nav-link icon-md btn btn-light p-0" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
             <span class="badge-notif animation-blink"></span>
 						<i class="bi bi-bell-fill fs-6"> </i>
@@ -131,7 +131,7 @@
               </div>
             </div>
           </div>
-				</li>
+				</li> --}}
         
         <!-- Notification dropdown END -->
 
@@ -149,13 +149,15 @@
                 </div>
                 <div>
                   <a class="h6 stretched-link">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a>
-                  <p class="small m-0">Web Developer</p>
+                  <p class="small m-0">{{auth()->user()->user_name}}</p>
                 </div>
               </div>
-              
             </li>
+
+            <li> <hr class="dropdown-divider"></li>
+
             <!-- Links -->
-            <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings & Privacy</a></li>
+            <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings</a></li>
             <li> 
               <a class="dropdown-item" href="https://support.webestica.com/" target="_blank">
                 <i class="fa-fw bi bi-life-preserver me-2"></i>Support

@@ -201,6 +201,7 @@
             </div>
         @endforeach
         <!-- Card feed item END -->
+        <br>
       </div>
       <!-- Main content END -->
     </div>
