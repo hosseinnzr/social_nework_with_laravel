@@ -76,7 +76,7 @@ class AuthManager extends Controller
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            notify()->success('signin successfully');
+            notify()->success('signup successfully');
             return redirect()->route('home');
         }
         return redirect(route('signin'))->with('error', 'signin details are not valid');

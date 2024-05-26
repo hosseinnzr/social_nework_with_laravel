@@ -6,12 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
-        //
+        Schema::create('conversations', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('sender_id');
+            $table->bigInteger('receiver_id');
+            $table->timestamp('deleted_at')->nullable();
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('conversations');
     }
 };

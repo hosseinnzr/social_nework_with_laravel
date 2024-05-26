@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('comments', function (Blueprint $table) {
@@ -16,7 +13,11 @@ return new class extends Migration
 
             $table->string('comment_value');
             $table->string('like');
-            $table->string('like_number');
+            $table->string('like_number')->nullable();
+            $table->string('UID');
+            $table->string('post_id');
+            $table->string('user_name');
+            $table->string('user_profile');
 
             $table->timestamps();
         });

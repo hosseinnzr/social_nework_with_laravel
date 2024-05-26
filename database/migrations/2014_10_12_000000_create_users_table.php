@@ -21,7 +21,12 @@ return new class extends Migration
             $table->string('email')->unique();
             
             $table->string('password');
-
+            $table->integer('followers_number')->default(0);
+            $table->integer('following_number')->default(0);
+            $table->string('profile_pic')->default('/default/default_profile.jpg');
+            $table->string('additional_name')->nullable();
+            $table->date('birthday')->nullable();
+            $table->integer('post_number')->default(0);
 
             $table->rememberToken();
             $table->timestamps();
