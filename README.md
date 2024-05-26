@@ -6,7 +6,7 @@ To run this Laravel app, you need to have the following software installed on yo
 
 
 ### Installation
-1. Extract file:
+1. Extract file.
 
 2. Change into the project directory:
     ```bash
