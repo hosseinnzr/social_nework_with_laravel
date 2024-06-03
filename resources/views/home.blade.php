@@ -107,7 +107,6 @@
                       </a>
                       <!-- Card share action dropdown menu -->
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$post['user_name']}}</a></li>
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$post['user_name']}}</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -147,50 +146,54 @@
 
                   <li class="nav-item">
                     <div data-bs-toggle="modal" data-bs-target="#showComments{{$post['id']}}" aria-controls="offcanvasChat">
-                      <small style="text-align: center" class="mb-0"> <i class="bi bi-chat-fill pe-1"></i> Comments</small>
+                      <small style="text-align: center" class="mb-0"> <i class="bi bi-chat fa-xl pe-1"></i></small>
                     </div>
                   </li>
 
-                    <!-- scroll show comment START -->
-                    <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
+                  <!-- scroll show comment START -->
+                  <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
 
-                          <!-- Modal feed header START -->
-                          <div class="modal-header">
-                            <h6 class="modal-title">Comments </h6>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <!-- Modal feed header END -->
-
-                          <!-- show post START -->
-                            <!-- Card body START -->
-                            <div class="card-body">
-                                <h5>{{$post['title']}}</h5>
-                                <p class="mb-0">{{$post['post']}}</p>
-                                <br>
-                                
-                                @isset($post['post_picture'])
-                                <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
-                                @endisset 
-
-                            </div>
-                            <!-- Card body END -->
-                          <hr>
-                          <!-- show post END -->
-
-                          @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                        <!-- Modal feed header START -->
+                        <div class="modal-header">
+                          <h6 class="modal-title">Comments </h6>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <!-- Modal feed header END -->
+
+                        <!-- show post START -->
+                          <!-- Card body START -->
+                          <div class="card-body">
+                              <h5>{{$post['title']}}</h5>
+                              <p class="mb-0">{{$post['post']}}</p>
+                              <br>
+                              
+                              @isset($post['post_picture'])
+                              <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                              @endisset 
+
+                          </div>
+                          <!-- Card body END -->
+                        <hr>
+                        <!-- show post END -->
+
+                        @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
                       </div>
                     </div>
-                    <!-- scroll show comment END -->
+                  </div>
+                  <!-- scroll show comment END -->
 
                   <li class="nav-item">
-                      <form action="#" method="POST" class="ms-auto me-auto mt-3">
-                          @csrf
-                          <button style="font-size: 12px" type="submit" class="btn btn-link"><i class="bi bi-send-fill pe-1"></i>Send</button>
-                      </form>
+                    <div data-bs-toggle="modal">
+                      <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
+                    </div>
                   </li>
+
+                  <li class="nav-item">
+                    @livewire('save-post', ['postId' => $post['id']]) 
+                  </li>
+
                 </ul>
                   <!-- Feed react END -->
               </div>

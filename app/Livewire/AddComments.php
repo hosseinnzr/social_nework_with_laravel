@@ -78,7 +78,7 @@ class AddComments extends Component
 
         $this->single_comment['like_number'] = $comment->like_number;
 
-        }
+    }
     public function render()
     {
         $this->post_comments = comments::latest()->where('post_id', $this->postId)->get();

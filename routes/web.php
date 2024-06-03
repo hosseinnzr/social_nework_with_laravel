@@ -29,6 +29,9 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     // Delete Post
     Route::get('/delete', [PostController::class, "delete"])->name('delete');
 
+    // Save post
+    Route::post('/save', [PostController::class, "save"])->name('save.post');
+
 
     // Logout/signin Page
     Route::get('/signin', [AuthManager::class, 'signin'])->name('signin');
