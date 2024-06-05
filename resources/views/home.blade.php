@@ -79,7 +79,96 @@
       <!-- Left sidebar END -->
 
       <!-- Main content START -->
-      <div class="col-md-8 col-lg-6 vstack gap-4">
+      <div style="padding: 0px" class="col-md-8 col-lg-6 vstack gap-4">
+        
+        <!-- Story START -->
+        <div class="tiny-slider arrow-hover overflow-hidden">
+          <div class="tiny-slider-inner ms-n4" data-arrow="true" data-dots="true" data-loop="false" data-autoplay="false" data-items-xl="6" data-items-lg="5" data-items-md="5" data-items-sm="5" data-items-xs="3" data-gutter="12" data-edge="30">
+
+            <!-- Slider items -->
+            <div class="position-relative text-center">
+              <!-- Card START -->
+              <div>
+                <a class="stretched-link btn btn-dark rounded-circle icon-xl rounded-circle" href="#!"><i class="fa-solid fa-plus fs-6"></i></a>
+              </div>
+              <a href="#!" class="small fw-normal text-secondary">Post a story</a>
+              <!-- Card END -->
+            </div>
+
+            <!-- Slider items -->
+            <div class="position-relative text-center">
+              <div class="avatar avatar-lg avatar-story">
+                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/01.jpg" alt=""></a>
+              </div>
+              <div>
+                <a href="#!" class="stretched-link small fw-normal text-secondary">Judy</a>
+              </div>
+            </div>
+
+            <!-- Slider items -->
+            <div class="position-relative text-center">
+              <div class="avatar avatar-lg avatar-story">
+                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/02.jpg" alt=""></a>
+              </div>
+              <div>
+                <a href="#!" class="stretched-link small fw-normal text-secondary">Samuel</a>
+              </div>
+            </div>
+
+            <!-- Slider items -->
+            <div class="position-relative text-center">
+              <div class="avatar avatar-lg">
+                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/03.jpg" alt=""></a>
+              </div>
+              <div>
+                <a href="#!" class="stretched-link small fw-normal text-secondary">Carolyn</a>
+              </div>
+            </div>
+
+            <!-- Slider items -->
+            <div class="position-relative text-center">
+              <div class="avatar avatar-lg avatar-story">
+                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/04.jpg" alt=""></a>
+              </div>
+              <div>
+                <a href="#!" class="stretched-link small fw-normal text-secondary">Amanda</a>
+              </div>
+            </div>
+
+            <!-- Slider items -->
+            <div class="position-relative text-center">
+              <div class="avatar avatar-lg avatar-story">
+                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/05.jpg" alt=""></a>
+              </div>
+              <div>
+                <a href="#!" class="stretched-link small fw-normal text-secondary">Stevens</a>
+              </div>
+            </div>
+
+            <!-- Slider items -->
+            <div class="position-relative text-center">
+              <div class="avatar avatar-lg avatar-story">
+                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/06.jpg" alt=""></a>
+              </div>
+              <div>
+                <a href="#!" class="stretched-link small fw-normal text-secondary">Nguyen</a>
+              </div>
+            </div>
+
+            <!-- Slider items -->
+            <div class="position-relative text-center">
+              <div class="avatar avatar-lg avatar-story">
+                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/07.jpg" alt=""></a>
+              </div>
+              <div>
+                <a href="#!" class="stretched-link small fw-normal text-secondary">Reed</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- Story END -->
+
 
         @if ($posts != '[]')
           <!-- Card feed item START -->
@@ -152,34 +241,112 @@
 
                   <!-- scroll show comment START -->
                   <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-
-                        <!-- Modal feed header START -->
-                        <div class="modal-header">
-                          <h6 class="modal-title">Comments </h6>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <!-- Modal feed header END -->
-
-                        <!-- show post START -->
-                          <!-- Card body START -->
-                          <div class="card-body">
-                              <h5>{{$post['title']}}</h5>
-                              <p class="mb-0">{{$post['post']}}</p>
-                              <br>
-                              
-                              @isset($post['post_picture'])
-                              <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
-                              @endisset 
-
+                    <div class="glightbox-desc custom-desc2">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                          <!-- Avatar -->
+                          <div class="avatar me-2">
+                            <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="">
                           </div>
-                          <!-- Card body END -->
-                        <hr>
-                        <!-- show post END -->
-
-                        @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                          <!-- Info -->
+                          <div>
+                            <div class="nav nav-divider">
+                              <h6 class="nav-item card-title mb-0">Lori Ferguson</h6>
+                              <span class="nav-item small"> 2hr</span>
+                            </div>
+                            <p class="mb-0 small">Web Developer at Webestica</p>
+                          </div>
+                        </div>
+                        <!-- Card feed action dropdown START -->
+                        <div class="dropdown">
+                          <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction3" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots"></i>
+                          </a>
+                          <!-- Card feed action dropdown menu -->
+                          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction3">
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                          </ul>
+                        </div>
+                        <!-- Card feed action dropdown END -->
                       </div>
+                      <p class="mt-3 mb-0">I'm so privileged to be involved in the @bootstrap hiring process! <a href="#">#internship #inclusivebusiness</a> <a href="#">#internship</a> <a href="#"> #hiring</a> <a href="#">#apply</a> </p>
+                      <ul class="nav nav-stack py-3 small">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (56)</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</a>
+                        </li>
+                        <!-- Card share action START -->
+                        <li class="nav-item dropdown ms-auto">
+                          <a class="nav-link mb-0" href="#" id="cardShareAction3" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-reply-fill fa-flip-horizontal pe-1"></i>Share (3)
+                          </a>
+                          <!-- Card share action dropdown menu -->
+                          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction3">
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a></li>
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a></li>
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a></li>
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-share fa-fw pe-2"></i>Share post via …</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a></li>
+                          </ul>
+                        </li>
+                        <!-- Card share action END -->
+                      </ul>
+                      <!-- Add comment -->
+                      <div class="d-flex mb-3">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                          <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="">
+                        </div>
+                        <!-- Comment box  -->
+                        <form class="position-relative w-100">
+                          <textarea class="form-control pe-4 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+                        </form>
+                      </div>
+                      <!-- Comment wrap START -->
+                      <ul class="comment-wrap list-unstyled ">
+                        <!-- Comment item START -->
+                        <li class="comment-item">
+                          <div class="d-flex">
+                            <!-- Avatar -->
+                            <div class="avatar avatar-xs">
+                              <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="">
+                            </div>
+                            <div class="ms-2">
+                              <!-- Comment by -->
+                              <div class="bg-light rounded-start-top-0 p-3 rounded">
+                                <div class="d-flex justify-content-center">
+                                  <div class="me-2">
+                                    <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
+                                    <p class="small mb-0">Removed demands expense account in outward tedious do.</p>
+                                  </div>
+                                  <small>5hr</small>
+                                </div>
+                              </div>
+                              <!-- Comment react -->
+                              <ul class="nav nav-divider py-2 small">
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#!"> Like (3)</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#!"> Reply</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#!"> View 5 replies</a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <!-- Comment wrap END -->
                     </div>
                   </div>
                   <!-- scroll show comment END -->

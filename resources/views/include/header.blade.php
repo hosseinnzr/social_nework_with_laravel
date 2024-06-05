@@ -52,7 +52,7 @@
 					</a>
 				</li>
 
-        {{-- <li class="nav-item dropdown ms-2">
+        <li class="nav-item dropdown ms-2">
 					<a class="nav-link icon-md btn btn-light p-0" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
             <span class="badge-notif animation-blink"></span>
 						<i class="bi bi-bell-fill fs-6"> </i>
@@ -131,7 +131,7 @@
               </div>
             </div>
           </div>
-				</li> --}}
+				</li>
         
         <!-- Notification dropdown END -->
 
@@ -148,7 +148,7 @@
                   <img class="avatar-img rounded-circle" src="{{auth()->user()->profile_pic}}" alt="avatar">
                 </div>
                 <div>
-                  <a class="h6 stretched-link">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a>
+                  <a class="h6 stretched-link" href="/user/{{auth()->user()->user_name}}">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a>
                   <p class="small m-0">{{auth()->user()->user_name}}</p>
                 </div>
               </div>

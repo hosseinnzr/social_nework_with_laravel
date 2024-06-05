@@ -1,10 +1,10 @@
 
-<div class="offcanvas-body pt-0 custom-scrollbar">
+<div style="width: 100%; padding: 0px"  class="offcanvas-body pt-0 custom-scrollbar">
     <!-- Add comment -->
     <div class="d-flex mb-2">
         <!-- Avatar -->
         <div class="avatar avatar-xs me-2">
-            <a href="#!"> <img class="avatar-img rounded-circle" src="{{auth()->user()->profile_pic}}" alt=""> </a>
+            <a href="/user/{{auth()->user()->user_name}}"> <img class="avatar-img rounded-circle" src="{{auth()->user()->profile_pic}}" alt=""> </a>
         </div>
 
         <!-- Comment box START -->
@@ -41,35 +41,33 @@
                 <div class="avatar avatar-xs">
                 <a href="#!"><img class="avatar-img rounded-circle" src="{{asset($single_comment['user_profile'])}}" alt=""></a>
                 </div>
-                <div style="width: 100%;" class="ms-2">
+                <div class="ms-2">
                     <!-- Comment by -->
-                    <div class="bg-light rounded-start-top-0 p-3 rounded">
+                    <div style="width: 70%;"  class="bg-light rounded-start-top-0 p-3 rounded">
                         <div class="d-flex justify-content-between">
-                            <h6 class="mb-1"> <a href="#!">{{$single_comment['user_name']}}</a></h6>
-                            <p class="ms-2">{{$single_comment['created_at']->diffForHumans()}}</p>
+                            {{-- <h6 class="mb-1"> <a href="#!">{{$single_comment['user_name']}}</a></h6> --}}
                         </div>
                         <p class="small mb-0">{{$single_comment['comment_value']}}</p>
                     </div>
                     <!-- Comment react -->
                     <ul class="nav py-2 small">
 
-                        <li  wire:poll.visible class="nav-item">
+                        <li wire:poll.visible class="nav-item">
                             <div style="text-align: center">
                                 @if (in_array(Auth::id(), explode(",", $single_comment['like'])))
-                            
-                                    <button style="color:red" wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill pe-1"></i>liked ( {{ $single_comment['like_number'] }} )</button>
+                                    <button style="color:red" wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill pe-1"></i> {{ $single_comment['like_number'] }}</button>
                                 @else
-                                    <button  wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill pe-1"></i>like ( {{ $single_comment['like_number'] }} )</button>
+                                    <button  wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill pe-1"></i> {{ $single_comment['like_number'] }}</button>
                                 @endif
                             </div>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#!"> Reply</a>
+                            <small>&nbsp; &nbsp; Reply</small>
                         </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="#!"> View 5 replies</a>
+
+                        <li style="text-align:right" class="nav-item">
+                            <small>&nbsp; &nbsp; {{$single_comment['created_at']->diffForHumans()}}</small> 
                         </li>
                     </ul>
                 </div>
