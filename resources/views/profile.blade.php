@@ -10,7 +10,12 @@
     <div class="row g-4">
 
       <!-- Left sidebar START -->
-      <div class="col-lg-8 vstack gap-4">
+      <div class="col-lg-2">
+      </div>
+      <!-- Left sidebar END -->
+
+      <!-- Center sidebar START -->
+      <div style="padding: 0px" class="col-lg-8 vstack gap-0">
 
         <!-- My profile START -->
         <div class="card">
@@ -70,252 +75,402 @@
                 <br><br>
                 <li class="list-inline-item"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Birthday : {{ str_replace("-", ".", $user['birthday']) }} </li>
                 <li class="list-inline-item"> <i class="bi bi-envelope fa-fw pe-1"></i> Email: {{$user['email']}}</li>
-                <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{$user['created_at']->format('Y-m-d ')}}</li>
+                <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{$user['created_at']->format('Y-m-d')}}</li>
               </ul>
-            </div>
-          <br>
-        </div>
+              
+              <br>
+              <!-- Tab nav line START -->
+              <ul class="nav nav-tabs nav-bottom-line justify-content-center justify-content-md-start">
+                <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#tab-1"> Your post </a> </li>
+                <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#tab-2"> Save post </a> </li>
+              </ul>
+              <!-- Tab nav line START -->
+              
         <!-- My profile END -->
 
+          <!-- Card body START -->
+            <div style="padding: 4px 0px 15px 0px" class="card-body">
+
+              <!-- Album Tab content START -->
+              <div class="tab-content mb-0 pb-0">
+  
+                <!-- your post tab START -->
+                <div class="tab-pane fade show active" id="tab-1">
+                  <div class="row g-3">
+                    
+                    @foreach ($posts as $post)
+                      <!-- Photo item START -->
+                      <div class="col-4 col-lg-4 position-relative">
+
+                        <div data-bs-toggle="modal" data-bs-target="#showComments{{$post['id']}}" aria-controls="offcanvasChat">
+                          <img class="img-fluid" src={{$post['post_picture']}} alt="">
+                        </div>
+
+                            <!-- scroll show post START -->
+                            <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+
+                                  <!-- Modal feed header START -->
+                                  <div class="modal-header">
+
+                                    <div class="d-flex align-items-center justify-content-between">
+                                      <div class="d-flex align-items-center">
+                                        <!-- Avatar -->
+                                        <div class="avatar me-2">
+                                          <img class="avatar-img rounded-circle" src={{$user['profile_pic']}} alt="">
+                                        </div>
+                                        <!-- Info -->
+                                        <div>
+                                          <div class="nav nav-divider">
+                                            <h6 class="nav-item card-title mb-0"><a href="/user/{{$user['user_name']}}">{{$user['user_name']}} </a></h6>
+                                            <span class="nav-item small"> {{$post['created_at']->diffForHumans()}}</span>
+                                          </div>
+                                          {{-- <p class="mb-0 small">{{$user['user_name']}}</p> --}}
+                                        </div>
+                                      </div>
+                                      <!-- Card feed action dropdown START -->
+                                      <div class="dropdown">
+                                        <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                        </a>
+                                        <!-- Card share action dropdown menu -->     
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                                          <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
+                                          <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
+                                          <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
+                                        </ul>
+                
+                                      </div>
+                                      <!-- Card feed action dropdown END -->
+                                    </div>
+                                    
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <!-- Modal feed header END -->
+
+                                  <!-- show post START -->
+                                    <!-- Card body START -->
+                                    <div class="card-body">
+                                      <div class="row g-3">
+
+                                        <div class="col-12 col-lg-6">
+                                          @isset($post['post_picture'])
+                                          <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                                          @endisset 
+                                          <br>
+                                          <ul class="nav nav-fill nav-stack small">
+                                            <li class="nav-item">
+                                              @livewire('like-post', ['post' => $post])
+                                            </li>
+                  
+                                            <li class="nav-item">
+                                              <div data-bs-toggle="modal">
+                                                <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
+                                              </div>
+                                            </li>
+                  
+                                            <li class="nav-item">
+                                              @livewire('save-post', ['postId' => $post['id']]) 
+                                            </li>
+
+                                          </ul>
+
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+
+                                          <div class="comments-container" style="height: 420px; overflow-y: auto;">
+                                            <p style="width: 100%;" class="mb-0">{{$post['id']}} - {{$post['post']}}</p>
+                                            <br>
+                                            @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                                          </div>
+
+                                        </div>
+
+                                      </div>
+                                    </div>
+                                    <!-- Card body END -->
+                                  <!-- show post END -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- scroll show post END -->
+
+                        <!-- glightbox Albums left bar START -->
+                        <div class="glightbox-desc custom-desc2">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                              <!-- Avatar -->
+                              <div class="avatar me-2">
+                                <img class="avatar-img rounded-circle" src={{$user['profile_pic']}} alt="">
+                              </div>
+                              <!-- Info -->
+                              <div>
+                                <div class="nav nav-divider">
+                                  <h6 class="nav-item card-title mb-0"><a href="/user/{{$user['user_name']}}">{{$user['user_name']}}</a></h6>
+                                  <span class="nav-item small"> {{$post['created_at']->diffForHumans()}}</span>
+                                </div>
+                                <p class="mb-0 small">Web Developer at Webestica</p>
+                              </div>
+                            </div>
+                            <!-- Card feed action dropdown START -->
+                            <div class="dropdown">
+                              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-three-dots"></i>
+                              </a>
+                              <!-- Card share action dropdown menu -->     
+                              @if ($post['UID'] == Auth::id())
+                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                                <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
+                                <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
+                              </ul>
+                              @else
+                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$user['user_name']}}</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$user['user_name']}}</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                              </ul>
+                              @endif                 
+                            </div>
+                            <!-- Card feed action dropdown END -->
+                          </div>
+                          <h6 class="mt-3 mb-0">{{$post['title']}}</h6>
+                          <p class="mt-3 mb-0">{{$post['post']}}</p>
+
+                          <ul class="nav nav-fill nav-stack small">
+                            <li class="nav-item">
+                              @livewire('like-post', ['post' => $post])
+                            </li>
+  
+                            <li class="nav-item">
+                              <div data-bs-toggle="modal">
+                                <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
+                              </div>
+                            </li>
+  
+                            <li class="nav-item">
+                              @livewire('save-post', ['postId' => $post['id']]) 
+                            </li>
+                          </ul>
+                          <br>
+                        </div>
+                        <!-- glightbox Albums left bar END  -->
+                      </div>
+                      <!-- Photo item END -->
+                    @endforeach
+
+                  </div>
+
+                </div>
+                <!-- your post tab END -->
+  
+                <!-- Save photos tab START -->
+                <div class="tab-pane fade" id="tab-2">
+                  <div class="row g-3">
+                    
+                    @foreach ($save_posts as $save_post)
+                      <!-- Photo item START -->
+                      <div class="col-4 col-lg-4 position-relative">
+
+                        <div data-bs-toggle="modal" data-bs-target="#showSavePost{{$save_post['id']}}" aria-controls="offcanvasChat">
+                          <img class="img-fluid" src={{$save_post['post_picture']}} alt="">
+                        </div>
+
+                            <!-- scroll show post START -->
+                            <div class="modal fade" id="showSavePost{{$save_post['id']}}" tabindex="-1" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+
+                                  <!-- Modal feed header START -->
+                                  <div class="modal-header">
+
+                                    <div class="d-flex align-items-center justify-content-between">
+                                      <div class="d-flex align-items-center">
+                                        <!-- Avatar -->
+                                        <div class="avatar me-2">
+                                          <img class="avatar-img rounded-circle" src={{$save_post['user_profile_pic']}}>
+                                        </div>
+                                        <!-- Info -->
+                                        <div>
+                                          <div class="nav nav-divider">
+                                            <h6 class="nav-item card-title mb-0"><a href="/user/{{$save_post['user_name']}}">{{$save_post['user_name']}} - {{$save_post['UID']}}</a></h6>
+                                            
+                                            <small>&nbsp; &nbsp;{{$save_post['created_at']->diffForHumans()}}</small>
+
+                                          </div>
+                                          {{-- <p class="mb-0 small">{{$user['user_name']}}</p> --}}
+                                        </div>
+                                      </div>
+                                      <!-- Card feed action dropdown START -->
+                                      <div class="dropdown">
+                                        <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                        </a>
+                                        <!-- Card share action dropdown menu -->     
+                                        @if ($save_post['UID'] == Auth::id())
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                                          <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $save_post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
+                                          <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
+                                          <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $save_post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
+                                        </ul>
+                                        @else
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                                          <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$user['user_name']}}</a></li>
+                                          <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$user['user_name']}}</a></li>
+                                          <li><hr class="dropdown-divider"></li>
+                                          <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                                        </ul>
+                                        @endif                 
+                                      </div>
+                                      <!-- Card feed action dropdown END -->
+                                    </div>
+                                    
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <!-- Modal feed header END -->
+
+                                  <!-- show post START -->
+                                    <!-- Card body START -->
+                                    <div class="card-body">
+                                      <div class="row g-3">
+
+                                        <div class="col-12 col-lg-6">
+                                          @isset($save_post['post_picture'])
+                                          <img class="card-img" src="{{$save_post['post_picture']}}" alt="Post">
+                                          @endisset 
+                                          <br>
+                                          <ul class="nav nav-fill nav-stack small">
+                                            <li class="nav-item">
+                                              @livewire('like-post', ['post' => $save_post])
+                                            </li>
+                  
+                                            <li class="nav-item">
+                                              <div data-bs-toggle="modal">
+                                                <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
+                                              </div>
+                                            </li>
+                  
+                                            <li class="nav-item">
+                                              @livewire('save-post', ['postId' => $save_post['id']]) 
+                                            </li>
+
+                                          </ul>
+
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+
+                                          <div class="comments-container" style="height: 420px; overflow-y: auto;">
+                                            <p style="width: 100%;" class="mb-0">{{$save_post['id']}} - {{$save_post['post']}}</p>
+                                            <br>
+                                            @livewire('add-comments', ['postId' => $save_post['id'], 'post' => $save_post])
+                                          </div>
+
+                                        </div>
+
+                                      </div>
+                                    </div>
+                                    <!-- Card body END -->
+                                  <!-- show post END -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- scroll show post END -->
+
+                        <!-- glightbox Albums left bar START -->
+                        <div class="glightbox-desc custom-desc2">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                              <!-- Avatar -->
+                              <div class="avatar me-2">
+                                <img class="avatar-img rounded-circle" src={{$user['profile_pic']}} alt="">
+                              </div>
+                              <!-- Info -->
+                              <div>
+                                <div class="nav nav-divider">
+                                  <h6 class="nav-item card-title mb-0"><a href="/user/{{$user['user_name']}}">{{$user['user_name']}}</a></h6>
+                                  <span class="nav-item small"> {{$post['created_at']->diffForHumans()}}</span>
+                                </div>
+                                <p class="mb-0 small">Web Developer at Webestica</p>
+                              </div>
+                            </div>
+                            <!-- Card feed action dropdown START -->
+                            <div class="dropdown">
+                              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-three-dots"></i>
+                              </a>
+                              <!-- Card share action dropdown menu -->     
+                              @if ($post['UID'] == Auth::id())
+                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                                <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
+                                <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
+                              </ul>
+                              @else
+                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$user['user_name']}}</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$user['user_name']}}</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                              </ul>
+                              @endif                 
+                            </div>
+                            <!-- Card feed action dropdown END -->
+                          </div>
+                          <h6 class="mt-3 mb-0">{{$post['title']}}</h6>
+                          <p class="mt-3 mb-0">{{$post['post']}}</p>
+
+                          <ul class="nav nav-fill nav-stack small">
+                            <li class="nav-item">
+                              @livewire('like-post', ['post' => $post])
+                            </li>
+  
+                            <li class="nav-item">
+                              <div data-bs-toggle="modal">
+                                <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
+                              </div>
+                            </li>
+  
+                            <li class="nav-item">
+                              @livewire('save-post', ['postId' => $post['id']]) 
+                            </li>
+                          </ul>
+                          <br>
+                        </div>
+                        <!-- glightbox Albums left bar END  -->
+                      </div>
+                      <!-- Photo item END -->
+                    @endforeach
+
+                  </div>
+                </div>
+                <!-- Save photos tab END -->
+                
+              </div>
+  
+            <!-- Album Tab content END -->
+            </div>
+          <!-- Card body END -->
+          </div>
+        <!-- Card END -->
+        </div>
+        
         <!-- show post START -->
         <div class="col-md-12 col-lg-12 vstack gap-4">
-          <!-- Card feed item START -->
-          @foreach ($posts as $post)
-              <div class="card">
-              <!-- Card header START -->
-              <div class="card-header">
-                  <div class="d-flex align-items-center justify-content-between">
-                  <div class="d-flex align-items-center">
-                      <!-- Avatar -->
-                      <div class="avatar me-2">
-                      <a href="#!"> <img class="avatar-img rounded-circle" src="{{$user['profile_pic']}}" alt=""> </a>
-                      </div>
-                      <!-- Info -->
-                      <div>
-                      <h6 class="card-title mb-0"> <a href="/user/{{$user['user_name']}}">{{$user['user_name']}}</a></h6>
-                      <p class="small mb-0">{{$post['created_at']->diffForHumans()}}</p>
-                      </div>
-                  </div>
-                  <!-- Card share action START -->
-                  <div class="dropdown">
-                      <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="bi bi-three-dots"></i>
-                      </a>
-                      <!-- Card share action dropdown menu -->     
-                      @if ($post['UID'] == Auth::id())
-                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                        <li><a class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
-                      </ul>
-                      @else
-                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$user['user_name']}}</a></li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$user['user_name']}}</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
-                      </ul>
-                      @endif                 
-                  </div>
-                  <!-- Card share action START -->
-                  </div>
-              </div>
-              <!-- Card header START -->
-              <!-- Card body START -->
-              <div class="card-body">
-                  <h5>{{$post['title']}}</h5>
-                  <p class="mb-0">{{$post['post']}}</p>
-                  <br>
-
-                  @isset($post['post_picture'])
-                    <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
-                    <br>    
-                  @endisset
-
-                  @foreach(explode(",", $post['tag']) as $tag)
-                  <a href="/user/{{auth()->user()->user_name}}?tag={{$tag}}">{{$tag}}</a>
-                  @endforeach
-              </div>
-              <!-- Card body END -->
-              <!-- Card Footer START -->
-              <div class="card-footer py-3">
-                  <!-- Feed react START -->
-                  <ul class="nav nav-fill nav-stack small">
-                    <li class="nav-item">
-                      @livewire('like-post', ['post' => $post])
-                    </li>
-
-                    <li class="nav-item">
-                      <div data-bs-toggle="modal" data-bs-target="#showComments{{$post['id']}}" aria-controls="offcanvasChat">
-                        <small style="text-align: center" class="mb-0"> <i class="bi bi-chat fa-xl pe-1"></i></small>
-                      </div>
-                    </li>
-
-                    <!-- scroll show comment START -->
-                    <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-
-                          <!-- Modal feed header START -->
-                          <div class="modal-header">
-                            <h6 class="modal-title">Comments </h6>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <!-- Modal feed header END -->
-
-                          <!-- show post START -->
-                            <!-- Card body START -->
-                            <div class="card-body">
-                                <h5>{{$post['title']}}</h5>
-                                <p class="mb-0">{{$post['post']}}</p>
-                                <br>
-                                
-                                @isset($post['post_picture'])
-                                <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
-                                @endisset 
-
-                            </div>
-                            <!-- Card body END -->
-                          <hr>
-                          <!-- show post END -->
-
-                          @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
-                        </div>
-                      </div>
-                    </div>
-                    <!-- scroll show comment END -->
-
-                    <li class="nav-item">
-                      <div data-bs-toggle="modal">
-                        <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
-                      </div>
-                    </li>
-
-                    <li class="nav-item">
-                      @livewire('save-post', ['postId' => $post['id']]) 
-                    </li>
-
-                  </ul>
-                  <!-- Feed react END -->
-              </div>
-              <!-- Card Footer END -->
-              </div>
-          @endforeach
-          <!-- Card feed item END -->
-          <br>
         </div>
         <!-- show post END -->
 
       </div>
-      <!-- Left sidebar END -->
+      <!-- Center sidebar END -->
 
 
       <!-- Right sidebar START -->
-      <div class="col-lg-4">
-        <div class="row g-4">
-            <!-- Card START -->
-            <div class="col-md-12 col-lg-12">
-              <div class="card">
-                <!-- Card header START -->
-                <div class="card-header d-sm-flex justify-content-between align-items-center border-0">
-                  <h5 class="card-title">Friends <span class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
-                  <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a>
-                </div>
-                <!-- Card header END -->
-                <!-- Card body START -->
-                <div class="card-body position-relative pt-0">
-                  <div class="row g-3">
-
-                    <div class="col-6">
-                      <!-- Friends item START -->
-                      <div class="card shadow-none text-center h-100">
-                        <!-- Card body -->
-                        <div class="card-body p-2 pb-0">
-                          <div class="avatar avatar-story avatar-xl">
-                            <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/02.jpg")}}" alt=""></a>
-                          </div>
-                          <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
-                          <p class="mb-0 small lh-sm">16 mutual connections</p>
-                        </div>
-                        <!-- Card footer -->
-                        <div class="card-footer p-2 border-0">
-                          <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                          <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
-                        </div>
-                      </div>
-                      <!-- Friends item END -->
-                    </div>
-
-                    <div class="col-6">
-                      <!-- Friends item START -->
-                      <div class="card shadow-none text-center h-100">
-                        <!-- Card body -->
-                        <div class="card-body p-2 pb-0">
-                          <div class="avatar avatar-xl">
-                            <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/03.jpg")}}" alt=""></a>
-                          </div>
-                          <h6 class="card-title mb-1 mt-3"> <a href="#!"> Samuel Bishop </a></h6>
-                          <p class="mb-0 small lh-sm">22 mutual connections</p>
-                        </div>
-                        <!-- Card footer -->
-                        <div class="card-footer p-2 border-0">
-                          <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                          <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
-                        </div>
-                      </div>
-                      <!-- Friends item END -->
-                    </div>
-
-                    <div class="col-6">
-                      <!-- Friends item START -->
-                      <div class="card shadow-none text-center h-100">
-                        <!-- Card body -->
-                        <div class="card-body p-2 pb-0">
-                          <div class="avatar avatar-xl">
-                            <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/04.jpg")}}" alt=""></a>
-                          </div>
-                          <h6 class="card-title mb-1 mt-3"> <a href="#"> Bryan Knight </a></h6>
-                          <p class="mb-0 small lh-sm">1 mutual connection</p>
-                        </div>
-                        <!-- Card footer -->
-                        <div class="card-footer p-2 border-0">
-                          <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                          <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
-                        </div>
-                      </div>
-                      <!-- Friends item END -->
-                    </div>
-
-                    <div class="col-6">
-                      <!-- Friends item START -->
-                      <div class="card shadow-none text-center h-100">
-                        <!-- Card body -->
-                        <div class="card-body p-2 pb-0">
-                          <div class="avatar avatar-xl">
-                            <a href="#!"><img class="avatar-img rounded-circle" src="{{asset("assets/images/avatar/05.jpg")}}" alt=""></a>
-                          </div>
-                          <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
-                          <p class="mb-0 small lh-sm">15 mutual connections</p>
-                        </div>
-                        <!-- Card footer -->
-                        <div class="card-footer p-2 border-0">
-                          <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                          <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove friend"> <i class="bi bi-person-x"></i> </button>
-                        </div>
-                      </div>
-                      <!-- Friends item END -->
-                    </div>
-
-                  </div>
-                </div>
-                <!-- Card body END -->
-              </div>
-            </div>
-            <!-- Card END -->
-        </div>
+      <div class="col-lg-2">
       </div>
       <!-- Right sidebar END -->
 

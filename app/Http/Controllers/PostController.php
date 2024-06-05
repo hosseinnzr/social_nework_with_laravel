@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -87,10 +89,29 @@ class PostController extends Controller
             ]);
 
             if ($request->hasFile('post_picture')) {
-                $image = ($request->file('post_picture'));
-                $imageName = time().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('post-picture'), $imageName);
-                $inputs['post_picture'] = '/post-picture/'.$imageName;
+                $image = $request->file('post_picture');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+                // create image manager with desired driver
+                $manager = new ImageManager(new Driver());
+
+                // Load image using Intervention Image
+                $img = $manager->read($image);
+
+                // Get dimensions to calculate cropping coordinates
+                $width = $img->width();
+                $height = $img->height();
+                $size = min($width, $height);
+                $x = ($width - $size) / 2;
+                $y = ($height - $size) / 2;
+
+                // Crop the image to a square
+                $img->crop($size, $size, $x, $y);
+
+                // Save the image to the public directory
+                $img->save(public_path('post-picture/' . $imageName));
+
+                $inputs['post_picture'] = '/post-picture/' . $imageName;
             }
 
             $inputs['UID'] = Auth::id();
@@ -124,22 +145,40 @@ class PostController extends Controller
             ]);
 
             if ($request->hasFile('post_picture')) {
-                $image = ($request->file('post_picture'));
-                $imageName = time().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('post-picture'), $imageName);
-                $inputs['post_picture'] = '/post-picture/'.$imageName;
+                $image = $request->file('post_picture');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+                // create image manager with desired driver
+                $manager = new ImageManager(new Driver());
+
+                // Load image using Intervention Image
+                $img = $manager->read($image);
+
+                // Get dimensions to calculate cropping coordinates
+                $width = $img->width();
+                $height = $img->height();
+                $size = min($width, $height);
+                $x = ($width - $size) / 2;
+                $y = ($height - $size) / 2;
+
+                // Crop the image to a square
+                $img->crop($size, $size, $x, $y);
+
+                // Save the image to the public directory
+                $img->save(public_path('post-picture/' . $imageName));
+
+                $inputs['post_picture'] = '/post-picture/' . $imageName;
             }
 
             $post = Post::findOrFail($request->id);
             $post->update($inputs);
 
-            notify()->success('update post successfully!');
-          
-            return redirect()
-                ->route('post', ['id'=> $post->id])
-                ->with('success', true);
+            notify()->success('Update post successfully!');
 
-        }else{
+            return redirect()
+                ->route('post', ['id' => $post->id])
+                ->with('success', true);
+        } else {
             return redirect()->route('/signin');
         }
 

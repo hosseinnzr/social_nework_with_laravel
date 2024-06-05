@@ -1,3 +1,7 @@
+## for use crop img
+composer require intervention/image
+install gd in windows and enable extention in xammp
+
 ## social_nework_with_laravel
 
 To run this Laravel app, you need to have the following software installed on your machine:
