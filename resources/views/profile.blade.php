@@ -150,7 +150,6 @@
                                   <!-- Modal feed header END -->
 
                                   <!-- show post START -->
-                                    <!-- Card body START -->
                                     <div class="card-body">
                                       <div class="row g-3">
 
@@ -190,7 +189,6 @@
 
                                       </div>
                                     </div>
-                                    <!-- Card body END -->
                                   <!-- show post END -->
                                 </div>
                               </div>
