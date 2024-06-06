@@ -26,11 +26,14 @@ class PostController extends Controller
 
             $posts = Post::latest()->where('delete', 0)->whereIn('UID', $user_following)->get();
 
+            $hash_tag = null;
+
             if(isset($request->tag)){
+                $hash_tag = $request->tag;
                 $result = array();
                 foreach ($posts as $post) {
                     $post_array = explode(',', $post['tag']);
-                    if ((in_array($request->tag, $post_array)) != false){
+                    if ((in_array('#'.$request->tag, $post_array)) != false){
                         array_push($result, $post);
                     }
                     $posts=$result;
@@ -49,6 +52,7 @@ class PostController extends Controller
             $following_user = User::whereIn('id', $user_following)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
 
             return view('home', [
+                'hash_tag' => $hash_tag,
                 'posts' => $posts,
                 'follower_user' => $follower_user,
                 'following_user' => $following_user,
@@ -123,6 +127,9 @@ class PostController extends Controller
             $user->post_number = $signin_user_post_number;
             $user->save();
 
+            // Organize hash tag
+            $inputs['tag'] = substr(str_replace(',,', ',', str_replace('#', ',#',str_replace(' ', '', $inputs['tag']))), 1);
+
             notify()->success('Add post successfully!');
           
             return redirect()->route('post', ['id'=> $post->id])
@@ -169,6 +176,10 @@ class PostController extends Controller
 
                 $inputs['post_picture'] = '/post-picture/' . $imageName;
             }
+
+            // Organize hash tag
+            $inputs['tag'] = substr(str_replace(',,', ',', str_replace('#', ',#',str_replace(' ', '', $inputs['tag']))), 1);
+
 
             $post = Post::findOrFail($request->id);
             $post->update($inputs);

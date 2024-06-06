@@ -181,6 +181,11 @@
 
                                           <div class="comments-container" style="height: 420px; overflow-y: auto;">
                                             <p style="width: 100%;" class="mb-0">{{$post['id']}} - {{$post['post']}}</p>
+
+                                            @foreach(explode(",", $post['tag']) as $tag)
+                                            <a href="/?tag={{$tag}}">{{$tag}} </a>
+                                            @endforeach
+                                            <br>
                                             <br>
                                             @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
                                           </div>
@@ -364,6 +369,11 @@
 
                                           <div class="comments-container" style="height: 420px; overflow-y: auto;">
                                             <p style="width: 100%;" class="mb-0">{{$save_post['id']}} - {{$save_post['post']}}</p>
+
+                                            @foreach(explode(",", $save_post['tag']) as $tag)
+                                            <a href="/?tag={{$tag}}">{{$tag}} </a>
+                                            @endforeach
+                                            <br>
                                             <br>
                                             @livewire('add-comments', ['postId' => $save_post['id'], 'post' => $save_post])
                                           </div>
