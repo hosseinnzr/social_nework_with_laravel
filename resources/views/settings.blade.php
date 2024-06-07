@@ -457,7 +457,6 @@
               </div> --}}
               <!-- Privacy and safety END -->
 
-              <br>
 
               <!-- Change your password START -->
                 @livewire('settings.change-password')

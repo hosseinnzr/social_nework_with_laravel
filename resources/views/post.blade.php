@@ -33,8 +33,7 @@
                       @isset($post['post_picture'])
                         <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
                       @endisset
-                      {{-- <br>
-                      <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Photo</a> --}}
+
                       <br>
                       <input name="post_picture" type="file" class="form-control">
                     

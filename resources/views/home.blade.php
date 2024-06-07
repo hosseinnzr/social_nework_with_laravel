@@ -13,6 +13,7 @@
 <main>      
   <!-- Container START -->
   <div class="container">
+    <!-- Row START -->
     <div class="row g-4">
 
       <!-- Left sidebar START -->
@@ -90,15 +91,16 @@
         <div class="tiny-slider arrow-hover overflow-hidden">
           <div class="tiny-slider-inner ms-n4" data-arrow="true" data-dots="true" data-loop="false" data-autoplay="false" data-items-xl="6" data-items-lg="5" data-items-md="5" data-items-sm="5" data-items-xs="3" data-gutter="12" data-edge="30">
 
-            <!-- Slider items -->
+            <!-- Post a story START -->
             <div class="position-relative text-center">
+              
               <!-- Card START -->
-              <div>
-                <a class="stretched-link btn btn-dark rounded-circle icon-xl rounded-circle" href="#!"><i class="fa-solid fa-plus fs-6"></i></a>
-              </div>
+              <a href="#" class="stretched-link nav-link btn btn-dark rounded-circle icon-xl rounded-circle" data-bs-toggle="modal" data-bs-target="#postStory"><i class="fa-solid fa-plus fs-6"></i></a>
+
               <a href="#!" class="small fw-normal text-secondary">Post a story</a>
               <!-- Card END -->
             </div>
+            <!-- Post a story END -->
 
             <!-- Slider items -->
             <div class="position-relative text-center">
@@ -502,434 +504,372 @@
         </div>
       </div>
       <!-- Right sidebar END -->
-
-    </div> <!-- Row END -->
+      
+    </div> 
+    <!-- Row END -->
   </div>  
   <!-- Container END -->
 
 </main>
+
+  <!-- Post a story START -->
+    <div class="modal fade" id="postStory" tabindex="-1" aria-labelledby="modalLabelCreateAlbum" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal feed header START -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabelCreateAlbum">Create story</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <!-- Modal feed header END -->
+          <!-- Modal feed body START -->
+          <div class="modal-body">
+            <!-- Form START -->
+            <form class="row g-4">
+
+              <!-- Title -->
+              <div class="col-12">
+                <label class="form-label">Title</label>
+                <input type="email" class="form-control" placeholder="story title">
+              </div>
+
+              <!-- Description -->
+              <div class="col-12">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="2" placeholder="story Description..."></textarea>
+              </div>
+
+              <!-- Photo START -->
+              <div class="col-sm-12 col-lg-12">
+
+                <input name="story_picture" type="file" class="form-control">
+              
+                @error('story_picture')
+                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+              </div>
+              <!-- Photo END -->
+
+            </form>
+            <!-- Form END -->
+          </div>
+          <!-- Modal feed body END -->
+          <!-- Modal footer -->
+          <!-- Button -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal"> Cancel</button>
+            <button type="button" class="btn btn-success-soft">Create now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Post a story END -->
 
   <!-- Show follower/following START -->
     <x-show-follower-following :following="$following_user" :follower="$follower_user" />
   <!-- Show follower/following END -->
 
   <!-- Chat START -->
-  <div aria-live="polite" aria-atomic="true" class="position-relative">
-    <div class="toast-container toast-chat d-flex gap-3 align-items-end">
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+      <div class="toast-container toast-chat d-flex gap-3 align-items-end">
 
-      <!-- Chat toast START -->
-      <div id="chatToast" class="toast mb-0 bg-mode" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-        <div class="toast-header bg-mode">
-          <!-- Top avatar and status START -->
-          <div class="d-flex justify-content-between align-items-center w-100">
-            <div class="d-flex">
-              <div class="flex-shrink-0 avatar me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
+        <!-- Chat toast START -->
+        <div id="chatToast" class="toast mb-0 bg-mode" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+          <div class="toast-header bg-mode">
+            <!-- Top avatar and status START -->
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <div class="d-flex">
+                <div class="flex-shrink-0 avatar me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <h6 class="mb-0 mt-1">Frances Guerrero</h6>
+                  <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
+                </div>
               </div>
-              <div class="flex-grow-1">
-                <h6 class="mb-0 mt-1">Frances Guerrero</h6>
-                <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
+              <div class="d-flex">
+              <!-- Call button -->
+              <div class="dropdown">
+                <a class="btn btn-secondary-soft-hover py-1 px-2" href="#" id="chatcoversationDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>               
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-camera-video me-2 fw-icon"></i>Video call</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-telephone me-2 fw-icon"></i>Audio call</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2 fw-icon"></i>Delete </a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-chat-square-text me-2 fw-icon"></i>Mark as unread</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-volume-up me-2 fw-icon"></i>Muted</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-archive me-2 fw-icon"></i>Archive</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-flag me-2 fw-icon"></i>Report</a></li>
+                </ul>
               </div>
+              <!-- Card action END -->
+              <a class="btn btn-secondary-soft-hover py-1 px-2" data-bs-toggle="collapse" href="#collapseChat" aria-expanded="false" aria-controls="collapseChat"><i class="bi bi-dash-lg"></i></a>        
+              <button class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="d-flex">
-            <!-- Call button -->
-            <div class="dropdown">
-              <a class="btn btn-secondary-soft-hover py-1 px-2" href="#" id="chatcoversationDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>               
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown">
-                <li><a class="dropdown-item" href="#"><i class="bi bi-camera-video me-2 fw-icon"></i>Video call</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-telephone me-2 fw-icon"></i>Audio call</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2 fw-icon"></i>Delete </a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-chat-square-text me-2 fw-icon"></i>Mark as unread</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-volume-up me-2 fw-icon"></i>Muted</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-archive me-2 fw-icon"></i>Archive</a></li>
-                <li class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-flag me-2 fw-icon"></i>Report</a></li>
-              </ul>
-            </div>
-            <!-- Card action END -->
-            <a class="btn btn-secondary-soft-hover py-1 px-2" data-bs-toggle="collapse" href="#collapseChat" aria-expanded="false" aria-controls="collapseChat"><i class="bi bi-dash-lg"></i></a>        
-            <button class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
           </div>
-        </div>
-        <!-- Top avatar and status END -->
-          
-        </div>
-        <div class="toast-body collapse show" id="collapseChat">
-          <!-- Chat conversation START -->
-          <div class="chat-conversation-content custom-scrollbar h-200px">
-            <!-- Chat time -->
-            <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
-            <!-- Chat message left -->
-            <div class="d-flex mb-1">
-              <div class="flex-shrink-0 avatar avatar-xs me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
-              </div>
-              <div class="flex-grow-1">
-                <div class="w-100">
-                  <div class="d-flex flex-column align-items-start">
-                    <div class="bg-light text-secondary p-2 px-3 rounded-2">Applauded no discovery😊</div>
-                    <div class="small my-2">6:15 AM</div>
+          <!-- Top avatar and status END -->
+            
+          </div>
+          <div class="toast-body collapse show" id="collapseChat">
+            <!-- Chat conversation START -->
+            <div class="chat-conversation-content custom-scrollbar h-200px">
+              <!-- Chat time -->
+              <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
+              <!-- Chat message left -->
+              <div class="d-flex mb-1">
+                <div class="flex-shrink-0 avatar avatar-xs me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="w-100">
+                    <div class="d-flex flex-column align-items-start">
+                      <div class="bg-light text-secondary p-2 px-3 rounded-2">Applauded no discovery😊</div>
+                      <div class="small my-2">6:15 AM</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Chat message right -->
-            <div class="d-flex justify-content-end text-end mb-1">
-              <div class="w-100">
-                <div class="d-flex flex-column align-items-end">
-                  <div class="bg-primary text-white p-2 px-3 rounded-2">With pleasure</div>
-                </div>
-              </div>
-            </div>
-            <!-- Chat message left -->
-            <div class="d-flex mb-1">
-              <div class="flex-shrink-0 avatar avatar-xs me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
-              </div>
-              <div class="flex-grow-1">
+              <!-- Chat message right -->
+              <div class="d-flex justify-content-end text-end mb-1">
                 <div class="w-100">
-                  <div class="d-flex flex-column align-items-start">
-                    <div class="bg-light text-secondary p-2 px-3 rounded-2">Please find the attached</div>
-                    <!-- Files START -->
-                    <!-- Files END -->
-                    <div class="small my-2">12:16 PM</div>
+                  <div class="d-flex flex-column align-items-end">
+                    <div class="bg-primary text-white p-2 px-3 rounded-2">With pleasure</div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Chat message left -->
-            <div class="d-flex mb-1">
-              <div class="flex-shrink-0 avatar avatar-xs me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
-              </div>
-              <div class="flex-grow-1">
-                <div class="w-100">
-                  <div class="d-flex flex-column align-items-start">
-                    <div class="bg-light text-secondary p-2 px-3 rounded-2">How promotion excellent curiosity😮</div>
-                    <div class="small my-2">3:22 PM</div>
+              <!-- Chat message left -->
+              <div class="d-flex mb-1">
+                <div class="flex-shrink-0 avatar avatar-xs me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="w-100">
+                    <div class="d-flex flex-column align-items-start">
+                      <div class="bg-light text-secondary p-2 px-3 rounded-2">Please find the attached</div>
+                      <!-- Files START -->
+                      <!-- Files END -->
+                      <div class="small my-2">12:16 PM</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Chat message right -->
-            <div class="d-flex justify-content-end text-end mb-1">
-              <div class="w-100">
-                <div class="d-flex flex-column align-items-end">
-                  <div class="bg-primary text-white p-2 px-3 rounded-2">And sir dare view.</div>
-                  <!-- Images -->
-                  <div class="d-flex my-2">
-                    <div class="small text-secondary">5:35 PM</div>
-                    <div class="small ms-2"><i class="fa-solid fa-check"></i></div>
+              <!-- Chat message left -->
+              <div class="d-flex mb-1">
+                <div class="flex-shrink-0 avatar avatar-xs me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="w-100">
+                    <div class="d-flex flex-column align-items-start">
+                      <div class="bg-light text-secondary p-2 px-3 rounded-2">How promotion excellent curiosity😮</div>
+                      <div class="small my-2">3:22 PM</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Chat time -->
-            <div class="text-center small my-2">2 New Messages</div>
-            <!-- Chat Typing -->
-            <div class="d-flex mb-1">
-              <div class="flex-shrink-0 avatar avatar-xs me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
-              </div>
-              <div class="flex-grow-1">
+              <!-- Chat message right -->
+              <div class="d-flex justify-content-end text-end mb-1">
                 <div class="w-100">
-                  <div class="d-flex flex-column align-items-start">
-                    <div class="bg-light text-secondary p-3 rounded-2">
-                      <div class="typing d-flex align-items-center">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
+                  <div class="d-flex flex-column align-items-end">
+                    <div class="bg-primary text-white p-2 px-3 rounded-2">And sir dare view.</div>
+                    <!-- Images -->
+                    <div class="d-flex my-2">
+                      <div class="small text-secondary">5:35 PM</div>
+                      <div class="small ms-2"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Chat time -->
+              <div class="text-center small my-2">2 New Messages</div>
+              <!-- Chat Typing -->
+              <div class="d-flex mb-1">
+                <div class="flex-shrink-0 avatar avatar-xs me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="w-100">
+                    <div class="d-flex flex-column align-items-start">
+                      <div class="bg-light text-secondary p-3 rounded-2">
+                        <div class="typing d-flex align-items-center">
+                          <div class="dot"></div>
+                          <div class="dot"></div>
+                          <div class="dot"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Chat conversation END -->
-          <!-- Chat bottom START -->
-          <div class="mt-2">
-            <!-- Chat textarea -->
-            <textarea class="form-control mb-sm-0 mb-3" placeholder="Type a message" rows="1"></textarea>
-            <!-- Button -->
-            <div class="d-sm-flex align-items-end mt-2">
-              <button class="btn btn-sm btn-danger-soft me-2"><i class="fa-solid fa-face-smile fs-6"></i></button>
-              <button class="btn btn-sm btn-secondary-soft me-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
-              <button class="btn btn-sm btn-success-soft me-2"> Gif </button>
-              <button class="btn btn-sm btn-primary ms-auto"> Send </button>
+            <!-- Chat conversation END -->
+            <!-- Chat bottom START -->
+            <div class="mt-2">
+              <!-- Chat textarea -->
+              <textarea class="form-control mb-sm-0 mb-3" placeholder="Type a message" rows="1"></textarea>
+              <!-- Button -->
+              <div class="d-sm-flex align-items-end mt-2">
+                <button class="btn btn-sm btn-danger-soft me-2"><i class="fa-solid fa-face-smile fs-6"></i></button>
+                <button class="btn btn-sm btn-secondary-soft me-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
+                <button class="btn btn-sm btn-success-soft me-2"> Gif </button>
+                <button class="btn btn-sm btn-primary ms-auto"> Send </button>
+              </div>
             </div>
+            <!-- Chat bottom START -->
           </div>
-          <!-- Chat bottom START -->
         </div>
-      </div>
-      <!-- Chat toast END -->
+        <!-- Chat toast END -->
 
-      <!-- Chat toast 2 START -->
-      <div id="chatToast2" class="toast mb-0 bg-mode" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-        <div class="toast-header bg-mode">
-          <!-- Top avatar and status START -->
-          <div class="d-flex justify-content-between align-items-center w-100">
-            <div class="d-flex">
-              <div class="flex-shrink-0 avatar me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+        <!-- Chat toast 2 START -->
+        <div id="chatToast2" class="toast mb-0 bg-mode" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+          <div class="toast-header bg-mode">
+            <!-- Top avatar and status START -->
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <div class="d-flex">
+                <div class="flex-shrink-0 avatar me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <h6 class="mb-0 mt-1">Lori Ferguson</h6>
+                  <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
+                </div>
               </div>
-              <div class="flex-grow-1">
-                <h6 class="mb-0 mt-1">Lori Ferguson</h6>
-                <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
+              <div class="d-flex">
+              <!-- Call button -->
+              <div class="dropdown">
+                <a class="btn btn-secondary-soft-hover py-1 px-2" href="#" id="chatcoversationDropdown2" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>               
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown2">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-camera-video me-2 fw-icon"></i>Video call</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-telephone me-2 fw-icon"></i>Audio call</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2 fw-icon"></i>Delete </a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-chat-square-text me-2 fw-icon"></i>Mark as unread</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-volume-up me-2 fw-icon"></i>Muted</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-archive me-2 fw-icon"></i>Archive</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-flag me-2 fw-icon"></i>Report</a></li>
+                </ul>
               </div>
+              <!-- Card action END -->
+              <a class="btn btn-secondary-soft-hover py-1 px-2" data-bs-toggle="collapse" href="#collapseChat2" role="button" aria-expanded="false" aria-controls="collapseChat2"><i class="bi bi-dash-lg"></i></a>        
+              <button class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="d-flex">
-            <!-- Call button -->
-            <div class="dropdown">
-              <a class="btn btn-secondary-soft-hover py-1 px-2" href="#" id="chatcoversationDropdown2" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>               
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown2">
-                <li><a class="dropdown-item" href="#"><i class="bi bi-camera-video me-2 fw-icon"></i>Video call</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-telephone me-2 fw-icon"></i>Audio call</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2 fw-icon"></i>Delete </a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-chat-square-text me-2 fw-icon"></i>Mark as unread</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-volume-up me-2 fw-icon"></i>Muted</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-archive me-2 fw-icon"></i>Archive</a></li>
-                <li class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-flag me-2 fw-icon"></i>Report</a></li>
-              </ul>
-            </div>
-            <!-- Card action END -->
-            <a class="btn btn-secondary-soft-hover py-1 px-2" data-bs-toggle="collapse" href="#collapseChat2" role="button" aria-expanded="false" aria-controls="collapseChat2"><i class="bi bi-dash-lg"></i></a>        
-            <button class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
           </div>
-        </div>
-        <!-- Top avatar and status END -->
-          
-        </div>
-        <div class="toast-body collapse show" id="collapseChat2">
-          <!-- Chat conversation START -->
-          <div class="chat-conversation-content custom-scrollbar h-200px">
-            <!-- Chat time -->
-            <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
-            <!-- Chat message left -->
-            <div class="d-flex mb-1">
-              <div class="flex-shrink-0 avatar avatar-xs me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
-              </div>
-              <div class="flex-grow-1">
-                <div class="w-100">
-                  <div class="d-flex flex-column align-items-start">
-                    <div class="bg-light text-secondary p-2 px-3 rounded-2">Applauded no discovery😊</div>
-                    <div class="small my-2">6:15 AM</div>
+          <!-- Top avatar and status END -->
+            
+          </div>
+          <div class="toast-body collapse show" id="collapseChat2">
+            <!-- Chat conversation START -->
+            <div class="chat-conversation-content custom-scrollbar h-200px">
+              <!-- Chat time -->
+              <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
+              <!-- Chat message left -->
+              <div class="d-flex mb-1">
+                <div class="flex-shrink-0 avatar avatar-xs me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="w-100">
+                    <div class="d-flex flex-column align-items-start">
+                      <div class="bg-light text-secondary p-2 px-3 rounded-2">Applauded no discovery😊</div>
+                      <div class="small my-2">6:15 AM</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Chat message right -->
-            <div class="d-flex justify-content-end text-end mb-1">
-              <div class="w-100">
-                <div class="d-flex flex-column align-items-end">
-                  <div class="bg-primary text-white p-2 px-3 rounded-2">With pleasure</div>
-                </div>
-              </div>
-            </div>
-            <!-- Chat message left -->
-            <div class="d-flex mb-1">
-              <div class="flex-shrink-0 avatar avatar-xs me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
-              </div>
-              <div class="flex-grow-1">
+              <!-- Chat message right -->
+              <div class="d-flex justify-content-end text-end mb-1">
                 <div class="w-100">
-                  <div class="d-flex flex-column align-items-start">
-                    <div class="bg-light text-secondary p-2 px-3 rounded-2">Please find the attached</div>
-                    <!-- Files START -->
-                    <!-- Files END -->
-                    <div class="small my-2">12:16 PM</div>
+                  <div class="d-flex flex-column align-items-end">
+                    <div class="bg-primary text-white p-2 px-3 rounded-2">With pleasure</div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Chat message left -->
-            <div class="d-flex mb-1">
-              <div class="flex-shrink-0 avatar avatar-xs me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
-              </div>
-              <div class="flex-grow-1">
-                <div class="w-100">
-                  <div class="d-flex flex-column align-items-start">
-                    <div class="bg-light text-secondary p-2 px-3 rounded-2">How promotion excellent curiosity😮</div>
-                    <div class="small my-2">3:22 PM</div>
+              <!-- Chat message left -->
+              <div class="d-flex mb-1">
+                <div class="flex-shrink-0 avatar avatar-xs me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="w-100">
+                    <div class="d-flex flex-column align-items-start">
+                      <div class="bg-light text-secondary p-2 px-3 rounded-2">Please find the attached</div>
+                      <!-- Files START -->
+                      <!-- Files END -->
+                      <div class="small my-2">12:16 PM</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Chat message right -->
-            <div class="d-flex justify-content-end text-end mb-1">
-              <div class="w-100">
-                <div class="d-flex flex-column align-items-end">
-                  <div class="bg-primary text-white p-2 px-3 rounded-2">And sir dare view.</div>
-                  <!-- Images -->
-                  <div class="d-flex my-2">
-                    <div class="small text-secondary">5:35 PM</div>
-                    <div class="small ms-2"><i class="fa-solid fa-check"></i></div>
+              <!-- Chat message left -->
+              <div class="d-flex mb-1">
+                <div class="flex-shrink-0 avatar avatar-xs me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="w-100">
+                    <div class="d-flex flex-column align-items-start">
+                      <div class="bg-light text-secondary p-2 px-3 rounded-2">How promotion excellent curiosity😮</div>
+                      <div class="small my-2">3:22 PM</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Chat time -->
-            <div class="text-center small my-2">2 New Messages</div>
-            <!-- Chat Typing -->
-            <div class="d-flex mb-1">
-              <div class="flex-shrink-0 avatar avatar-xs me-2">
-                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
-              </div>
-              <div class="flex-grow-1">
+              <!-- Chat message right -->
+              <div class="d-flex justify-content-end text-end mb-1">
                 <div class="w-100">
-                  <div class="d-flex flex-column align-items-start">
-                    <div class="bg-light text-secondary p-3 rounded-2">
-                      <div class="typing d-flex align-items-center">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
+                  <div class="d-flex flex-column align-items-end">
+                    <div class="bg-primary text-white p-2 px-3 rounded-2">And sir dare view.</div>
+                    <!-- Images -->
+                    <div class="d-flex my-2">
+                      <div class="small text-secondary">5:35 PM</div>
+                      <div class="small ms-2"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Chat time -->
+              <div class="text-center small my-2">2 New Messages</div>
+              <!-- Chat Typing -->
+              <div class="d-flex mb-1">
+                <div class="flex-shrink-0 avatar avatar-xs me-2">
+                  <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="w-100">
+                    <div class="d-flex flex-column align-items-start">
+                      <div class="bg-light text-secondary p-3 rounded-2">
+                        <div class="typing d-flex align-items-center">
+                          <div class="dot"></div>
+                          <div class="dot"></div>
+                          <div class="dot"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Chat conversation END -->
-          <!-- Chat bottom START -->
-          <div class="mt-2">
-            <!-- Chat textarea -->
-            <textarea class="form-control mb-sm-0 mb-3" placeholder="Type a message" rows="1"></textarea>
-            <!-- Button -->
-            <div class="d-sm-flex align-items-end mt-2">
-              <button class="btn btn-sm btn-danger-soft me-2"><i class="fa-solid fa-face-smile fs-6"></i></button>
-              <button class="btn btn-sm btn-secondary-soft me-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
-              <button class="btn btn-sm btn-success-soft me-2"> Gif </button>
-              <button class="btn btn-sm btn-primary ms-auto"> Send </button>
+            <!-- Chat conversation END -->
+            <!-- Chat bottom START -->
+            <div class="mt-2">
+              <!-- Chat textarea -->
+              <textarea class="form-control mb-sm-0 mb-3" placeholder="Type a message" rows="1"></textarea>
+              <!-- Button -->
+              <div class="d-sm-flex align-items-end mt-2">
+                <button class="btn btn-sm btn-danger-soft me-2"><i class="fa-solid fa-face-smile fs-6"></i></button>
+                <button class="btn btn-sm btn-secondary-soft me-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
+                <button class="btn btn-sm btn-success-soft me-2"> Gif </button>
+                <button class="btn btn-sm btn-primary ms-auto"> Send </button>
+              </div>
             </div>
+            <!-- Chat bottom START -->
           </div>
-          <!-- Chat bottom START -->
         </div>
-      </div>
-      <!-- Chat toast 2 END -->
+        <!-- Chat toast 2 END -->
 
+      </div>
     </div>
-  </div>
   <!-- Chat END -->
-
-</div>
-  <!-- Show follower/following Main Chat END -->
-
-<!-- Modal create Feed START -->
-<div class="modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="modalLabelCreateFeed" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <!-- Modal feed header START -->
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabelCreateFeed">Create post</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <!-- Modal feed header END -->
-
-      <!-- Modal feed body START -->
-      <div class="modal-body">
-          <!-- Add Feed -->
-          <div class="d-flex mb-3">
-          <!-- Avatar -->
-          <div class="avatar avatar-xs me-2">
-            <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
-          </div>
-          <!-- Feed box  -->
-          <form class="w-100">
-            <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4" placeholder="Share your thoughts..." autofocus></textarea>
-          </form>
-        </div>
-        <!-- Feed rect START -->
-        <div class="hstack gap-2">
-          <a class="icon-md bg-success bg-opacity-10 text-success rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Photo"> <i class="bi bi-image-fill"></i> </a>
-          <a class="icon-md bg-info bg-opacity-10 text-info rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Video"> <i class="bi bi-camera-reels-fill"></i> </a>
-          <a class="icon-md bg-danger bg-opacity-10 text-danger rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"> <i class="bi bi-calendar2-event-fill"></i> </a>
-          <a class="icon-md bg-warning bg-opacity-10 text-warning rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Feeling/Activity"> <i class="bi bi-emoji-smile-fill"></i> </a>
-          <a class="icon-md bg-light text-secondary rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Check in"> <i class="bi bi-geo-alt-fill"></i> </a>
-          <a class="icon-md bg-primary bg-opacity-10 text-primary rounded-circle" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tag people on top"> <i class="bi bi-tag-fill"></i> </a>
-        </div>
-        <!-- Feed rect END -->
-      </div>
-      <!-- Modal feed body END -->
-
-      <!-- Modal feed footer -->
-      <div class="modal-footer row justify-content-between">
-        <!-- Select -->
-        <div class="col-lg-3">
-          <select class="form-select js-choice choice-select-text-none" data-position="top" data-search-enabled="false">
-            <option value="PB">Public</option>
-            <option value="PV">Friends</option>
-            <option value="PV">Only me</option>
-            <option value="PV">Custom</option>
-          </select>
-        <!-- Button -->
-        </div>
-        <div class="col-lg-8 text-sm-end">
-          <button type="button" class="btn btn-danger-soft me-2"> <i class="bi bi-camera-video-fill pe-1"></i> Live video</button>
-          <button type="button" class="btn btn-success-soft">Post</button>
-        </div>
-      </div>
-      <!-- Modal feed footer -->
-
-    </div>
-  </div>
-</div>
-<!-- Modal create feed END -->
-
-<!-- Modal create Feed video START -->
-<div class="modal fade" id="feedActionVideo" tabindex="-1" aria-labelledby="feedActionVideoLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <!-- Modal feed header START -->
-      <div class="modal-header">
-      <h5 class="modal-title" id="feedActionVideoLabel">Add post video</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <!-- Modal feed header END -->
-
-      <!-- Modal feed body START -->
-      <div class="modal-body">
-        <!-- Add Feed -->
-        <div class="d-flex mb-3">
-        <!-- Avatar -->
-        <div class="avatar avatar-xs me-2">
-          <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
-        </div>
-        <!-- Feed box  -->
-        <form class="w-100">
-          <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
-        </form>
-      </div>
-
-      <!-- Dropzone photo START -->
-      <div>
-        <label class="form-label">Upload attachment</label>
-        <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-          <div class="dz-message">
-            <i class="bi bi-camera-reels display-3"></i>
-                <p>Drag here or click to upload video.</p>
-          </div>
-        </div>
-      </div>
-      <!-- Dropzone photo END -->
-
-    </div>
-      <!-- Modal feed body END -->
-
-      <!-- Modal feed footer -->
-      <div class="modal-footer">
-        <!-- Button -->
-        <button type="button" class="btn btn-danger-soft me-2"><i class="bi bi-camera-video-fill pe-1"></i> Live video</button>
-        <button type="button" class="btn btn-success-soft">Post</button>
-      </div>
-      <!-- Modal feed footer -->
-    </div>
-  </div>
-</div>
-<!-- Modal create Feed video END -->
     
 @endauth
 

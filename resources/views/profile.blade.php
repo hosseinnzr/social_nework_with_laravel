@@ -180,7 +180,7 @@
                                         <div class="col-12 col-lg-6">
 
                                           <div class="comments-container" style="height: 420px; overflow-y: auto;">
-                                            <p style="width: 100%;" class="mb-0">{{$post['id']}} - {{$post['post']}}</p>
+                                            <p style="width: 100%;" class="mb-0">{{$post['post']}}</p>
 
                                             @foreach(explode(",", $post['tag']) as $tag)
                                             <a href="/?tag={{$tag}}">{{$tag}} </a>
@@ -300,7 +300,7 @@
                                         <!-- Info -->
                                         <div>
                                           <div class="nav nav-divider">
-                                            <h6 class="nav-item card-title mb-0"><a href="/user/{{$save_post['user_name']}}">{{$save_post['user_name']}} - {{$save_post['UID']}}</a></h6>
+                                            <h6 class="nav-item card-title mb-0"><a href="/user/{{$save_post['user_name']}}">{{$save_post['user_name']}}</a></h6>
                                             
                                             <small>&nbsp; &nbsp;{{$save_post['created_at']->diffForHumans()}}</small>
 
@@ -368,7 +368,7 @@
                                         <div class="col-12 col-lg-6">
 
                                           <div class="comments-container" style="height: 420px; overflow-y: auto;">
-                                            <p style="width: 100%;" class="mb-0">{{$save_post['id']}} - {{$save_post['post']}}</p>
+                                            <p style="width: 100%;" class="mb-0">{{$save_post['post']}}</p>
 
                                             @foreach(explode(",", $save_post['tag']) as $tag)
                                             <a href="/?tag={{$tag}}">{{$tag}} </a>
@@ -467,7 +467,7 @@
           </div>
         <!-- Card END -->
         </div>
-        
+        <br>
         <!-- show post START -->
         <div class="col-md-12 col-lg-12 vstack gap-4">
         </div>
