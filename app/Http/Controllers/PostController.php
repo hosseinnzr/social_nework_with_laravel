@@ -84,6 +84,10 @@ class PostController extends Controller
             
         if (Auth::check()) {
 
+            $request->validate([
+                'post' => 'required',
+            ]);
+
             $inputs = $request->only([
                 'post_picture',
                 'UID',
@@ -144,6 +148,11 @@ class PostController extends Controller
     public function update(Request $request){
 
         if (isset($request->id)) {
+            
+            $request->validate([
+                'post' => 'required',
+            ]);
+
             $inputs = $request->only([
                 'post_picture',
                 'title',

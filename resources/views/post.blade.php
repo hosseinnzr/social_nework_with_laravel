@@ -7,19 +7,19 @@
   
   <main>
     <div class="container">
-      <div class="row justify-content-center align-items-center vh-100 py-5">
+      <div class="row justify-content-center align-items-center vh-100 py-2">
         <div class="col-sm-10 col-md-8 col-lg-8 col-xl-7 col-xxl-6">
           <div class="card card-body rounded-3 p-4 p-sm-5"> 
             <form method="POST" action="{{ isset($post) ? route('post.update', ['id' => $post->id]) : route('post.store')}}" class="mt-4" enctype="multipart/form-data">
                 @csrf
-
+{{-- 
                 @if($errors->any())
                 <div class="col-12">
                   @foreach($errors->all() as $error)
                     <div class="alert alert-danger">{{$error}}</div>
                   @endforeach
                 </div>
-                @endif
+                @endif --}}
                 
                   @isset($post)
                     <h3>Edit Post :</h3>
@@ -80,12 +80,13 @@
                   </button>
 
                   <hr>
-                  <div class="card-footer text-center py-2">
+                  <div class=" text-center">
                     <a class="btn btn-link text-secondary btn-sm" type="submit" href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">Back to Profile </a>
                   </div>
 
             </form>
           </div>
+          <br>
         </div>
       </div>
     </div>
