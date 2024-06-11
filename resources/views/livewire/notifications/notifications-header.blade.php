@@ -13,7 +13,7 @@
                     <li>
                         <div class="list-group-item rounded bd-flex border-0 mb-1 p-3 ">
                             <div style="text-align: center;">
-                                <h3 class="small mb-2">No notification</h3>
+                                <h3 class="small mb-2">No notifications</h3>
                             </div>
                         </div>
                     </li>
@@ -55,7 +55,9 @@
                                         </a>
                                         <!-- Card feed action dropdown menu -->
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>delete notifications</a></li>
+                                            <li>        
+                                                <button class="dropdown-item" wire:click="delete({{$user_notification->id}})"><i class="bi bi-check-all"></i> seen</a></button>
+                                            </li>
                                             <li><a class="dropdown-item" href="#"> <i class="bi bi-file-post-fill"></i> view post</a></li>
                                         </ul>
                                     </div>
@@ -94,7 +96,9 @@
                                         </a>
                                         <!-- Card feed action dropdown menu -->
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>delete notifications</a></li>
+                                            <li>        
+                                                <button class="dropdown-item" wire:click="delete({{$user_notification->id}})"><i class="bi bi-check-all"></i> seen</a></button>
+                                            </li>        
                                         </ul>
                                     </div>
                                     <!-- Card feed action dropdown END -->
