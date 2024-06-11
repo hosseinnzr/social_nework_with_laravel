@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\notifications;
 use Exception;
 
 
@@ -68,7 +69,7 @@ class AuthManager extends Controller
         }
     }
 
-    // signin / singUp / logout
+    // signin / signUp / logout
     function signin(){
         if(auth::check()){
             notify()->success('you are now signin');
@@ -121,7 +122,7 @@ class AuthManager extends Controller
     }
  
     function signup(){
-        return view('signUp');
+        return view('signup');
     }
 
     function logout(Request $request){
@@ -261,7 +262,16 @@ class AuthManager extends Controller
 
         if(!$is_follow){
             $followers = $user->followers . ',' . $user_signin->id;
-            $followings = $user_signin->following . ',' . $user->id;   
+            $followings = $user_signin->following . ',' . $user->id;
+            
+            // send notifiction
+            notifications::create([
+                'UID' => $user->id,
+                'body' => Auth::user()->user_name,
+                'type'=> 'follow',
+                'url' => '/post/$post->UID',
+                'user_profile' => Auth::user()->profile_pic,
+            ]);
         }
 
         // save follow

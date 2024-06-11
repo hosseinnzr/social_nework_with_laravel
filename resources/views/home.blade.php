@@ -97,7 +97,7 @@
               <!-- Card START -->
               <a href="#" class="stretched-link nav-link btn btn-dark rounded-circle icon-xl rounded-circle" data-bs-toggle="modal" data-bs-target="#postStory"><i class="fa-solid fa-plus fs-6"></i></a>
 
-              <a href="#!" class="small fw-normal text-secondary">Post a story</a>
+              {{-- <a href="#!" class="small fw-normal text-secondary">Post a story</a> --}}
               <!-- Card END -->
             </div>
             <!-- Post a story END -->

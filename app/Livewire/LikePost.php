@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\notifications;
 use Livewire\Component;
 
 class LikePost extends Component
@@ -37,6 +38,17 @@ class LikePost extends Component
                 $like = $post->like . ',' . $user_liked_id;
             } else {
                 $like = $post->like . $user_liked_id;   
+            }
+
+            // send notifiction
+            if($post->UID != Auth::id()){
+                notifications::create([
+                    'UID' => $post->UID,
+                    'body' => Auth::user()->user_name . " like your post with id : ". $post->id,
+                    'type'=> 'like',
+                    'url' => '/post/$post->UID',
+                    'user_profile' => Auth::user()->profile_pic,
+                ]);
             }
         }
 
