@@ -58,7 +58,7 @@
                                             <li>        
                                                 <button class="dropdown-item" wire:click="delete({{$user_notification->id}})"><i class="bi bi-check-all"></i> seen</a></button>
                                             </li>
-                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-file-post-fill"></i> view post</a></li>
+                                            <li><a class="dropdown-item" href="{{$user_notification->url}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
                                         </ul>
                                     </div>
                                     <!-- Card feed action dropdown END -->

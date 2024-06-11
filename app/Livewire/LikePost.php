@@ -46,7 +46,7 @@ class LikePost extends Component
                     'UID' => $post->UID,
                     'body' => Auth::user()->user_name . " like your post with id : ". $post->id,
                     'type'=> 'like',
-                    'url' => '/post/$post->UID',
+                    'url' => "/p/$post->id",
                     'user_profile' => Auth::user()->profile_pic,
                 ]);
             }

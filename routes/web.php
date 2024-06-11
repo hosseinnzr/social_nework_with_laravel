@@ -19,6 +19,9 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::post('/post', [PostController::class, "create"])->name('post.store'); // Store route
     Route::post('/post/update', [PostController::class, "update"])->name('post.update'); // Update route
 
+    // view post
+    Route::get('/p/{id}', [PostController::class, "viewPost"])->name('viewPost');
+
     // Home page
     Route::get('/', [PostController::class, "home"])->name('home');
 

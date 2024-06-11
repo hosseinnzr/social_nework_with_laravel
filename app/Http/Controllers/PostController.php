@@ -40,7 +40,6 @@ class PostController extends Controller
                 } 
             }
             
-                
             foreach ($posts as $post) {
                 $user = User::where('id', $post->UID)->select('id', 'user_name', 'profile_pic')->first();
                 $post['user_id'] = $user['id'];
@@ -64,7 +63,19 @@ class PostController extends Controller
         }
     }
 
-    public function postRoute(Request $request){
+    public function viewPost($id){
+
+        $post = post::findOrFail($id);
+
+        $user = User::where('id', $post->UID)->select('id', 'user_name', 'profile_pic')->first();
+        $post['user_id'] = $user['id'];
+        $post['user_name'] = $user['user_name'];
+        $post['user_profile_pic'] = $user['profile_pic'];
+
+        return view('posts.viewPost', ['post' => $post]);
+    }
+
+    public function postRoute(Request $request,){
         if(isset($request->id)){
             $post = Post::findOrFail($request->id);
 
@@ -72,11 +83,11 @@ class PostController extends Controller
                 notify()->error('you do not have access');
                 return back();
             }else{
-                return view('post', ['post' => $post]);
+                return view('posts.post', ['post' => $post]);
             }
 
         }else{
-            return view('post');
+            return view('posts.post');
         }
     }
     
@@ -136,7 +147,7 @@ class PostController extends Controller
 
             notify()->success('Add post successfully!');
           
-            return redirect()->route('post', ['id'=> $post->id])
+            return redirect()->route('posts.post', ['id'=> $post->id])
               ->with('success', true);
 
         }else{
