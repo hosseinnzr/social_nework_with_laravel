@@ -2,12 +2,20 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Livewire\Component;
+use App\Models\messages;
+use App\Models\conversations;
 
 class SendPost extends Component
 {
     public $search = "";
+
+    public $postId ;
+    public $conversation_id = "";
+
+    public $notification = "";
 
     public $select_user_id = [];
 
@@ -16,7 +24,45 @@ class SendPost extends Component
 
 
     public function send(){
-        dd($this->select_user_id);
+        
+        $postId = $this->postId;
+
+        foreach($this->select_user_id as $user_id){
+
+            $find_conversation_sender_id = conversations::where('sender_id' , auth::id())->where('receiver_id' , $user_id)->get();
+            $find_conversation_receiver_id = conversations::where('receiver_id' , auth::id())->where('sender_id' , $user_id)->get();
+
+            if( !($find_conversation_sender_id->isEmpty()) ){
+                $this->conversation_id = $find_conversation_sender_id[0]->id;
+
+            }elseif( !($find_conversation_receiver_id->isEmpty()) ){
+                $this->conversation_id = $find_conversation_receiver_id[0]->id;
+            }else{
+                $createdConversation = Conversations::create([
+                    'sender_id' => auth::id(),
+                    'receiver_id' => $user_id,
+                ]); 
+
+                $this->conversation_id = $createdConversation[0];
+            }
+
+            if($this->conversation_id != ""){
+                $createdMessage = messages::create([
+                    'conversation_id' => $this->conversation_id,
+                    'sender_id' => auth()->id(),
+                    'receiver_id' => $user_id,
+                    'body' => "thezoom/p/$postId",
+                ]);
+
+                if($createdMessage){
+                    $this->select_user_info = [];
+                    $this->select_user_id = [];
+
+                    $this->notification = 'send massage successfully';
+                }
+            }
+        }
+
     }
 
     public function selectUser($id){

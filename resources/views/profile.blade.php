@@ -189,7 +189,7 @@
                                                           <div class="sends-container" style="height: 420px; overflow-y: auto;">
                                                             
                                                             <!-- Nav Search START -->
-                                                            @livewire('send-post')
+                                                            @livewire('send-post', ['postId' => $post['id']])
                                                             <!-- Nav Search END -->
                                                           </div>
                                                         </div>
@@ -350,7 +350,7 @@
                                                           <div class="sends-container" style="height: 420px; overflow-y: auto;">
                                                             
                                                             <!-- Nav Search START -->
-                                                            @livewire('send-post')
+                                                            @livewire('send-post', ['postId' => $post['id']])
                                                             <!-- Nav Search END -->
                                                           </div>
                                                         </div>

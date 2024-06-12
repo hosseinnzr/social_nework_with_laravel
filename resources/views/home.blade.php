@@ -317,45 +317,48 @@
                   </div>
                   <!-- scroll show comment END -->
 
+                  <!-- send button START -->
                   <li class="nav-item">
                     <div data-bs-toggle="modal" data-bs-target="#showSend{{$post['id']}}" aria-controls="offcanvasChat">
                       <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
                     </div>
                   </li>
 
-                  <!-- scroll show send START -->
-                  <div class="modal fade" id="showSend{{$post['id']}}" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
+                    <!-- scroll show send START -->
+                    <div class="modal fade" id="showSend{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
 
-                        <!-- Modal feed header START -->
-                        <div class="modal-header">
-                          <h6 class="modal-title">send post to </h6>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <!-- Modal feed header END -->
-
-                        <!-- show post START -->
-                          <div style="padding: 10px" class="card-body">
-                            <div class="row g-3">
-
-                              <div class="col-12 col-lg-12">
-                                <div class="sends-container" style="height: 420px; overflow-y: auto;">
-                                  
-                                  <!-- Nav Search START -->
-                                  @livewire('send-post')
-                                  <!-- Nav Search END -->
-                                </div>
-                              </div>
-
-                            </div>
+                          <!-- Modal feed header START -->
+                          <div class="modal-header">
+                            <h6 class="modal-title">send post to </h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
-                        <!-- show post END -->
+                          <!-- Modal feed header END -->
 
+                          <!-- show post START -->
+                            <div style="padding: 10px" class="card-body">
+                              <div class="row g-3">
+
+                                <div class="col-12 col-lg-12">
+                                  <div class="sends-container" style="height: 420px; overflow-y: auto;">
+                                    
+                                    <!-- Nav Search START -->
+                                    @livewire('send-post', ['postId' => $post['id']])
+                                    <!-- Nav Search END -->
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          <!-- show post END -->
+
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- scroll show send END -->
+                    <!-- scroll show send END -->
+
+                  <!-- send button END -->
 
                   <li class="nav-item">
                     @livewire('save-post', ['postId' => $post['id']]) 

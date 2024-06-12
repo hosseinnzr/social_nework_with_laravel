@@ -1,5 +1,5 @@
 <div>
-
+    <h6>{{$notification}}</h6>
     <input class="form-control bg-light" type="search" placeholder="Search user" aria-label="Search user" wire:model.live="search">
 
     @isset($users)
@@ -45,7 +45,7 @@
         
     {{-- send botton --}}
     <div style="padding-top: 15px" class="d-grid">
-        <button type="submit" class="btn btn-lg btn-primary" wire:click="send">send</button>
+        <button type="submit" class="btn btn-lg btn-primary" wire:click="send({{$postId}})">send</button>
     </div>
 
     <hr>
