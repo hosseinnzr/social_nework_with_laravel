@@ -4,7 +4,7 @@
     {{ csrf_field() }}
 <main>
   <div class="container">
-    <div class="row justify-content-center align-items-center vh-100 py-5">
+    <div class="row justify-content-center align-items-center">
       <div class="col-sm-10 col-md-8 col-lg-8 col-xl-7 col-xxl-6">
         <div class="card card-body rounded-3 p-4 p-sm-5">
           <form action="{{route('signup.post')}}" method="POST" class="mt-4">
