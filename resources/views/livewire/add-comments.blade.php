@@ -39,26 +39,33 @@
             <div class="d-flex position-relative">
                 <!-- Avatar -->
                 <div class="avatar avatar-xs">
-                <a href="#!"><img class="avatar-img rounded-circle" src="{{asset($single_comment['user_profile'])}}" alt=""></a>
+                <a href="/user/{{$single_comment['user_name']}}s"><img class="avatar-img rounded-circle" src="{{asset($single_comment['user_profile'])}}" alt=""></a>
                 </div>
                 <div class="ms-2">
                     <!-- Comment by -->
-                    <div style="width: 70%;"  class="bg-light rounded-start-top-0 p-3 rounded">
-                        <div class="d-flex justify-content-between">
-                            {{-- <h6 class="mb-1"> <a href="#!">{{$single_comment['user_name']}}</a></h6> --}}
+                    <div class="ms-2">
+                        <div class="bg-light rounded-start-top-0 p-2 rounded">
+                            <div class="d-flex justify-content-between">
+                            <p class="mb-1"> <a href="/user/{{$single_comment['user_name']}}"> {{$single_comment['user_name']}} </a></p>
+                            
+                            <div style="text-align: center">
+                                @if (in_array(Auth::id(), explode(",", $single_comment['like'])))
+                                    <button style="color:red" wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill "></i></button>
+                                @else
+                                    <button  wire:click="like({{$single_comment}})"><i class="bi bi-heart "></i></button>
+                                @endif
+                            </div>    
+
+                            </div>
+                            <p style="max-width: 30ch;" class="small mb-0">{{$single_comment['comment_value']}}</p>
                         </div>
-                        <p class="small mb-0">{{$single_comment['comment_value']}}</p>
                     </div>
                     <!-- Comment react -->
-                    <ul class="nav py-2 small">
+                    <ul class="nav px-2 small">
 
                         <li wire:poll.visible class="nav-item">
                             <div style="text-align: center">
-                                @if (in_array(Auth::id(), explode(",", $single_comment['like'])))
-                                    <button style="color:red" wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill pe-1"></i> {{ $single_comment['like_number'] }}</button>
-                                @else
-                                    <button  wire:click="like({{$single_comment}})"><i class="bi bi-heart-fill pe-1"></i> {{ $single_comment['like_number'] }}</button>
-                                @endif
+                                <button  wire:click="like({{$single_comment}})">{{ $single_comment['like_number'] }} likes</button>
                             </div>
                         </li>
 

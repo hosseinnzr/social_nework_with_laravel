@@ -308,7 +308,7 @@
                                             <small>&nbsp; &nbsp;{{$save_post['created_at']->diffForHumans()}}</small>
 
                                           </div>
-                                          {{-- <p class="mb-0 small">{{$user['user_name']}}</p> --}}
+
                                         </div>
                                       </div>
                                       <!-- Card feed action dropdown START -->

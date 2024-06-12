@@ -77,9 +77,9 @@
                 <div class="col-12 col-lg-6">
 
                     <div class="comments-container" style="height: 420px; overflow-y: auto;">
-                    <p style="width: 100%;" class="mb-0">{{$post['post']}}</p>
-                    <br>
-                    @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                        <p style="width: 100%;" class="mb-0">{{$post['post']}}</p>
+                        <br>
+                        @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
                     </div>
 
                 </div>
