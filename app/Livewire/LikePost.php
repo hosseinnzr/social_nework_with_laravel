@@ -44,7 +44,7 @@ class LikePost extends Component
             if($post->UID != Auth::id()){
                 notifications::create([
                     'UID' => $post->UID,
-                    'body' => Auth::user()->user_name . " like your post with id : ". $post->id,
+                    'body' => Auth::user()->user_name,
                     'type'=> 'like',
                     'url' => "/p/$post->id",
                     'user_profile' => Auth::user()->profile_pic,

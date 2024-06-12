@@ -44,7 +44,7 @@
                                             <p class="nav-item card-title mb-0"><b>new like</b></p>
                                             <span class="nav-item small"> {{$user_notification['created_at']->diffForHumans(null, true, true)}} ago</span>
                                         </div>
-                                        <p class="mb-0 small">{{$user_notification->body}}</p>
+                                        <p class="mb-0 small">{{$user_notification->body}} like your post</p>
                                         </div>
                                     </div>
 
@@ -56,7 +56,7 @@
                                         <!-- Card feed action dropdown menu -->
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                                             <li>        
-                                                <button class="dropdown-item" wire:click="delete({{$user_notification->id}})"><i class="bi bi-check-all"></i> seen</a></button>
+                                                <button class="dropdown-item" wire:click="delete({{$user_notification->id}})"><i class="bi bi-eye-slash"> </i> Hide this notification</a></button>
                                             </li>
                                             <li><a class="dropdown-item" href="{{$user_notification->url}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
                                         </ul>
@@ -70,24 +70,25 @@
                             <!-- follow Notif START -->
                             <li>
                                 <div style="background-color: rgba(97, 97, 97, 0.088)" class="list-group-item rounded d-flex border-0 mb-1 p-3 justify-content-between">
-                                    <div class="avatar text-center d-none d-sm-inline-block">
-                                        <img class="avatar-img rounded-circle" src="{{$user_notification->user_profile}}" alt="">
-                                    </div>
-                                    <div class="ms-sm-3">
-                                        <div>
-                                            <div class="nav nav-divider">
-                                                <p class="nav-item card-title mb-0"><b>new follow</b></p>
-                                                <span class="nav-item small"> {{$user_notification['created_at']->diffForHumans(null, true, true)}} ago</span>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar text-center d-none d-sm-inline-block">
+                                            <img class="avatar-img rounded-circle" src="{{$user_notification->user_profile}}" alt="">
+                                        </div>
+                                        <div class="ms-sm-3">
+                                            <div>
+                                                <div class="nav nav-divider">
+                                                    <p class="nav-item card-title mb-0"><b>new follow</b></p>
+                                                    <span class="nav-item small"> {{$user_notification['created_at']->diffForHumans(null, true, true)}} ago</span>
+                                                </div>
+                                                <p class="nav-item small"><b>{{$user_notification->body}} </b>&nbsp;follow you</p>
                                             </div>
-                                            <p class="nav-item small"><b>{{$user_notification->body}} </b>&nbsp;follow you</p>
-                                        </div>
-                                        
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm py-1 btn-primary me-2">Accept </button>
-                                            <button class="btn btn-sm py-1 btn-danger-soft">Delete </button>
+                                            
+                                            <div class="d-flex">
+                                                <button class="btn btn-sm py-1 btn-primary me-2">Accept </button>
+                                                <button class="btn btn-sm py-1 btn-danger-soft">Delete </button>
+                                            </div>
                                         </div>
                                     </div>
-
                                     
                                     <!-- Card feed action dropdown START -->
                                     <div class="dropdown">
@@ -97,7 +98,7 @@
                                         <!-- Card feed action dropdown menu -->
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                                             <li>        
-                                                <button class="dropdown-item" wire:click="delete({{$user_notification->id}})"><i class="bi bi-check-all"></i> seen</a></button>
+                                                <button class="dropdown-item" wire:click="delete({{$user_notification->id}})"><i class="bi bi-eye-slash"> </i> Hide this notification</a></button>
                                             </li>        
                                         </ul>
                                     </div>
