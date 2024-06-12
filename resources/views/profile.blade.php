@@ -126,7 +126,6 @@
                                             <h6 class="nav-item card-title mb-0"><a href="/user/{{$user['user_name']}}">{{$user['user_name']}} </a></h6>
                                             <span class="nav-item small"> {{$post['created_at']->diffForHumans()}}</span>
                                           </div>
-                                          {{-- <p class="mb-0 small">{{$user['user_name']}}</p> --}}
                                         </div>
                                       </div>
                                       <!-- Card feed action dropdown START -->
@@ -165,10 +164,44 @@
                                             </li>
                   
                                             <li class="nav-item">
-                                              <div data-bs-toggle="modal">
+                                              <div data-bs-toggle="modal" data-bs-target="#showSend{{$post['id']}}" aria-controls="offcanvasChat">
                                                 <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
                                               </div>
                                             </li>
+                          
+                                            <!-- scroll show send START -->
+                                            <div class="modal fade" id="showSend{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                                              <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                          
+                                                  <!-- Modal feed header START -->
+                                                  <div class="modal-header">
+                                                    <h6 class="modal-title">send post to </h6>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  </div>
+                                                  <!-- Modal feed header END -->
+                          
+                                                  <!-- show post START -->
+                                                    <div style="padding: 10px" class="card-body">
+                                                      <div class="row g-3">
+                          
+                                                        <div class="col-12 col-lg-12">
+                                                          <div class="sends-container" style="height: 420px; overflow-y: auto;">
+                                                            
+                                                            <!-- Nav Search START -->
+                                                            @livewire('send-post')
+                                                            <!-- Nav Search END -->
+                                                          </div>
+                                                        </div>
+                          
+                                                      </div>
+                                                    </div>
+                                                  <!-- show post END -->
+                          
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <!-- scroll show send END -->
                   
                                             <li class="nav-item">
                                               @livewire('save-post', ['postId' => $post['id']]) 
@@ -200,71 +233,6 @@
                               </div>
                             </div>
                             <!-- scroll show post END -->
-
-                        <!-- glightbox Albums left bar START -->
-                        <div class="glightbox-desc custom-desc2">
-                          <div class="d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center">
-                              <!-- Avatar -->
-                              <div class="avatar me-2">
-                                <img class="avatar-img rounded-circle" src={{$user['profile_pic']}} alt="">
-                              </div>
-                              <!-- Info -->
-                              <div>
-                                <div class="nav nav-divider">
-                                  <h6 class="nav-item card-title mb-0"><a href="/user/{{$user['user_name']}}">{{$user['user_name']}}</a></h6>
-                                  <span class="nav-item small"> {{$post['created_at']->diffForHumans()}}</span>
-                                </div>
-                                <p class="mb-0 small">Web Developer at Webestica</p>
-                              </div>
-                            </div>
-                            <!-- Card feed action dropdown START -->
-                            <div class="dropdown">
-                              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="bi bi-three-dots"></i>
-                              </a>
-                              <!-- Card share action dropdown menu -->     
-                              @if ($post['UID'] == Auth::id())
-                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                                <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
-                                <li><a class="dropdown-item" href="/p/{{$post['id']}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
-                                <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
-                              </ul>
-                              @else
-                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$user['user_name']}}</a></li>
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$user['user_name']}}</a></li>
-                                <li><a class="dropdown-item" href="/p/{{$post['id']}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
-                              </ul>
-                              @endif                 
-                            </div>
-                            <!-- Card feed action dropdown END -->
-                          </div>
-                          <h6 class="mt-3 mb-0">{{$post['title']}}</h6>
-                          <p class="mt-3 mb-0">{{$post['post']}}</p>
-
-                          <ul class="nav nav-fill nav-stack small">
-                            <li class="nav-item">
-                              @livewire('like-post', ['post' => $post])
-                            </li>
-  
-                            <li class="nav-item">
-                              <div data-bs-toggle="modal">
-                                <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
-                              </div>
-                            </li>
-  
-                            <li class="nav-item">
-                              @livewire('save-post', ['postId' => $post['id']]) 
-                            </li>
-                          </ul>
-                          <br>
-                        </div>
-                        <!-- glightbox Albums left bar END  -->
                       </div>
                       <!-- Photo item END -->
                     @endforeach
@@ -357,10 +325,44 @@
                                             </li>
                   
                                             <li class="nav-item">
-                                              <div data-bs-toggle="modal">
+                                              <div data-bs-toggle="modal" data-bs-target="#showSend{{$post['id']}}" aria-controls="offcanvasChat">
                                                 <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
                                               </div>
                                             </li>
+                          
+                                            <!-- scroll show send START -->
+                                            <div class="modal fade" id="showSend{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                                              <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                          
+                                                  <!-- Modal feed header START -->
+                                                  <div class="modal-header">
+                                                    <h6 class="modal-title">send post to </h6>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  </div>
+                                                  <!-- Modal feed header END -->
+                          
+                                                  <!-- show post START -->
+                                                    <div style="padding: 10px" class="card-body">
+                                                      <div class="row g-3">
+                          
+                                                        <div class="col-12 col-lg-12">
+                                                          <div class="sends-container" style="height: 420px; overflow-y: auto;">
+                                                            
+                                                            <!-- Nav Search START -->
+                                                            @livewire('send-post')
+                                                            <!-- Nav Search END -->
+                                                          </div>
+                                                        </div>
+                          
+                                                      </div>
+                                                    </div>
+                                                  <!-- show post END -->
+                          
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <!-- scroll show send END -->
                   
                                             <li class="nav-item">
                                               @livewire('save-post', ['postId' => $save_post['id']]) 
@@ -394,69 +396,6 @@
                             </div>
                             <!-- scroll show post END -->
 
-                        <!-- glightbox Albums left bar START -->
-                        <div class="glightbox-desc custom-desc2">
-                          <div class="d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center">
-                              <!-- Avatar -->
-                              <div class="avatar me-2">
-                                <img class="avatar-img rounded-circle" src={{$user['profile_pic']}} alt="">
-                              </div>
-                              <!-- Info -->
-                              <div>
-                                <div class="nav nav-divider">
-                                  <h6 class="nav-item card-title mb-0"><a href="/user/{{$user['user_name']}}">{{$user['user_name']}}</a></h6>
-                                  <span class="nav-item small"> {{$post['created_at']->diffForHumans()}}</span>
-                                </div>
-                                <p class="mb-0 small">Web Developer at Webestica</p>
-                              </div>
-                            </div>
-                            <!-- Card feed action dropdown START -->
-                            <div class="dropdown">
-                              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="bi bi-three-dots"></i>
-                              </a>
-                              <!-- Card share action dropdown menu -->     
-                              @if ($post['UID'] == Auth::id())
-                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                                <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
-                                <li><a class="dropdown-item" href="/p/{{$post['id']}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
-                                <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
-                              </ul>
-                              @else
-                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$user['user_name']}}</a></li>
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$user['user_name']}}</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
-                              </ul>
-                              @endif                 
-                            </div>
-                            <!-- Card feed action dropdown END -->
-                          </div>
-                          <h6 class="mt-3 mb-0">{{$post['title']}}</h6>
-                          <p class="mt-3 mb-0">{{$post['post']}}</p>
-
-                          <ul class="nav nav-fill nav-stack small">
-                            <li class="nav-item">
-                              @livewire('like-post', ['post' => $post])
-                            </li>
-  
-                            <li class="nav-item">
-                              <div data-bs-toggle="modal">
-                                <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
-                              </div>
-                            </li>
-  
-                            <li class="nav-item">
-                              @livewire('save-post', ['postId' => $post['id']]) 
-                            </li>
-                          </ul>
-                          <br>
-                        </div>
-                        <!-- glightbox Albums left bar END  -->
                       </div>
                       <!-- Photo item END -->
                     @endforeach
@@ -471,7 +410,8 @@
             </div>
           <!-- Card body END -->
           </div>
-        <!-- Card END -->
+        
+          <!-- Card END -->
         </div>
         <br>
         <!-- show post START -->

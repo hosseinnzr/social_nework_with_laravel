@@ -31,7 +31,7 @@
 
           </div>
         </div>
-						<a class="nav-link" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+				<a class="nav-link" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
       </div>
       <!-- Nav Search END -->
       
@@ -91,17 +91,12 @@
                 <i class="fa-fw bi bi-life-preserver me-2"></i>Support
               </a> 
             </li>
-            <li> 
-              <a class="dropdown-item" href="docs/index.html" target="_blank">
-                <i class="fa-fw bi bi-card-text me-2"></i>Documentation
-              </a> 
-            </li>
             <li class="dropdown-divider"></li>
 
             <li>
-              <form action="{{route('logout')}}" method="POST" class="dropdown-item btn btn-sm my-2 text-center">
+              <form action="{{route('logout')}}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger-soft"><i class="bi bi-power fa-fw me-2"></i>Sign Out</button>
+                <button style="color: red;" type="submit" class="dropdown-item"><i class="bi bi-power fa-fw me-2"></i>Sign Out</button>
               </form>
             </li>
             
