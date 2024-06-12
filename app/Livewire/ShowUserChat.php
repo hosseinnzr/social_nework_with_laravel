@@ -28,15 +28,18 @@ class ShowUserChat extends Component
 
     public function save($user_in_chat){
 
-        $createdMessage = messages::create([
-            'conversation_id' => $this->conversation_id,
-            'sender_id' => auth()->id(),
-            'receiver_id' => $user_in_chat,
-            'body' => $this->message
-        ]);
+        if($this->message != null){
+            $createdMessage = messages::create([
+                'conversation_id' => $this->conversation_id,
+                'sender_id' => auth()->id(),
+                'receiver_id' => $user_in_chat,
+                'body' => $this->message
+            ]);
 
-        if($createdMessage){
-            $this->message = '';
+            
+            if($createdMessage){
+                $this->message = '';
+            }
         }
         
     }

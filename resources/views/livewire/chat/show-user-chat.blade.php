@@ -204,7 +204,7 @@
               @if ($user_in_chat)
               <div class="card-footer w-full px-0">             
                   <form class="d-flex gap-1 items-stretch w-full" wire:submit="save({{$user_in_chat}})" >
-                      <input wire:model="message" name="message" id="cmnt-input" class="form-control py-2 w-full" type="text" placeholder="Add Comment ..." aria-label="Search">
+                      <input wire:model="message" name="message" id="cmnt-input" class="form-control py-2 w-full" type="text" placeholder="message" aria-label="Search">
                       <button class="btn btn-light" id="cmnt-btn" type="submit"> <i class="fa-solid fa-paper-plane fs-6"></i></button>
                   </form>
               </div>
