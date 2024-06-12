@@ -13,7 +13,7 @@
         </div>
 
         <!-- Advanced filter responsive toggler END -->
-        <div class="card card-body border-end-0 border-bottom-0 rounded-bottom-0">
+        <div style="border-radius: 6px 0px 0px 6px" class="card card-body border-end-0 border-bottom-0 rounded-bottom-0">
             <div class=" d-flex justify-content-between align-items-center">
                 <h1 class="h5 mb-0">THEZOOM</h1>
             </div>
@@ -51,6 +51,7 @@
                   </button>
                 </form>
                 <!-- Search chat END -->
+                
                 <!-- Chat list tab START -->
                 <div class="mt-4 h-100">
                   <div class="chat-tab-list custom-scrollbar">
@@ -165,20 +166,27 @@
                 <!-- Top avatar and status END -->
                 <hr>
                 <!-- Chat conversation START -->
-                <div class="chat-conversation-content custom-scrollbar">
+                <div  class="chat-conversation-content custom-scrollbar">
                   @if ($user_in_chat)
                   <div wire:poll.visible style="height: calc(100% - 60px); overflow-y:scroll"  class="chat-conversation-content custom-scrollbar">
                       @for ($i = 0; $i < $show_messages_count; $i++)
                           @if ( $show_messages[$i]['sender_id'] == $userId )
                               <!-- Chat message right -->
-
-                              
                               <div class="d-flex justify-content-end text-end mb-1">
                                   <div class="w-100">
                                   <div class="d-flex flex-column align-items-end">
-                                      <div style="background-color: #ffeaa9c7; color: black"  class="p-2 px-3 rounded-2">{{$show_messages[$i]['body']}} 
-                                          <br><small style="font-size: 10px; color: black" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
-                                      </div>
+                                        <!-- CHECK FOR FIND POST IN MASSAGE -->
+                                        @if (str_contains($show_messages[$i]['body'], "/post-picture/"))
+                                            <div style="background-color: #ffeaa9c7; color: black"  class="p-2 px-2 rounded-2">
+                                                <img class="rounded-1 h-200px" src="/post-picture/{{substr($show_messages[$i]['body'], 14)}}" alt="">
+                                                <br><small style="font-size: 10px; color: black" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
+                                            </div>
+                                        @else
+                                            <div style="background-color: #ffeaa9c7; color: black"  class="p-2 px-2 rounded-2">{{$show_messages[$i]['body']}} 
+                                                <br><small style="font-size: 10px; color: black" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
+                                            </div>
+                                        @endif
+
                                   </div>
                                   </div>
                               </div>  
@@ -188,9 +196,18 @@
                                   <div class="flex-grow-1">
                                       <div class="w-100">
                                       <div class="d-flex flex-column align-items-start">
-                                          <div class="bg-light text-secondary p-2 px-3 rounded-2">{{$show_messages[$i]['body']}}
-                                              <br> <small style="font-size: 10px" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
-                                          </div>
+                                        <!-- CHECK FOR FIND POST IN MASSAGE -->
+                                        @if (str_contains($show_messages[$i]['body'], "/post-picture/"))
+                                            <div class="bg-light text-secondary p-2 px-2 rounded-2">
+                                                <img class="rounded-1 h-200px" src="/post-picture/{{substr($show_messages[$i]['body'], 14)}}" alt=""> 
+                                                <br> <small style="font-size: 10px" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
+                                            </div>
+                                        @else
+                                            <div class="bg-light text-secondary p-2 px-2 rounded-2">{{$show_messages[$i]['body']}}
+                                                <br> <small style="font-size: 10px" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
+                                            </div>
+                                        @endif
+
                                       </div>
                                       </div>
                                   </div>

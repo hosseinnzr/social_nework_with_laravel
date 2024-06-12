@@ -42,11 +42,6 @@
         @endforeach
     </div>
     @endisset   
-        
-    {{-- send botton --}}
-    <div style="padding-top: 15px" class="d-grid">
-        <button type="submit" class="btn btn-lg btn-primary" wire:click="send({{$postId}})">send</button>
-    </div>
 
     <hr>
     
@@ -72,6 +67,11 @@
             </div>
         @endforeach
         </div>
+    </div>
+
+    {{-- send botton --}}
+    <div style="padding-top: 15px" class="d-grid">
+        <button style="border-radius: 33px; padding: 2px" type="submit" class="btn btn-lg btn-primary" wire:click="send({{$postId}})">send</button>
     </div>
 </div>
 

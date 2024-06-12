@@ -12,7 +12,7 @@
   <div class="container">
 
       <!-- Chat START -->
-        @livewire('show-user-chat')
+        @livewire('show-user-chat', ['chat' => $chat])
       <!-- Chat START -->
 
 	</div>

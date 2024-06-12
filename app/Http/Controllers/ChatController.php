@@ -14,10 +14,11 @@ use Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
 class ChatController extends Controller
 {
     public function index(Request $request){
-
-        return view('chat.index');
+        return view('chat.index', [
+            'chat' => null
+        ]);
     }
-    public function show(Request $request, $query){
+    public function show($query){
 
         $Id = auth::id();
 

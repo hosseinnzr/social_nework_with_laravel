@@ -25,6 +25,8 @@ class ShowUserChat extends Component
     public $alluser;
     public $alluser_count; 
 
+    public $chat;
+
 
     public function save($user_in_chat){
 
@@ -60,6 +62,10 @@ class ShowUserChat extends Component
 
     public function render()
     {
+        if($this->chat != null){
+            $this->chat_result = $this->chat;
+        }
+
         $this->show_messages = messages::where('conversation_id', $this->conversation_id)->get();
         $this->show_messages_count = messages::where('conversation_id', $this->conversation_id)->count();
 

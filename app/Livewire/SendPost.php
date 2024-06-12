@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Post;
 use Livewire\Component;
 use App\Models\messages;
 use App\Models\conversations;
@@ -29,6 +30,8 @@ class SendPost extends Component
 
         foreach($this->select_user_id as $user_id){
 
+            $post_address = Post::findOrFail($postId)->post_picture;
+
             $find_conversation_sender_id = conversations::where('sender_id' , auth::id())->where('receiver_id' , $user_id)->get();
             $find_conversation_receiver_id = conversations::where('receiver_id' , auth::id())->where('sender_id' , $user_id)->get();
 
@@ -51,7 +54,7 @@ class SendPost extends Component
                     'conversation_id' => $this->conversation_id,
                     'sender_id' => auth()->id(),
                     'receiver_id' => $user_id,
-                    'body' => "thezoom/p/$postId",
+                    'body' => $post_address,
                 ]);
 
                 if($createdMessage){
