@@ -1,33 +1,36 @@
 
 <div style="width: 100%; padding: 0px"  class="offcanvas-body pt-0 custom-scrollbar">
-    <!-- Add comment -->
-    <div class="d-flex mb-2">
+
+    <!-- Add comment START -->
+    <div class="d-flex mb-2 pt-3">
         <!-- Avatar -->
         <div class="avatar avatar-xs me-2">
             <a href="/user/{{auth()->user()->user_name}}"> <img class="avatar-img rounded-circle" src="{{auth()->user()->profile_pic}}" alt=""> </a>
         </div>
 
         <!-- Comment box START -->
-        <div class="offcanvas-body p-0">
-            <div class=" rounded-end-lg-0 w-full border-end-lg-0">
-              <!-- add comment START -->
+        <div  class="offcanvas-body p-0">
+            <div style="position: sticky; top: 500;" class=" rounded-end-lg-0 w-full border-end-lg-0">
+                <!-- add comment START -->
 
-              <form wire:submit="save({{$postId}})" >
+                <form wire:submit="save({{$postId}})" >
                 <label>             
                     <input wire:model="comment" name="comment" id="cmnt-input" class="form-control py-2 w-full" type="text" placeholder="Add Comment ..." aria-label="Search">
                 </label>
                     <button class="btn btn-light" id="cmnt-btn" type="submit">  <i class="fa-solid fa-comment"></i></button>
-              </form>
-              <script>
+                </form>
+                <script>
                 document.getElementById('cmnt-btn').addEventListener('click', function() {
                     document.getElementById('cmnt-input').value = '';
                 })
-              </script>
+                </script>
             </div>
         </div>
         <!-- Comment box END -->
 
     </div>
+    <!-- Add comment END -->
+
     <!-- Comment wrap START -->
     <ul class="comment-wrap list-unstyled">
 
@@ -39,7 +42,7 @@
             <div class="d-flex position-relative">
                 <!-- Avatar -->
                 <div class="avatar avatar-xs">
-                <a href="/user/{{$single_comment['user_name']}}s"><img class="avatar-img rounded-circle" src="{{asset($single_comment['user_profile'])}}" alt=""></a>
+                <a href="/user/{{$single_comment['user_name']}}"><img class="avatar-img rounded-circle" src="{{asset($single_comment['user_profile'])}}" alt=""></a>
                 </div>
                 <div class="ms-2">
                     <!-- Comment by -->
@@ -60,12 +63,13 @@
                             <p style="max-width: 30ch;" class="small mb-0">{{$single_comment['comment_value']}}</p>
                         </div>
                     </div>
-                    <!-- Comment react -->
+
+                    <!-- Comment like, replay, time ago -->
                     <ul class="nav px-2 small">
 
                         <li wire:poll.visible class="nav-item">
                             <div style="text-align: center">
-                                <button  wire:click="like({{$single_comment}})">{{ $single_comment['like_number'] }} likes</button>
+                                <a>{{ $single_comment['like_number'] }} likes</a>
                             </div>
                         </li>
 
@@ -84,6 +88,14 @@
         <!-- Comment item END -->
         @endforeach
 
+        <br>
+        <li class="nav-item">
+            <div style="align-content: center" class="card-footer border-0 p-0">
+                <!-- Load more comments -->
+                  <button class="" style="background-color: rgba(118, 118, 118, 0.136); padding:5px 8px 5px 8px; border-radius: 33px" wire:click="loadMore()">Load more comments </button>
+            </div>
+        </li>
     </ul>
     <!-- Comment wrap END -->
+    
 </div>

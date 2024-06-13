@@ -21,6 +21,8 @@ class AddComments extends Component
 
     public $error;
 
+    public $amount = 5;
+
     public function save($postId){
         $input = [
             'UID' => Auth::id(),
@@ -35,6 +37,10 @@ class AddComments extends Component
         if($input['comment_value'] != null){
             Comments::create($input);
         }
+    }
+
+    public function loadMore(){
+        $this->amount += 5;
     }
 
     public function like($single_comment)
@@ -81,7 +87,7 @@ class AddComments extends Component
     }
     public function render()
     {
-        $this->post_comments = comments::latest()->where('post_id', $this->postId)->get();
+        $this->post_comments = comments::latest()->where('post_id', $this->postId)->limit($this->amount)->get();
 
         return view('livewire.add-comments',[
             'post_comments' => $this->post_comments,

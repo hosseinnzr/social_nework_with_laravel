@@ -1,9 +1,6 @@
 @extends('layout')
-@if (isset($hash_tag))
-  @section('title', "home - #$hash_tag")
-@else
-  @section('title', 'home')  
-@endif
+
+@section('title', 'show post')  
 
 @section('content')
 @auth

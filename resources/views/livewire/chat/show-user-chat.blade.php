@@ -179,7 +179,7 @@
                                         @if (str_contains($show_messages[$i]['body'], "/post-picture/"))
                                             <div style="background-color: #ffeaa9c7; color: black"  class="p-2 px-2 rounded-2">
                                                 <img class="rounded-1 h-200px" src="/post-picture/{{substr($show_messages[$i]['body'], 14)}}" alt="">
-                                                <br><small style="font-size: 10px; color: black" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
+                                                <small style="font-size: 10px; color: black" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
                                             </div>
                                         @else
                                             <div style="background-color: #ffeaa9c7; color: black"  class="p-2 px-2 rounded-2">{{$show_messages[$i]['body']}} 
@@ -200,7 +200,7 @@
                                         @if (str_contains($show_messages[$i]['body'], "/post-picture/"))
                                             <div class="bg-light text-secondary p-2 px-2 rounded-2">
                                                 <img class="rounded-1 h-200px" src="/post-picture/{{substr($show_messages[$i]['body'], 14)}}" alt=""> 
-                                                <br> <small style="font-size: 10px" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
+                                                <small style="font-size: 10px" class="small my-2">{{$show_messages[$i]['created_at']->format('H:i')}}</small>
                                             </div>
                                         @else
                                             <div class="bg-light text-secondary p-2 px-2 rounded-2">{{$show_messages[$i]['body']}}
