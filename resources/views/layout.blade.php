@@ -4,6 +4,29 @@
     <title>@yield('title')</title>
     @notifyCss
 
+	<!-- SHOW modal in moadal bootstrap SATRT -->
+
+	<link href="{{asset('css/bootstrap-modal-bs3patch.css')}}" rel="stylesheet" />
+	<link href="{{asset('css/bootstrap-modal.css" rel="stylesheet')}}" />
+
+
+	<style>      
+		.text-center { 
+		  text-align: center; 
+		}
+	  
+		.marketing h1 {
+		  font-size: 50px;
+		  font-weight: lighter;
+		  line-height: 1;
+		}
+  
+		.marketing p {
+		  font-size: 18px;
+		}
+	</style>
+	<!-- SHOW modal in moadal bootstrap END -->
+
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

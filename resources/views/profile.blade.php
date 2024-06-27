@@ -5,6 +5,7 @@
 {{ csrf_field() }}
 
 <main>
+  
   <!-- Container START -->
   <div class="container">
     <div class="row g-4">
@@ -45,7 +46,81 @@
                   @if ($user['user_name'] == auth()->user()->user_name)
                     <a class="btn btn-success-soft me-2" type="submit" href="{{ route('post') }}">
                       <span><i class="fa fa-add"></i> Add post</span>
-                    </a>  
+                    </a>
+
+                    <div class="container" style="position: relative">
+                      <div class="row">
+                        <div class="col-md-10">
+                
+                          <div class="stackable">
+                            <div class="text-center">
+                            <button class="demo btn btn-primary btn-lg" data-toggle="modal" href="#stack1">View Demo</button>
+                            </div>
+                          </div>
+                
+                        </div>
+                      </div>
+                    </div>
+                    
+                
+                <div id="stack1" class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Stack One</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>One fine body…</p>
+                    <p>One fine body…</p>
+                    <p>One fine body…</p>
+                    <input class="form-control" type="text" data-tabindex="1" />
+                    <input class="form-control" type="text" data-tabindex="2" />
+                    <button class="btn btn-default" data-toggle="modal" href="#stack2">Launch modal</button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <button type="button" class="btn btn-primary">Ok</button>
+                  </div>
+                </div>
+                
+                <div id="stack2" class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Stack Two</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>One fine body…</p>
+                    <p>One fine body…</p>
+                    <input class="form-control" type="text" data-tabindex="1" />
+                    <input class="form-control" type="text" data-tabindex="2" />
+                    <button class="btn btn-default" data-toggle="modal" href="#stack3">Launch modal</button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="  btn btn-default">Close</button>
+                    <button type="button" class="btn btn-primary">Ok</button>
+                  </div>
+                </div>
+                
+                <div id="stack3" class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Stack Three</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>One fine body…</p>
+                    <input class="form-control" type="text" data-tabindex="1" />
+                    <input class="form-control" type="text" data-tabindex="2" />
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <button type="button" class="btn btn-primary">Ok</button>
+                  </div>
+                </div>
+
+                
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script src="{{asset('js/bootstrap-modalmanager.js')}}"></script>
+                <script src="{{asset('js/bootstrap-modal.js')}}"></script>
+                      
                   @elseif ( in_array(auth()->id(), explode(",", $user['followers'])) )    
 
                     <form action="{{route('follow', ['id' => $user['id']])}}" method="POST" class="ms-auto me-auto mt-3">
@@ -107,7 +182,7 @@
                         </div>
 
                             <!-- scroll show post START -->
-                            <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                            <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true" style="z-index: 1400;">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
 
@@ -168,9 +243,9 @@
                                                 <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
                                               </div>
                                             </li>
-                          
+
                                             <!-- scroll show send START -->
-                                            <div class="modal fade" id="showSend{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                                            <div class="modal fade" id="showSend{{$post['id']}}" tabindex="-1" aria-hidden="true" style="z-index: 1600;">
                                               <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                           
@@ -233,6 +308,7 @@
                               </div>
                             </div>
                             <!-- scroll show post END -->
+
                       </div>
                       <!-- Photo item END -->
                     @endforeach
@@ -288,7 +364,7 @@
                                         @if ($save_post['UID'] == Auth::id())
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
                                           <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $save_post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
-                                          <li><a class="dropdown-item" href="/p/{{$post['id']}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
+                                          <li><a class="dropdown-item" href="/p/{{$save_post['id']}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
                                           <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
                                           <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $save_post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
                                         </ul>
@@ -325,13 +401,13 @@
                                             </li>
                   
                                             <li class="nav-item">
-                                              <div data-bs-toggle="modal" data-bs-target="#showSend{{$post['id']}}" aria-controls="offcanvasChat">
+                                              <div data-bs-toggle="modal" data-bs-target="#showSendSave{{$save_post['id']}}" aria-controls="offcanvasChat">
                                                 <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
                                               </div>
                                             </li>
                           
                                             <!-- scroll show send START -->
-                                            <div class="modal fade" id="showSend{{$post['id']}}" tabindex="-1" aria-hidden="true">
+                                            <div class="modal fade" id="showSendSave{{$save_post['id']}}" tabindex="-1" aria-hidden="true">
                                               <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                           
@@ -350,7 +426,7 @@
                                                           <div class="sends-container" style="height: 420px; overflow-y: auto;">
                                                             
                                                             <!-- Nav Search START -->
-                                                            @livewire('send-post', ['postId' => $post['id']])
+                                                            @livewire('send-post', ['postId' => $save_post['id']])
                                                             <!-- Nav Search END -->
                                                           </div>
                                                         </div>

@@ -43,6 +43,8 @@ class AuthManager extends Controller
                     } 
                 }
 
+                dd($posts);
+
                 $user_follower = explode(",", $user->followers);
                 $user_following = explode(",", $user->following);
 

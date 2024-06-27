@@ -285,12 +285,6 @@
                                   </li>
         
                                   <li class="nav-item">
-                                    <div data-bs-toggle="modal">
-                                      <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
-                                    </div>
-                                  </li>
-        
-                                  <li class="nav-item">
                                     @livewire('save-post', ['postId' => $post['id']]) 
                                   </li>
 
