@@ -10,7 +10,7 @@
 	<link href="{{asset('css/bootstrap-modal.css" rel="stylesheet')}}" />
 
 
-	<style>      
+	<style>   
 		.text-center { 
 		  text-align: center; 
 		}

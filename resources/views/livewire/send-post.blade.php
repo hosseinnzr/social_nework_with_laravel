@@ -1,5 +1,6 @@
 <div>
-    <h6>{{$notification}}</h6>
+    <p class="alert alert-success">{{$notification}}</p>
+    
     <input class="form-control bg-light" type="search" placeholder="Search user" aria-label="Search user" wire:model.live="search">
 
     @isset($users)
@@ -43,36 +44,40 @@
     </div>
     @endisset   
 
-    <hr>
-    
-    <div style="padding: 10px" class="card-body">
-        <div class="row g-3">
-
-        @foreach ($select_user_info as $select)
-
-            <div class="col-3 col-sm-3 col-lg-3 mb-5 ">
-                <div class="d-flex align-items-center position-relative">
-                    <div class="avatar">
-                        <img style="baorder: 10px" class="avatar-img rounded-circle" src="{{$select['profile_pic']}}" alt="">
-
-                                    <!-- Duration -->
-                        <div class="position-relative align-items-center bottom-0 d-flex ">
-                            <button class="btn rounded-circle icon-md ms-auto" wire:click="deSelectUser({{$select['id']}})">
-                                <i style="font-size: 20px;" class="bi bi-check-circle-fill"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        </div>
-    </div>
-
     {{-- send botton --}}
     <div style="padding-top: 15px" class="d-grid">
         <button style="border-radius: 33px; padding: 2px" type="submit" class="btn btn-lg btn-primary" wire:click="send({{$postId}})">send</button>
     </div>
+
+    <hr>
+    
+    <div style="padding: 10px" class="card-body">
+      <div class="row g-3">
+
+        @foreach ($select_user_info as $select)
+            <div class="col-3 col-sm-3 col-lg-3 mb-5 ">
+                <div class="d-flex align-items-center position-relative">
+                    <div class="avatar">
+                        <!-- Avatar -->
+                        <img style="baorder: 10px" class="avatar-img rounded-circle" href="{{ route('profile', ['user_name' => $select['user_name']]) }}" src="{{$select['profile_pic']}}" alt="">
+                        <!-- Title -->
+                        <div class="overflow-hidden">
+                            <p class="mb-0 small text-truncate text-center">{{$select['user_name']}}</p>
+                        </div>  
+                        <!-- Duration -->
+                        <div class="position-relative text-center bottom-0 d-flex ">
+                            <button style="margin-left: 4px" class="btn rounded-circle icon-md" wire:click="deSelectUser({{$select['id']}})">
+                                <i style="font-size: 20px;" class="bi bi-check-circle-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+      </div>
+    </div>
+
 </div>
 
 

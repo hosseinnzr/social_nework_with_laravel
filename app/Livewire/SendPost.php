@@ -62,6 +62,7 @@ class SendPost extends Component
                     $this->select_user_id = [];
 
                     $this->notification = 'send massage successfully';
+                    
                 }
             }
         }

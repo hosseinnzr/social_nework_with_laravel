@@ -4,6 +4,50 @@
 @auth
 {{ csrf_field() }}
 
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1401;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+  }
+
+  .modal-content-send-post {
+    border-radius: 5px;
+    width: 45%;
+    height: auto;
+    margin: auto;
+    padding: 0 10 0 10px;
+    border: 1px solid #888;
+    background-color: white;
+  }
+
+  @media (max-width: 927px) {
+    .modal-content-send-post {
+      width: 70%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modal-content-send-post {
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal-content-send-post {
+      width: 80%;
+    }
+  }
+</style>
+
 <main>
   
   <!-- Container START -->
@@ -34,7 +78,7 @@
                 <div class="ms-sm-4 mt-sm-3">
                   <!-- Info -->
                   <h1 class="mb-0 h5">{{$user['first_name']}} {{$user['last_name']}} <i class="bi bi-patch-check-fill text-success small"></i></h1>
-                    
+
                   <!-- post, follow, following START -->
                     <x-post-follower-following :user="$user"/>
                   <!-- post, follow, following END -->
@@ -101,6 +145,29 @@
                   <div class="row g-3">
                     
                     @foreach ($posts as $post)
+                      <!-- script for open send-post modal -->
+                      <script>
+                        document.addEventListener('DOMContentLoaded', (event) => {
+                          var modal = document.getElementById("myModal{{$post['id']}}");
+                          var btn = document.getElementById("myBtn{{$post['id']}}");
+                          var span = modal.querySelector(".close");
+
+                          btn.onclick = function() {
+                            modal.style.display = "block";
+                          }
+
+                          span.onclick = function() {
+                            modal.style.display = "none";
+                          }
+
+                          document.onclick = function(event) {
+                            if (event.target == modal) {
+                              modal.style.display = "none";
+                            }
+                          }
+                        });
+                      </script>
+
                       <!-- Photo item START -->
                       <div class="col-4 col-lg-4 position-relative">
 
@@ -108,133 +175,115 @@
                           <img class="img-fluid" src={{$post['post_picture']}} alt="">
                         </div>
 
-                            <!-- scroll show post START -->
-                            <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true" style="z-index: 1400;">
-                              <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
+                        <!-- scroll show post START -->
+                        <div class="modal fade" id="showComments{{$post['id']}}" tabindex="-1" aria-hidden="true" style="z-index: 1400;">
+                          <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
 
-                                  <!-- Modal feed header START -->
-                                  <div class="modal-header">
+                              <!-- Modal feed header START -->
+                              <div class="modal-header">
 
-                                    <div class="d-flex align-items-center justify-content-between">
-                                      <div class="d-flex align-items-center">
-                                        <!-- Avatar -->
-                                        <div class="avatar me-2">
-                                          <img class="avatar-img rounded-circle" src={{$user['profile_pic']}} alt="">
-                                        </div>
-                                        <!-- Info -->
-                                        <div>
-                                          <div class="nav nav-divider">
-                                            <h6 class="nav-item card-title mb-0"><a href="/user/{{$user['user_name']}}">{{$user['user_name']}} </a></h6>
-                                            <span class="nav-item small"> {{$post['created_at']->diffForHumans()}}</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- Card feed action dropdown START -->
-                                      <div class="dropdown">
-                                        <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-three-dots-vertical"></i>
-                                        </a>
-                                        <!-- Card share action dropdown menu -->     
-                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                                          <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
-                                          <li><a class="dropdown-item" href="/p/{{$post['id']}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
-                                          <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
-                                          <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
-                                        </ul>
-                
-                                      </div>
-                                      <!-- Card feed action dropdown END -->
+                                <div class="d-flex align-items-center justify-content-between">
+                                  <div class="d-flex align-items-center">
+                                    <!-- Avatar -->
+                                    <div class="avatar me-2">
+                                      <img class="avatar-img rounded-circle" src={{$user['profile_pic']}} alt="">
                                     </div>
-                                    
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <!-- Info -->
+                                    <div>
+                                      <div class="nav nav-divider">
+                                        <h6 class="nav-item card-title mb-0"><a href="/user/{{$user['user_name']}}">{{$user['user_name']}} </a></h6>
+                                        <span class="nav-item small"> {{$post['created_at']->diffForHumans()}}</span>
+                                      </div>
+                                    </div>
                                   </div>
-                                  <!-- Modal feed header END -->
+                                  <!-- Card feed action dropdown START -->
+                                  <div class="dropdown">
+                                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                    </a>
+                                    <!-- Card share action dropdown menu -->     
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                                      <li><a style="color: rgb(10, 0, 195)" class="dropdown-item" type="submit" href="{{ route('post', ['id' => $post['id']]) }}"> <i class="bi bi-pencil fa-fw pe-2"></i>Edit post</a></li>
+                                      <li><a class="dropdown-item" href="/p/{{$post['id']}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
+                                      <li><a class="dropdown-item" href="#"> <i class="bi bi-archive fa-fw pe-2"></i>Archive</a></li>
+                                      <li><a style="color: red" class="dropdown-item" type="submit" href="{{ route('delete', ['id' => $post['id']]) }}"> <i class="bi bi-x-circle fa-fw pe-2"></i>Delete post</a></li>
+                                    </ul>
+            
+                                  </div>
+                                  <!-- Card feed action dropdown END -->
+                                </div>
+                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <!-- Modal feed header END -->
 
-                                  <!-- show post START -->
-                                    <div class="card-body">
-                                      <div class="row g-3">
+                              <!-- show post START -->
+                                <div class="card-body">
+                                  <div class="row g-3">
 
-                                        <div class="col-12 col-lg-6">
-                                          @isset($post['post_picture'])
-                                          <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
-                                          @endisset 
-                                          <br>
-                                          <ul class="nav nav-fill nav-stack small">
-                                            <li class="nav-item">
-                                              @livewire('like-post', ['post' => $post])
-                                            </li>
-                  
-                                            <li class="nav-item">
-                                              <div data-bs-toggle="modal" data-bs-target="#showSend{{$post['id']}}" aria-controls="offcanvasChat">
-                                                <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
-                                              </div>
-                                            </li>
+                                    <div class="col-12 col-lg-6">
+                                      @isset($post['post_picture'])
+                                      <img class="card-img" src="{{$post['post_picture']}}" alt="Post">
+                                      @endisset 
+                                      <br>
+                                      <ul class="nav nav-fill nav-stack small">
+                                        <li class="nav-item">
+                                          @livewire('like-post', ['post' => $post])
+                                        </li>
+              
 
-                                            <!-- scroll show send START -->
-                                            <div class="modal fade" id="showSend{{$post['id']}}" tabindex="-1" aria-hidden="true" style="z-index: 1600;">
-                                              <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                          
-                                                  <!-- Modal feed header START -->
-                                                  <div class="modal-header">
-                                                    <h6 class="modal-title">send post to </h6>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button id="myBtn{{$post['id']}}"><i class="bi bi-send fa-xl pe-1"></i></button>
+                                        <div id="myModal{{$post['id']}}" class="modal" style="z-index: 1401;">
+                                          <div class="modal-content-send-post">
+                                            <!-- show post START -->
+                                            <div class="card">
+                                              <span class="close modal-header">&times;</span>
+                                              <div style="padding: 15px;" class="row g-3">
+                                                <div class="col-12 col-lg-12">
+                                                  <div class="sends-container" style="height: 420px; overflow-y: auto;">
+                                                    <!-- Nav Search START -->
+                                                    @livewire('send-post', ['postId' => $post['id']])
+                                                    <!-- Nav Search END -->
                                                   </div>
-                                                  <!-- Modal feed header END -->
-                          
-                                                  <!-- show post START -->
-                                                    <div style="padding: 10px" class="card-body">
-                                                      <div class="row g-3">
-                          
-                                                        <div class="col-12 col-lg-12">
-                                                          <div class="sends-container" style="height: 420px; overflow-y: auto;">
-                                                            
-                                                            <!-- Nav Search START -->
-                                                            @livewire('send-post', ['postId' => $post['id']])
-                                                            <!-- Nav Search END -->
-                                                          </div>
-                                                        </div>
-                          
-                                                      </div>
-                                                    </div>
-                                                  <!-- show post END -->
-                          
                                                 </div>
                                               </div>
                                             </div>
-                                            <!-- scroll show send END -->
-                  
-                                            <li class="nav-item">
-                                              @livewire('save-post', ['postId' => $post['id']]) 
-                                            </li>
-
-                                          </ul>
-
-                                        </div>
-
-                                        <div class="col-12 col-lg-6">
-
-                                          <div class="comments-container" style="height: 420px; overflow-y: auto;">
-                                            <p style="width: 100%;" class="mb-0">{{$post['post']}}</p>
-
-                                            @foreach(explode(",", $post['tag']) as $tag)
-                                            <a href="/?tag={{$tag}}">{{$tag}} </a>
-                                            @endforeach
-                                            <br>
-                                            <br>
-                                            @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                                            <!-- show post END -->
                                           </div>
-
                                         </div>
+                                        
 
-                                      </div>
+                                        <li class="nav-item">
+                                          @livewire('save-post', ['postId' => $post['id']]) 
+                                        </li>
+
+                                      </ul>
+
                                     </div>
-                                  <!-- show post END -->
+
+                                    <div class="col-12 col-lg-6">
+
+                                      <div class="comments-container" style="height: 420px; overflow-y: auto;">
+                                        <p style="width: 100%;" class="mb-0">{{$post['post']}}</p>
+
+                                        @foreach(explode(",", $post['tag']) as $tag)
+                                        <a href="/?tag={{$tag}}">{{$tag}} </a>
+                                        @endforeach
+                                        <br>
+                                        <br>
+                                        @livewire('add-comments', ['postId' => $post['id'], 'post' => $post])
+                                      </div>
+
+                                    </div>
+
+                                  </div>
                                 </div>
-                              </div>
+                              <!-- show post END -->
                             </div>
-                            <!-- scroll show post END -->
+                          </div>
+                        </div>
+                        <!-- scroll show post END -->
 
                       </div>
                       <!-- Photo item END -->
@@ -250,6 +299,29 @@
                   <div class="row g-3">
                     
                     @foreach ($save_posts as $save_post)
+                      <!-- script for open send-post modal -->
+                      <script>
+                        document.addEventListener('DOMContentLoaded', (event) => {
+                          var modal = document.getElementById("myModal{{$save_post['id']}}");
+                          var btn = document.getElementById("myBtn{{$save_post['id']}}");
+                          var span = modal.querySelector(".close");
+
+                          btn.onclick = function() {
+                            modal.style.display = "block";
+                          }
+
+                          span.onclick = function() {
+                            modal.style.display = "none";
+                          }
+
+                          document.onclick = function(event) {
+                            if (event.target == modal) {
+                              modal.style.display = "none";
+                            }
+                          }
+                        });
+                      </script>
+
                       <!-- Photo item START -->
                       <div class="col-4 col-lg-4 position-relative">
 
@@ -327,45 +399,25 @@
                                               @livewire('like-post', ['post' => $save_post])
                                             </li>
                   
-                                            <li class="nav-item">
-                                              <div data-bs-toggle="modal" data-bs-target="#showSendSave{{$save_post['id']}}" aria-controls="offcanvasChat">
-                                                <small style="text-align: center" class="mb-0"> <i class="bi bi-send fa-xl pe-1"></i></small>
-                                              </div>
-                                            </li>
-                          
-                                            <!-- scroll show send START -->
-                                            <div class="modal fade" id="showSendSave{{$save_post['id']}}" tabindex="-1" aria-hidden="true">
-                                              <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                          
-                                                  <!-- Modal feed header START -->
-                                                  <div class="modal-header">
-                                                    <h6 class="modal-title">send post to </h6>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                  </div>
-                                                  <!-- Modal feed header END -->
-                          
-                                                  <!-- show post START -->
-                                                    <div style="padding: 10px" class="card-body">
-                                                      <div class="row g-3">
-                          
-                                                        <div class="col-12 col-lg-12">
-                                                          <div class="sends-container" style="height: 420px; overflow-y: auto;">
-                                                            
-                                                            <!-- Nav Search START -->
-                                                            @livewire('send-post', ['postId' => $save_post['id']])
-                                                            <!-- Nav Search END -->
-                                                          </div>
-                                                        </div>
-                          
+                                            <button id="myBtn{{$save_post['id']}}"><i class="bi bi-send fa-xl pe-1"></i></button>
+                                            <div id="myModal{{$save_post['id']}}" class="modal" style="z-index: 1401;">
+                                              <div class="modal-content-send-post">
+                                                <!-- show post START -->
+                                                <div class="card">
+                                                  <span class="close modal-header">&times;</span>
+                                                  <div style="padding: 15px;" class="row g-3">
+                                                    <div class="col-12 col-lg-12">
+                                                      <div class="sends-container" style="height: 420px; overflow-y: auto;">
+                                                        <!-- Nav Search START -->
+                                                        @livewire('send-post', ['postId' => $save_post['id']])
+                                                        <!-- Nav Search END -->
                                                       </div>
                                                     </div>
-                                                  <!-- show post END -->
-                          
+                                                  </div>
                                                 </div>
+                                                <!-- show post END -->
                                               </div>
                                             </div>
-                                            <!-- scroll show send END -->
                   
                                             <li class="nav-item">
                                               @livewire('save-post', ['postId' => $save_post['id']]) 
@@ -445,3 +497,4 @@
 
 @endauth
 @endsection    
+

@@ -85,7 +85,7 @@
             <li> <hr class="dropdown-divider"></li>
 
             <!-- Links -->
-            <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings</a></li>
+            <li><a class="dropdown-item" href="{{ route('settings')}}"><i class="bi bi-gear fa-fw me-2"></i>Settings</a></li>
             <li> 
               <a class="dropdown-item" href="https://support.webestica.com/" target="_blank">
                 <i class="fa-fw bi bi-life-preserver me-2"></i>Support
