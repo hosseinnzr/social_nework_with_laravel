@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\StoryControllers;
 
 // SignUp
 Route::get('/signup', [AuthManager::class, 'signup'])->name('signup');
@@ -35,6 +36,9 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     // Save post
     Route::post('/save', [PostController::class, "save"])->name('save.post');
 
+
+    // add story
+    Route::post('/story', [StoryControllers::class, "create"])->name('crate.story');
 
     // Logout/signin Page
     Route::get('/signin', [AuthManager::class, 'signin'])->name('signin');

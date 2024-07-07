@@ -599,18 +599,18 @@
           <!-- Modal feed body START -->
           <div class="modal-body">
             <!-- Form START -->
-            <form class="row g-4">
-
+            <form method="POST" action="{{ route('crate.story')}}" enctype="multipart/form-data" class="row g-4">
+              @csrf
               <!-- Title -->
               <div class="col-12">
                 <label class="form-label">Title</label>
-                <input type="email" class="form-control" placeholder="story title">
+                <input name="title" type="text" class="form-control" placeholder="story title">
               </div>
 
               <!-- Description -->
               <div class="col-12">
                 <label class="form-label">Description</label>
-                <textarea class="form-control" rows="2" placeholder="story Description..."></textarea>
+                <textarea name="description" class="form-control" rows="2" placeholder="story Description..."></textarea>
               </div>
 
               <!-- Photo START -->
@@ -624,16 +624,18 @@
               </div>
               <!-- Photo END -->
 
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-danger-soft me-2" data-bs-dismiss="modal"> Cancel</button>
+                <button type="submit" class="btn btn-success-soft">Create now</button>
+              </div>
+
             </form>
             <!-- Form END -->
           </div>
           <!-- Modal feed body END -->
           <!-- Modal footer -->
           <!-- Button -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal"> Cancel</button>
-            <button type="button" class="btn btn-success-soft">Create now</button>
-          </div>
+
         </div>
       </div>
     </div>

@@ -177,7 +177,7 @@ class AuthManager extends Controller
 
         if ($request->hasFile('profile_pic')) {
             $image = ($request->file('profile_pic'));
-            $imageName = $imageName = time().'.'.$image->getClientOriginalExtension();
+            $imageName = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('profile'), $imageName);
             $input['profile_pic'] = '/profile/'.$imageName;
         }
