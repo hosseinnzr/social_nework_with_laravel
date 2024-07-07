@@ -192,6 +192,28 @@
           <!-- Card feed item START -->
           @foreach ($posts as $post)
 
+            <script>
+              document.addEventListener('DOMContentLoaded', (event) => {
+                var modal = document.getElementById("myModal{{$post['id']}}");
+                var btn = document.getElementById("myBtn{{$post['id']}}");
+                var span = modal.querySelector(".close");
+
+                btn.onclick = function() {
+                  modal.style.display = "block";
+                }
+
+                span.onclick = function() {
+                  modal.style.display = "none";
+                }
+
+                document.onclick = function(event) {
+                  if (event.target == modal) {
+                    modal.style.display = "none";
+                  }
+                }
+              });
+            </script>
+
             <div class="card">
               <!-- Card header START -->
               <div class="card-header">
@@ -283,6 +305,26 @@
                                   <li class="nav-item">
                                     @livewire('like-post', ['post' => $post])
                                   </li>
+
+                                  <button id="myBtn{{$post['id']}}"><i class="bi bi-send fa-xl pe-1"></i></button>
+                                  <div id="myModal{{$post['id']}}" class="modal" style="z-index: 1401;">
+                                    <div class="modal-content-send-post">
+                                      <!-- show post START -->
+                                      <div class="card">
+                                        <span class="close modal-header">&times;</span>
+                                        <div style="padding: 15px;" class="row g-3">
+                                          <div class="col-12 col-lg-12">
+                                            <div class="sends-container" style="height: 420px; overflow-y: auto;">
+                                              <!-- Nav Search START -->
+                                              @livewire('send-post', ['postId' => $post['id']])
+                                              <!-- Nav Search END -->
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- show post END -->
+                                    </div>
+                                  </div>
         
                                   <li class="nav-item">
                                     @livewire('save-post', ['postId' => $post['id']]) 

@@ -6,7 +6,7 @@
   
   <!-- Container START -->
   <div class="container">
-    <div class="row justify-content-center align-items-center vh-100 py-5">
+    <div class="row justify-content-center align-items-center">
       <!-- Main content START -->
       <div class="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
         <!-- Sign in START -->

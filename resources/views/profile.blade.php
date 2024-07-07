@@ -4,50 +4,6 @@
 @auth
 {{ csrf_field() }}
 
-<style>
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1401;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-  }
-
-  .modal-content-send-post {
-    border-radius: 5px;
-    width: 45%;
-    height: auto;
-    margin: auto;
-    padding: 0 10 0 10px;
-    border: 1px solid #888;
-    background-color: white;
-  }
-
-  @media (max-width: 927px) {
-    .modal-content-send-post {
-      width: 70%;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .modal-content-send-post {
-      width: 80%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .modal-content-send-post {
-      width: 80%;
-    }
-  }
-</style>
-
 <main>
   
   <!-- Container START -->
