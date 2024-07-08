@@ -9,6 +9,21 @@ use Illuminate\Http\Request;
 
 class StoryControllers extends Controller
 {
+    public function show(Request $request){
+        $all_story = story::all();
+        
+        foreach ($all_story as $story) {
+            $user = User::where('id', $story->UID)->select('id', 'user_name', 'first_name', 'last_name', 'profile_pic')->first();
+            $story['user_id'] = $user['id'];
+            $story['user_name'] = $user['user_name'];
+            $story['first_name'] = $user['first_name'];
+            $story['last_name'] = $user['last_name'];
+            $story['user_profile_pic'] = $user['profile_pic'];
+        }
+
+        return view('home.story', ['all_story' => $all_story]);
+    }
+
     public function create(Request $request){
 
         $inputs = $request->only([

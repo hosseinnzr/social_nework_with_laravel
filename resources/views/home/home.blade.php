@@ -36,9 +36,9 @@
             </div>
 
             <!-- Offcanvas body -->
-            <div class="offcanvas-body d-block px-2 px-lg-0">
+            <div class="offcanvas-body d-block px-0 px-lg-0">
               <!-- Card START -->
-              <div class="card overflow-hidden">
+              <div style="border: 0px;" class="card overflow-hidden">
                 <!-- Cover image -->
                 <div class="h-50px" style="background-image:url(assets/images/bg/01.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                   <!-- Card body START -->
@@ -89,18 +89,21 @@
         
         <!-- Story START -->
         <div class="tiny-slider arrow-hover overflow-hidden">
+
+          <!-- Post a story START -->
+          <div class="position-relative text-center">
+  
+            <!-- Card START -->
+            <a href="#" class="stretched-link nav-link btn btn-dark rounded-circle icon-xl rounded-circle" data-bs-toggle="modal" data-bs-target="#postStory"><i class="fa-solid fa-plus fs-6"></i></a>
+
+            {{-- <a href="#!" class="small fw-normal text-secondary">Post a story</a> --}}
+            <!-- Card END -->
+          </div>
+          <!-- Post a story END -->
+
           <div class="tiny-slider-inner ms-n4" data-arrow="true" data-dots="true" data-loop="false" data-autoplay="false" data-items-xl="6" data-items-lg="5" data-items-md="5" data-items-sm="5" data-items-xs="3" data-gutter="12" data-edge="30">
 
-            <!-- Post a story START -->
-            <div class="position-relative text-center">
-              
-              <!-- Card START -->
-              <a href="#" class="stretched-link nav-link btn btn-dark rounded-circle icon-xl rounded-circle" data-bs-toggle="modal" data-bs-target="#postStory"><i class="fa-solid fa-plus fs-6"></i></a>
 
-              {{-- <a href="#!" class="small fw-normal text-secondary">Post a story</a> --}}
-              <!-- Card END -->
-            </div>
-            <!-- Post a story END -->
 
             <!-- Slider items -->
             <div class="position-relative text-center">
@@ -515,7 +518,7 @@
         <div class="row g-4">
           <!-- New Users START -->
           <div class="col-sm-6 col-lg-12">
-            <div class="card">
+            <div style="border: 0px;"  class="card">
               <!-- Card header START -->
               <div class="card-header pb-0 border-0">
                 <h5 class="card-title mb-0">New Users</h5>

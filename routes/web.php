@@ -37,7 +37,8 @@ Route::middleware(['web', 'throttle:600,1'])->group(function () {
     Route::post('/save', [PostController::class, "save"])->name('save.post');
 
 
-    // add story
+    // add/show story
+    Route::get('/story', [StoryControllers::class, "show"])->name('show.story');
     Route::post('/story', [StoryControllers::class, "create"])->name('crate.story');
 
     // Logout/signin Page

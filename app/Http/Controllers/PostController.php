@@ -50,7 +50,7 @@ class PostController extends Controller
             $follower_user = User::whereIn('id', $user_follower)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
             $following_user = User::whereIn('id', $user_following)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
 
-            return view('home', [
+            return view('home.home', [
                 'hash_tag' => $hash_tag,
                 'posts' => $posts,
                 'follower_user' => $follower_user,
