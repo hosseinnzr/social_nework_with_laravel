@@ -40,7 +40,7 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 1.3rem;
+  width: 0.5rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -50,7 +50,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #222224;
+  background: #4e4e50;
 }
 
 ::-webkit-scrollbar-track {
@@ -101,7 +101,7 @@ body {
 
 @media (max-width:500px) {
   #tranding .tranding-slider {
-    height: 37rem;
+    height: 40rem;
   }
 }
 
