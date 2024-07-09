@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
+
+use App\Models\story;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Post;
-use App\Models\story;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {   
@@ -29,7 +31,9 @@ class PostController extends Controller
 
             $hash_tag = null;
 
-            $storys = story::select('id', 'UID')->distinct()->get();
+            $storys = story::orderBy('id')->select('id', 'UID')->groupBy('UID')->get();
+
+            // $storys = DB::table('story')->orderBy('id')->select('id', 'UID')->groupBy('UID')->get();
 
             foreach ($storys as $story) {
                 $user = User::where('id', $story->UID)->select('user_name', 'profile_pic')->first();

@@ -64,19 +64,6 @@
                     <hr>
 
                     <!-- Side Nav START -->
-                    <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
-                      <li class="nav-item">
-                        <a class="btn btn-link text-secondary btn-sm" href="{{route('post')}}"> Add Post</a>
-                      </li>
-                      <li>
-                        <a class="btn btn-link text-secondary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#postStory"> Add Story</a>
-                      </li>
-                    </ul>
-
-                    <!-- Divider -->
-                    <hr>
-
-                    <!-- Side Nav START -->
                     <ul class="nav nav-link-secondary flex-column fw-bold gap-0">
                       <li class="nav-item">
                         <div class=" text-center py-0">
