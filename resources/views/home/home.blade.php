@@ -58,20 +58,33 @@
                       <x-post-follower-following :user="auth()->user()"/>
                     <!-- post, follow, following END -->
 
-                  </div>
+                    </div>
 
-                  <!-- Divider -->
-                  <hr>
+                    <!-- Divider -->
+                    <hr>
 
-                  <!-- Side Nav START -->
-                  <ul class="nav nav-link-secondary flex-column fw-bold gap-0">
-                    <li class="nav-item">
-                      <div class=" text-center py-0">
-                        <a class="btn btn-link text-secondary btn-sm" type="submit" href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">view Profile </a>
-                      </div>
-                    </li>
+                    <!-- Side Nav START -->
+                    <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
+                      <li class="nav-item">
+                        <a class="btn btn-link text-secondary btn-sm" href="{{route('post')}}"> Add Post</a>
+                      </li>
+                      <li>
+                        <a class="btn btn-link text-secondary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#postStory"> Add Story</a>
+                      </li>
+                    </ul>
 
-                  </ul>
+                    <!-- Divider -->
+                    <hr>
+
+                    <!-- Side Nav START -->
+                    <ul class="nav nav-link-secondary flex-column fw-bold gap-0">
+                      <li class="nav-item">
+                        <div class=" text-center py-0">
+                          <a class="btn btn-link text-secondary btn-sm" type="submit" href="{{ route('profile', ['user_name' => Auth::user()->user_name]) }}">view Profile </a>
+                        </div>
+                      </li>
+
+                    </ul>
                   <!-- Side Nav END -->
                 </div>
                 <!-- Card body END -->
@@ -90,88 +103,76 @@
         <!-- Story START -->
         <div class="tiny-slider arrow-hover overflow-hidden">
 
-          <!-- Post a story START -->
-          <div class="position-relative text-center">
-  
-            <!-- Card START -->
-            <a href="#" class="stretched-link nav-link btn btn-dark rounded-circle icon-xl rounded-circle" data-bs-toggle="modal" data-bs-target="#postStory"><i class="fa-solid fa-plus fs-6"></i></a>
-
-            {{-- <a href="#!" class="small fw-normal text-secondary">Post a story</a> --}}
-            <!-- Card END -->
-          </div>
-          <!-- Post a story END -->
-
           <div class="tiny-slider-inner ms-n4" data-arrow="true" data-dots="true" data-loop="false" data-autoplay="false" data-items-xl="6" data-items-lg="5" data-items-md="5" data-items-sm="5" data-items-xs="3" data-gutter="12" data-edge="30">
-
 
 
             <!-- Slider items -->
             <div class="position-relative text-center">
               <div class="avatar avatar-lg avatar-story">
-                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/01.jpg" alt=""></a>
+                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/01.jpg" alt=""></a>
               </div>
               <div>
-                <a href="#!" class="stretched-link small fw-normal text-secondary">Judy</a>
+                <a href="/story" class="stretched-link small fw-normal text-secondary">Judy</a>
               </div>
             </div>
 
             <!-- Slider items -->
             <div class="position-relative text-center">
               <div class="avatar avatar-lg avatar-story">
-                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/02.jpg" alt=""></a>
+                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/02.jpg" alt=""></a>
               </div>
               <div>
-                <a href="#!" class="stretched-link small fw-normal text-secondary">Samuel</a>
+                <a href="/story" class="stretched-link small fw-normal text-secondary">Samuel</a>
               </div>
             </div>
 
             <!-- Slider items -->
             <div class="position-relative text-center">
               <div class="avatar avatar-lg">
-                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/03.jpg" alt=""></a>
+                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/03.jpg" alt=""></a>
               </div>
               <div>
-                <a href="#!" class="stretched-link small fw-normal text-secondary">Carolyn</a>
+                <a href="/story" class="stretched-link small fw-normal text-secondary">Carolyn</a>
               </div>
             </div>
 
             <!-- Slider items -->
             <div class="position-relative text-center">
               <div class="avatar avatar-lg avatar-story">
-                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/04.jpg" alt=""></a>
+                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/04.jpg" alt=""></a>
               </div>
               <div>
-                <a href="#!" class="stretched-link small fw-normal text-secondary">Amanda</a>
+                <a href="/story" class="stretched-link small fw-normal text-secondary">Amanda</a>
               </div>
             </div>
 
             <!-- Slider items -->
             <div class="position-relative text-center">
               <div class="avatar avatar-lg avatar-story">
-                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/05.jpg" alt=""></a>
+                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/05.jpg" alt=""></a>
               </div>
               <div>
-                <a href="#!" class="stretched-link small fw-normal text-secondary">Stevens</a>
+                <a href="/story" class="stretched-link small fw-normal text-secondary">Stevens</a>
               </div>
             </div>
 
             <!-- Slider items -->
             <div class="position-relative text-center">
               <div class="avatar avatar-lg avatar-story">
-                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/06.jpg" alt=""></a>
+                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/06.jpg" alt=""></a>
               </div>
               <div>
-                <a href="#!" class="stretched-link small fw-normal text-secondary">Nguyen</a>
+                <a href="/story" class="stretched-link small fw-normal text-secondary">Nguyen</a>
               </div>
             </div>
 
             <!-- Slider items -->
             <div class="position-relative text-center">
               <div class="avatar avatar-lg avatar-story">
-                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/07.jpg" alt=""></a>
+                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/07.jpg" alt=""></a>
               </div>
               <div>
-                <a href="#!" class="stretched-link small fw-normal text-secondary">Reed</a>
+                <a href="/story" class="stretched-link small fw-normal text-secondary">Reed</a>
               </div>
             </div>
 
