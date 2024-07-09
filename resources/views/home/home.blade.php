@@ -98,87 +98,39 @@
       <!-- Left sidebar END -->
 
       <!-- Main content START -->
-      <div style="padding: 0px" class="col-md-8 col-lg-6 vstack gap-4">
+      <div style="padding: 0px" class="col-md-8 col-lg-6 vstack gap-2">
         
-        <!-- Story START -->
-        <div class="tiny-slider arrow-hover overflow-hidden">
+        @if (isset($storys))
+          <!-- Story START -->
+          <div class="tiny-slider arrow-hover overflow-hidden">
 
-          <div class="tiny-slider-inner ms-n4" data-arrow="true" data-dots="true" data-loop="false" data-autoplay="false" data-items-xl="6" data-items-lg="5" data-items-md="5" data-items-sm="5" data-items-xs="3" data-gutter="12" data-edge="30">
+            <div class="tiny-slider-inner ms-n4" data-arrow="true" data-dots="true" data-loop="false" data-autoplay="false" data-items-xl="6" data-items-lg="5" data-items-md="5" data-items-sm="5" data-items-xs="3" data-gutter="12" data-edge="30">
 
 
-            <!-- Slider items -->
-            <div class="position-relative text-center">
-              <div class="avatar avatar-lg avatar-story">
-                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/01.jpg" alt=""></a>
+              <!-- Add Story -->
+              <div style="padding-left: 30px" class="position-relative text-center">
+                <!-- Card START -->
+                <div>
+                  <a class="stretched-link btn btn-dark rounded-circle icon-xl rounded-circle" data-bs-toggle="modal" data-bs-target="#postStory"><i class="fa-solid fa-plus fs-6"></i></a>
+                </div>
+                <!-- Card END -->
               </div>
-              <div>
-                <a href="/story" class="stretched-link small fw-normal text-secondary">Judy</a>
-              </div>
+
+              @foreach ($storys as $story)
+                <div class="position-relative text-center">
+                  <div class="avatar avatar-lg avatar-story">
+                    <a href="/story?user={{$story['user_name']}}"><img class="avatar-img rounded-circle" src="{{$story['user_profile_pic']}}" alt=""></a>
+                  </div>
+                  <div>
+                    <a href="/story?user={{$story['user_name']}}" class="stretched-link small fw-normal text-secondary">{{$story['user_name']}}</a>
+                  </div>
+                </div>
+              @endforeach
+
             </div>
-
-            <!-- Slider items -->
-            <div class="position-relative text-center">
-              <div class="avatar avatar-lg avatar-story">
-                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/02.jpg" alt=""></a>
-              </div>
-              <div>
-                <a href="/story" class="stretched-link small fw-normal text-secondary">Samuel</a>
-              </div>
-            </div>
-
-            <!-- Slider items -->
-            <div class="position-relative text-center">
-              <div class="avatar avatar-lg">
-                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/03.jpg" alt=""></a>
-              </div>
-              <div>
-                <a href="/story" class="stretched-link small fw-normal text-secondary">Carolyn</a>
-              </div>
-            </div>
-
-            <!-- Slider items -->
-            <div class="position-relative text-center">
-              <div class="avatar avatar-lg avatar-story">
-                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/04.jpg" alt=""></a>
-              </div>
-              <div>
-                <a href="/story" class="stretched-link small fw-normal text-secondary">Amanda</a>
-              </div>
-            </div>
-
-            <!-- Slider items -->
-            <div class="position-relative text-center">
-              <div class="avatar avatar-lg avatar-story">
-                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/05.jpg" alt=""></a>
-              </div>
-              <div>
-                <a href="/story" class="stretched-link small fw-normal text-secondary">Stevens</a>
-              </div>
-            </div>
-
-            <!-- Slider items -->
-            <div class="position-relative text-center">
-              <div class="avatar avatar-lg avatar-story">
-                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/06.jpg" alt=""></a>
-              </div>
-              <div>
-                <a href="/story" class="stretched-link small fw-normal text-secondary">Nguyen</a>
-              </div>
-            </div>
-
-            <!-- Slider items -->
-            <div class="position-relative text-center">
-              <div class="avatar avatar-lg avatar-story">
-                <a href="/story"><img class="avatar-img rounded-circle" src="assets/images/post/1by1/07.jpg" alt=""></a>
-              </div>
-              <div>
-                <a href="/story" class="stretched-link small fw-normal text-secondary">Reed</a>
-              </div>
-            </div>
-
           </div>
-        </div>
-        <!-- Story END -->
+          <!-- Story END -->
+        @endif
 
         <!-- Show hashtag START -->
         @if (isset($hash_tag))

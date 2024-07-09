@@ -95,7 +95,7 @@
                 delay: 5000,
                 disableOnInteraction: false,
             },
-            initialSlide: 1
+            initialSlide: {{$show_story_number}},
         });
         </script>
         </body>   

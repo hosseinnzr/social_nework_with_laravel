@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
-use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\story;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -27,6 +28,14 @@ class PostController extends Controller
             $posts = Post::latest()->where('delete', 0)->whereIn('UID', $user_following)->get();
 
             $hash_tag = null;
+
+            $storys = story::select('id', 'UID')->distinct()->get();
+
+            foreach ($storys as $story) {
+                $user = User::where('id', $story->UID)->select('user_name', 'profile_pic')->first();
+                $story['user_name'] = $user['user_name'];
+                $story['user_profile_pic'] = $user['profile_pic'];
+            }
 
             if(isset($request->tag)){
                 $hash_tag = $request->tag;
@@ -55,7 +64,8 @@ class PostController extends Controller
                 'posts' => $posts,
                 'follower_user' => $follower_user,
                 'following_user' => $following_user,
-                'new_users' => $new_users
+                'new_users' => $new_users,
+                'storys' => $storys,
             ]);    
             
         } else {
