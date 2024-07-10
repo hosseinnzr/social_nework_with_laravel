@@ -40,6 +40,8 @@ class StoryControllers extends Controller
             'story_picture',
         ]);
 
+        $inputs['UID'] = Auth::id();
+        
         if ($request->hasFile('story_picture')) {
             $image = $request->file('story_picture');
             $imageName = time() . '.' . $image->getClientOriginalExtension();

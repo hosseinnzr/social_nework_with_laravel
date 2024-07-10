@@ -1,6 +1,8 @@
 <div>
-    <p class="alert alert-success">{{$notification}}</p>
-    
+    @if ($notification)
+        <p class="alert alert-success">{{$notification}}</p>
+    @endif  
+
     <input class="form-control bg-light" type="search" placeholder="Search user" aria-label="Search user" wire:model.live="search">
 
     @isset($users)

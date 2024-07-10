@@ -12,12 +12,9 @@ use App\Models\conversations;
 class SendPost extends Component
 {
     public $search = "";
-
     public $postId ;
     public $conversation_id = "";
-
     public $notification = "";
-
     public $select_user_id = [];
 
     public $select_user_info = [];
@@ -68,6 +65,7 @@ class SendPost extends Component
         }
 
     }
+
 
     public function selectUser($id){
         array_push($this->select_user_id, $id);

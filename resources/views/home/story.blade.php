@@ -17,8 +17,8 @@
             <div class="container">
             
 
-                <div class="swiper-button-prev slider-arrow">
-                    <ion-icon name="arrow-back-outline"></ion-icon>
+                <div style="color: rgb(102, 102, 102);" class="swiper-button-prev">
+                    <ion-icon name="back-outline"></ion-icon>
                 </div>
 
                 <div style="max-width: 100%" class="swiper tranding-slider">
@@ -43,13 +43,22 @@
                                         </div>
                                     </div>
 
-                                <div class="tranding-slide-content-bottom">
-                                    <h2 class="food-name"> {{$story['title']}} </h2>
-                                    <h5 class="food-rating">
-                                        <span> {{$story['description']}} </span>
-                                    </h5>
+                                    <div style="width: 70%" class="tranding-slide-content-bottom">
+                                        <h2 class="food-name"> {{$story['title']}} </h2>
+                                        <h5 class="food-rating">
+                                            <span> {{$story['description']}} </span>
+                                        </h5>
+                                        <br>
+                                        <div class="d-flex align-items-end">
+                                            <input style="background: rgba(4, 4, 4, 0.44); border-radius: 15px" class="form-control py-2" type="search" placeholder="Comment" aria-label="Search">
+                                        </div>
+                                        
+                                    </div>
+
+                                    <button style="color: red; position: absolute; bottom: 5%; right: 6%; font-size: 18px;" class="btn btn-sm "><i class="bi bi-heart fs-20"></i></button>
+ 
                                 </div>
-                                </div>
+                                
                             </div>
 
                         @endforeach
@@ -57,8 +66,8 @@
                     </div>
                 </div>
 
-                <div class="swiper-button-next slider-arrow">
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                <div style="color: rgb(102, 102, 102);" class="swiper-button-next">
+                    <ion-icon name="forward-outline"></ion-icon>
                 </div>
 
             </div>
