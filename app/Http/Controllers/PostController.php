@@ -161,7 +161,7 @@ class PostController extends Controller
 
             notify()->success('Add post successfully!');
           
-            return redirect()->route('posts.post', ['id'=> $post->id])
+            return redirect()->route('post.store', ['id'=> $post->id])
               ->with('success', true);
 
         }else{

@@ -49,6 +49,7 @@ class AuthManager extends Controller
                 $follower_user = User::whereIn('id', $user_follower)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
                 $following_user = User::whereIn('id', $user_following)->select('user_name', 'first_name', 'last_name', 'profile_pic')->get();
 
+                // dd($user);
                 
                 return view('profile', [
                     'save_posts' => $save_posts,

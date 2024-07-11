@@ -73,11 +73,22 @@
               </div>
               <!-- List profile -->
               <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
-                <li class="list-inline-item">{{$user['biography']}} </li>
-                <br><br>
-                <li class="list-inline-item"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Birthday : {{ str_replace("-", ".", $user['birthday']) }} </li>
-                <li class="list-inline-item"> <i class="bi bi-envelope fa-fw pe-1"></i> Email: {{$user['email']}}</li>
-                <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{$user['created_at']->format('Y-m-d')}}</li>
+                @if ($user['biography'] != "")
+                  <li class="list-inline-item">{{$user['biography']}} </li>
+                  <br><br>
+                @endif
+
+                @if ($user['birthday'] != "")
+                  <li class="list-inline-item"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Birthday : {{ str_replace("-", ".", $user['birthday']) }} </li>
+                @endif
+
+                @if ($user['email'] != "")
+                  <li class="list-inline-item"> <i class="bi bi-envelope fa-fw pe-1"></i> Email: {{$user['email']}}</li>
+                @endif
+
+                @if ($user['created_at'] != "")
+                  <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{$user['created_at']->format('Y-m-d')}}</li>
+                @endif
               </ul>
               
               <br>
