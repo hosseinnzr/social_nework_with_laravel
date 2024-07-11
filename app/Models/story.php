@@ -21,5 +21,7 @@ class story extends Model
         'title',
         'description',
         'story_picture',
+        'like',
+        'like_number'
         ];
 }

@@ -228,7 +228,7 @@
                 <!-- Card header START -->
                 <div class="card-header border-0 pb-0">
                   <h5 class="card-title">Notification</h5>
-                  <p class="mb-0">Tried law yet style child. The bore of true of no be deal. Frequently sufficient to be unaffected. The furnished she concluded depending procuring concealed. </p>
+                  {{-- <p class="mb-0">Tried law yet style child. The bore of true of no be deal. Frequently sufficient to be unaffected. The furnished she concluded depending procuring concealed. </p> --}}
                 </div>
                 <!-- Card header START -->
                 <!-- Card body START -->
@@ -238,7 +238,7 @@
                     <!-- Notification list item -->
                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                       <div class="me-2">
-                        <h6 class="mb-0">Likes and Comments</h6>
+                        <h6 class="mb-0">Likes Notification</h6>
                         <p class="small mb-0">Joy say painful removed reached end.</p>
                       </div>
                       <div class="form-check form-switch">
@@ -248,7 +248,7 @@
                     <!-- Notification list item -->
                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                       <div class="me-2">
-                        <h6 class="mb-0">Reply to My comments</h6>
+                        <h6 class="mb-0">Comments Notification</h6>
                         <p class="small mb-0">Ask a quick six seven offer see among.</p>
                       </div>
                       <div class="form-check form-switch">
@@ -258,31 +258,11 @@
                     <!-- Notification list item -->
                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                       <div class="me-2">
-                        <h6 class="mb-0">Subscriptions</h6>
+                        <h6 class="mb-0">Follow Notification</h6>
                         <p class="small mb-0">Preference any astonished unreserved Mrs.</p>
                       </div>
                       <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="NotiSwitchCheckChecked3">
-                      </div>
-                    </li>
-                    <!-- Notification list item -->
-                    <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
-                      <div class="me-2">
-                        <h6 class="mb-0">Birthdays</h6>
-                        <p class="small mb-0">Contented he gentleman agreeable do be</p>
-                      </div>
-                      <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="NotiSwitchCheckChecked4">
-                      </div>
-                    </li>
-                    <!-- Notification list item -->
-                    <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
-                      <div class="me-2">
-                        <h6 class="mb-0">Events</h6>
-                        <p class="small mb-0">Fulfilled direction use continually.</p>
-                      </div>
-                      <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="NotiSwitchCheckChecked5" checked>
                       </div>
                     </li>
                     <!-- Notification list item -->

@@ -55,8 +55,8 @@
                                         
                                     </div>
 
-                                    <button style="color: red; position: absolute; bottom: 5%; right: 6%; font-size: 18px;" class="btn btn-sm "><i class="bi bi-heart fs-20"></i></button>
- 
+                                    @livewire('story.like-story', ['story' => $story])
+                                    
                                 </div>
                                 
                             </div>
