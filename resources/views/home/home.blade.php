@@ -17,11 +17,11 @@
     <div class="row g-4">
 
       <!-- Left sidebar START -->
-      <div style="position: -webkit-sticky; position: sticky; top: 70px; height:100% ; overflow-y: auto; z-index: 999;" class="col-lg-3 ">
+      <div style="position: -webkit-sticky; padding: 0px; position: sticky; overflow-y: auto; z-index: 999;" class="col-lg-3 ">
 
         <!-- Advanced filter responsive toggler START -->
         <div class="d-flex align-items-center d-lg-none">
-          <button style="background-color: rgba(255, 174, 0, 0.763); border-radius: 33px" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+          <button style="background-color: rgba(255, 174, 0, 0.763); border-radius: 0px 33px 33px 0px" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
             <i style="color: rgb(255, 255, 255)" class="btn fw-bold bi bi-person-fill"></i>
           </button>
         </div>
@@ -181,7 +181,12 @@
                       </a>
                       <!-- Card share action dropdown menu -->
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow {{$post['user_name']}}</a></li>
+                        <li>                                
+                          <form action="{{route('follow', ['id' => $post['UID']])}}" method="POST" class="ms-auto me-auto">
+                            @csrf
+                            <button type="submit" class="dropdown-item"><i class="bi bi-person-x fa-fw pe-2"></i>unfollow {{$post['user_name']}}</button>
+                          </form>
+                        </li>
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block {{$post['user_name']}}</a></li>
                         <li><a class="dropdown-item" href="/p/{{$post['id']}}"> <i class="bi bi-file-post-fill"></i> view post</a></li>
                         <li><hr class="dropdown-divider"></li>
