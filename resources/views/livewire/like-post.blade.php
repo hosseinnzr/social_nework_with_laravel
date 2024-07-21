@@ -1,7 +1,7 @@
 <div wire:poll.visible style="text-align: center">
-    @if (in_array(Auth::id(), explode(",", $post['like'])))
-        <button style="color:red;" wire:click="like({{$post}})"><i class="bi bi-heart-fill fa-lg pe-1"></i> {{ $post['like_number'] }} </button>
+    @if ($liked)
+        <button style="color:red;" wire:click="dislike({{$post}})"><i class="bi bi-heart-fill fa-lg pe-1"></i> {{ $post['like_number'] }}  - {{$liked}}</button>
     @else
-        <button  wire:click="like({{$post}})"><i class="bi bi-heart fa-lg pe-1"></i> {{ $post['like_number'] }} </button>
+        <button  wire:click="like({{$post}})"><i class="bi bi-heart fa-lg pe-1"></i> {{ $post['like_number'] }} - {{$liked}} </button>
     @endif
 </div>

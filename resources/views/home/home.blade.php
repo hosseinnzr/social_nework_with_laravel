@@ -17,7 +17,7 @@
     <div class="row g-4">
 
       <!-- Left sidebar START -->
-      <div style="position: -webkit-sticky; padding: 0px; position: sticky; overflow-y: auto; z-index: 999;" class="col-lg-3 ">
+      <div style="position: -webkit-sticky; position: sticky; overflow-y: auto; z-index: 999;" class="col-lg-3 ">
 
         <!-- Advanced filter responsive toggler START -->
         <div class="d-flex align-items-center d-lg-none">
