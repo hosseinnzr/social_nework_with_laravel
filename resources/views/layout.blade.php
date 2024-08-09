@@ -6,8 +6,8 @@
 
 	<!-- SHOW modal in moadal bootstrap SATRT -->
 
-	<link href="{{asset('css/bootstrap-modal-bs3patch.css')}}" rel="stylesheet" />
-	<link href="{{asset('css/bootstrap-modal.css" rel="stylesheet')}}" />
+	<link href="{{asset("css/bootstrap-modal-bs3patch.css")}}" rel="stylesheet" />
+	<link href="{{asset("css/bootstrap-modal.css")}}" rel="stylesheet" />
 
 	<style>
 		/* start modal for save chat */
@@ -78,35 +78,35 @@
 	<meta name="description" content="Bootstrap 5 based Social Media Network and Community Theme">
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}">
+	<link rel="shortcut icon" href="{{asset("assets/images/favicon.png")}}">
 
 	<!-- Google Font -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 
 	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/font-awesome/css/all.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}">
-  	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/dropzone/dist/dropzone.css')}}" />
-  	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/glightbox-master/dist/css/glightbox.min.css')}}">
-  	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/choices.js/public/assets/styles/choices.min.css')}}">
-  	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/flatpickr/dist/flatpickr.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/font-awesome/css/all.min.css")}}">
+	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/bootstrap-icons/bootstrap-icons.css")}}">
+  	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/dropzone/dist/dropzone.css")}}" />
+  	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/glightbox-master/dist/css/glightbox.min.css")}}">
+  	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/choices.js/public/assets/styles/choices.min.css")}}">
+  	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/flatpickr/dist/flatpickr.min.css")}}">
 
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/OverlayScrollbars-master/css/OverlayScrollbars.min.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/OverlayScrollbars-master/css/OverlayScrollbars.min.css")}}" />
 
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/tiny-slider/dist/tiny-slider.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/flatpickr/dist/flatpickr.css')}}" />
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/plyr/plyr.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/tiny-slider/dist/tiny-slider.css")}}">
+	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/flatpickr/dist/flatpickr.css")}}" />
+	<link rel="stylesheet" type="text/css" href="{{asset("assets/vendor/plyr/plyr.css")}}" />
 
 	<!-- Theme CSS -->
-	<link id="style-switch" rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+	<link id="style-switch" rel="stylesheet" type="text/css" href="{{asset("assets/css/style.css")}}">
 
 	<!-- liveWire -->
 	@livewireStyles
 
   </head>
-  <body>
 
+  <body>
 	<div style="position: absolute; z-index:9000" class="notifications bottom-right">
 		<x-notify::notify />
 		@notifyJs

@@ -26,6 +26,10 @@ class ForgetPassword extends Component
 
     public function sendCode(){
 
+        if(!isset($this->email)){
+            return back()->with('error', "email is require");
+        }
+
         if(!(User::where('email', $this->email)->first())){
             return back()->with('error', "email not found");
         }

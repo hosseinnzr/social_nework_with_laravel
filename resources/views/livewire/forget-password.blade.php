@@ -7,7 +7,7 @@
 
         @if(Session::get('error') && Session::get('error') != null)
 
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-secondary  alert-dismissible fade show" role="alert">
                 {{ Session::get('error') }}
             </div>
             @php
@@ -26,6 +26,8 @@
             Session::put('success', null)
             @endphp
         @endif
+
+
     </div>
 
     @if ($send_code == false)

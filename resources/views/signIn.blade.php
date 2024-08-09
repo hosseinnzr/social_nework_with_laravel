@@ -8,7 +8,8 @@
   <div class="container">
     <div class="row justify-content-center align-items-center">
       <!-- Main content START -->
-      <div class="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-5">
+        
         <!-- Sign in START -->
         <div class="card card-body text-center p-4 p-sm-5">
           <!-- Title -->
@@ -34,10 +35,6 @@
               
               <!-- Remember me -->
               <div class="mb-3 d-sm-flex justify-content-between">
-                {{-- <div>
-                  <input type="checkbox" class="form-check-input" id="rememberCheck">
-                  <label class="form-check-label" for="rememberCheck">Remember me?</label>
-                </div> --}}
                 <a href="/forgot-password">Forgot password?</a>
               </div>
               
@@ -56,5 +53,21 @@
   <!-- Container END -->
 
 </main>
+
+<script>
+  document.querySelector('.fakepasswordicon').addEventListener('click', function () {
+    let passwordInput = document.getElementById('psw-input');
+    let icon = this;
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+});
+</script>
 
 @endsection
