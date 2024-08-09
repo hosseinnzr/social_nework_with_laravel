@@ -8,7 +8,7 @@ use App\Http\Controllers\StoryControllers;
 
 // SignUp
 Route::get('/signup', [AuthManager::class, 'signup'])->name('signup');
-Route::post('/signup', [AuthManager::class, 'signupPost'])->name('signup.post');
+// Route::post('/signup', [AuthManager::class, 'signupPost'])->name('signup.post'); #### Written by Livw Wire ####
 
 Route::middleware(['web', 'throttle:600,1'])->group(function () {
 

@@ -15,13 +15,13 @@
 
                 <form wire:submit="save({{$postId}})" >
                 <label>             
-                    <input wire:model="comment" name="comment" id="cmnt-input" class="form-control py-2 w-full" type="text" placeholder="Add Comment ..." aria-label="Search">
+                    <input wire:model="comment" name="comment" id="cmnt-input" class="form-control py-2 w-full" type="text" placeholder="Add Comment ..." aria-label="Search" value="">
                 </label>
                     <button class="btn btn-light" id="cmnt-btn" type="submit">  <i class="fa-solid fa-comment"></i></button>
                 </form>
                 <script>
                 document.getElementById('cmnt-btn').addEventListener('click', function() {
-                    document.getElementById('cmnt-input').value = '';
+                    document.getElementById('cmnt-input').value = "";
                 })
                 </script>
             </div>
@@ -89,10 +89,10 @@
         @endforeach
 
         <br>
-        <li class="nav-item">
-            <div style="align-content: center" class="card-footer border-0 p-0">
+        <li wire:click="loadMore()" class="comment-item">
+            <div>
                 <!-- Load more comments -->
-                  <button class="" style="background-color: rgba(118, 118, 118, 0.136); padding:5px 8px 5px 8px; border-radius: 33px" wire:click="loadMore()">Load more comments </button>
+                  <button class="" style="padding:5px 8px 5px 8px; ">Load more commnent ... </button>
             </div>
         </li>
     </ul>

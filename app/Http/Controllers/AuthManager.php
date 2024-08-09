@@ -96,34 +96,39 @@ class AuthManager extends Controller
         return redirect(route('signin'))->with('error', 'signin details are not valid');
     }
 
-    public function signupPost(Request $request){
+    // public function signupPost(Request $request){ 
 
-        $request->validate([
-            'profile_pic',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'user_name' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-        ]);
+    //     $request->validate([
+    //         'profile_pic',
+    //         'first_name' => 'required',
+    //         'last_name' => 'required',
+    //         'user_name' => 'required|unique:users',
+    //         'email' => 'required|email|unique:users',
+    //         'password' => 'required',
+    //     ]);
 
-        $data['first_name'] = $request->first_name;
-        $data['last_name'] = $request->last_name;
-        $data['user_name'] = $request->user_name;
-        $data['email'] = $request->email;
-        $data['password'] = Hash::make($request->password);
-        $data['profile_pic'] = '/default/default_profile.jpg';
+    //     $data['first_name'] = $request->first_name;
+    //     $data['last_name'] = $request->last_name;
+    //     $data['user_name'] = $request->user_name;
+    //     $data['email'] = $request->email;
+    //     $data['password'] = Hash::make($request->password);
+    //     $data['profile_pic'] = '/default/default_profile.jpg';
 
-        $user = User::create($data);
-        if($user){
-            notify()->success('signup user successfully!');
-            return redirect(route('signin'));
-        }
-        return redirect()->back();
-    }
+    //     $user = User::create($data);
+    //     if($user){
+    //         notify()->success('signup user successfully!');
+    //         return redirect(route('signin'));
+    //     }
+    //     return redirect()->back();
+    // }  #### Written by Livw Wire ####
  
     function signup(){
-        return view('signup');
+        if(auth::check()){
+            notify()->success('you are now signin');
+            return redirect()->route('home');  
+        }else{
+            return view('signup');
+        }
     }
 
     function logout(Request $request){
