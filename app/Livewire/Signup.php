@@ -28,19 +28,22 @@ class Signup extends Component
     }
 
     public function checkemail(){
-        // if((User::where('email', $this->email)->first())){
-        //     return back()->with('error', "Another account is using the same email.");
-        // }
+        if(isset($this->email)){
 
-        // $this->random_number = mt_rand(123456, 987654);
-        // if(Mail::to($this->email)->send(new SendMail($this->random_number))){
-        //     $this->send_code = true;
-        //     $this->state = 1;
-        //     return "Email send successfully";
-        // }
+            if((User::where('email', $this->email)->first())){
+                return back()->with('error', "Another account is using the same email.");
+            }
+            
 
-        // return 'Email send error';
-        $this->state = 1;
+            $this->random_number = mt_rand(123456, 987654);
+            if(Mail::to($this->email)->send(new SendMail($this->random_number))){
+                $this->send_code = true;
+                $this->state = 1;
+                return "Email send successfully";
+            }
+        }
+
+        return 'Email send error';
     }
 
     public function signup(){
