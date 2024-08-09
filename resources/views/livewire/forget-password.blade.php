@@ -39,8 +39,53 @@
 
             <br>
             <!-- Button -->
+            <style>
+                .loader-container {
+                    margin-top: 4px;
+                    width: 100%;
+                    height: 4px;
+                    background-color: #e0e0e0;
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 0px 0px 5px 5px;
+                }
+
+                .loader-line {
+                    width: 10%;
+                    height: 100%;
+                    background-color: #0f6fec;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    animation: moveLine 1s linear infinite;
+                }
+
+                @keyframes moveLine {
+                    0% {
+                        left: 0;
+                    }
+                    100% {
+                        left: 100%;
+                    }
+                }
+            </style>  
+
             <div class="d-grid">
-            <button type="submit" class="btn btn-lg btn-primary-soft">send verify code</button>
+                <div wire:loading.remove>
+                    <button type="submit" class="btn btn-primary w-100"> 
+                        send verify code
+                        <br>            
+                    </button>
+                </div>
+                <div wire:loading.flex>
+                    <button type="submit" style="padding: 8px 0px 0px 0px" class="btn btn-primary w-100"> 
+                        send verify code
+                        <br>  
+                        <div class="loader-container">
+                            <div class="loader-line"></div>
+                        </div>          
+                    </button>
+                </div>
             </div>
         </form>
     @else
