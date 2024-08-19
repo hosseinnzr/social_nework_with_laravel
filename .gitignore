@@ -20,4 +20,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/app/Livewire
+/app/Controllers/AuthManager.php
