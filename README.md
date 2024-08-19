@@ -1,8 +1,5 @@
-## for use crop img
-composer require intervention/image
-install gd in windows and enable extention in xammp
-
-php artisan storage:link
+## social network option in version 1.0
+signin, signup(send verify code with email), forgotpasswork(send verify code with email), follow, unfollow, like and dislike post, add comment, like and dislike comments, save post, send post to user in pv, setting for update password and user general information, add/edit/delete post, past have -> image-body-hastag
 
 ## social_nework_with_laravel
 
@@ -48,6 +45,12 @@ To run this Laravel app, you need to have the following software installed on yo
     php artisan serve
     ```
 10. Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser to view the app.
+
+## for use crop img
+composer require intervention/image
+install gd in windows and enable extention in xammp
+
+php artisan storage:link
 
 
 ## License
