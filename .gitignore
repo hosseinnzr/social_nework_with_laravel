@@ -20,4 +20,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/app/Controllers/AuthManager.php
+/app/Http/Controllers/AuthManager.php
